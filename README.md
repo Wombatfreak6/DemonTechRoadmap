@@ -46,7 +46,11 @@ Our mission is to make learning technology easier by providing clear, step-by-st
 - GitHub Actions
 
 ---
+## Community
 
+- [Contributing Guide](./CONTRIBUTING.md)
+- [Code of Conduct](./CODE_OF_CONDUCT.md)
+  
 ## 🤝 Contributing
 
 We welcome contributors of all skill levels.
