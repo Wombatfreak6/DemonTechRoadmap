@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { execSync } = require("child_process");
+const { execSync, execFileSync } = require("child_process");
 
 const README_PATH = path.join(process.env.GITHUB_WORKSPACE || ".", "README.md");
 
@@ -9,6 +9,13 @@ const END_MARKER   = "<!-- CONTRIBUTORS-END -->";
 
 function sh(cmd) {
   return execSync(cmd, {
+    encoding: "utf8",
+    cwd: process.env.GITHUB_WORKSPACE,
+  }).trim();
+}
+
+function git(...args) {
+  return execFileSync("git", args, {
     encoding: "utf8",
     cwd: process.env.GITHUB_WORKSPACE,
   }).trim();
@@ -61,6 +68,8 @@ function getNewCommitters() {
   return Array.from(committers.values());
 }
 
+const USERNAME_RE = /^[a-z0-9]([a-z0-9]|-(?!-)){0,38}$/i;
+
 async function enrichContributor({ guessedUsername, name, email }) {
   const headers = {
     Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
@@ -68,6 +77,7 @@ async function enrichContributor({ guessedUsername, name, email }) {
     "User-Agent": "update-contributors-bot",
   };
 
+  // 1. Direct lookup by guessed username
   try {
     const direct = await fetch(
       `https://api.github.com/users/${guessedUsername}`,
@@ -75,16 +85,30 @@ async function enrichContributor({ guessedUsername, name, email }) {
     );
     if (direct.ok) {
       const data = await direct.json();
-      console.log(`    ✓ direct lookup: @${data.login}`);
-      return {
-        username: data.login,
-        name: data.name || data.login,
-        avatarUrl: data.avatar_url,
-        htmlUrl: data.html_url,
-      };
+      // Validate API response fields
+      if (
+        data.login &&
+        USERNAME_RE.test(data.login) &&
+        typeof data.avatar_url === "string" &&
+        data.avatar_url.startsWith("https://avatars.githubusercontent.com/") &&
+        typeof data.html_url === "string" &&
+        data.html_url.startsWith("https://github.com/")
+      ) {
+        console.log(`    ✓ direct lookup: @${data.login}`);
+        return {
+          username: data.login,
+          name: data.name || data.login,
+          avatarUrl: data.avatar_url,
+          htmlUrl: data.html_url,
+        };
+      }
+      console.warn(`    ⚠ direct lookup returned invalid fields for "${guessedUsername}", falling through`);
     }
-  } catch (_) {}
+  } catch (err) {
+    console.warn(`    ⚠ API error for "${guessedUsername}": ${err.message}`);
+  }
 
+  // 2. Name-based search
   if (name && name !== guessedUsername) {
     try {
       const q = encodeURIComponent(`${name} in:name type:user`);
@@ -99,10 +123,10 @@ async function enrichContributor({ guessedUsername, name, email }) {
           const scored = items.map((item) => {
             let score = 0;
             const loginLower = item.login.toLowerCase();
-            const displayLower = (item.login || "").toLowerCase();
-            if (displayLower === lowerName) score += 100;
+            const nameLower = (item.name || "").toLowerCase();
+            if (nameLower === lowerName) score += 100;
             if (loginLower === lowerName) score += 90;
-            if (displayLower.includes(lowerName)) score += 50;
+            if (nameLower.includes(lowerName)) score += 50;
             if (loginLower.includes(lowerName.replace(/\s+/g, ""))) score += 40;
             if (loginLower.includes(lowerName.replace(/\s+/g, "-"))) score += 40;
             return { ...item, score };
@@ -121,15 +145,54 @@ async function enrichContributor({ guessedUsername, name, email }) {
           }
         }
       }
-    } catch (_) {}
+    } catch (err) {
+      console.warn(`    ⚠ API error during name search: ${err.message}`);
+    }
   }
 
+  // 3. Commit-based lookup using email
+  if (email) {
+    try {
+      const emailEncoded = encodeURIComponent(email);
+      const repoParts = (process.env.GITHUB_REPOSITORY || "").split("/");
+      const repoQuery = repoParts.length === 2 ? `repo:${repoParts[0]}/${repoParts[1]}+` : "";
+      const commitSearch = await fetch(
+        `https://api.github.com/search/commits?q=${repoQuery}author-email:${emailEncoded}&per_page=1`,
+        {
+          headers: {
+            ...headers,
+            Accept: "application/vnd.github.cloak-preview",
+          }
+        }
+      );
+      if (commitSearch.ok) {
+        const data = await commitSearch.json();
+        if (data.items && data.items.length > 0) {
+          const author = data.items[0].author;
+          if (author) {
+            console.log(`    ✓ commit search found: @${author.login}`);
+            return {
+              username: author.login,
+              name: author.login,
+              avatarUrl: author.avatar_url,
+              htmlUrl: author.html_url,
+            };
+          }
+        }
+      }
+    } catch (err) {
+      console.warn(`    ⚠ Commit search error: ${err.message}`);
+    }
+  }
+
+  // 4. Fallback
   console.log(`    ⚠ using fallback for guessed username "${guessedUsername}"`);
+  const safeUsername = USERNAME_RE.test(guessedUsername) ? guessedUsername : "unknown-user";
   return {
-    username: guessedUsername,
-    name: name || guessedUsername,
-    avatarUrl: `https://github.com/${guessedUsername}.png`,
-    htmlUrl: `https://github.com/${guessedUsername}`,
+    username: safeUsername,
+    name: name || safeUsername,
+    avatarUrl: `https://github.com/${safeUsername}.png`,
+    htmlUrl: `https://github.com/${safeUsername}`,
   };
 }
 
@@ -155,20 +218,27 @@ function getExistingContributors(content) {
 
 function parseExistingContributors(blockContent) {
   const contributors = [];
-  const linkRegex = /href="https:\/\/github\.com\/([^"/]+)"/g;
+  const rowRegex = /<td[\s\S]*?<\/td>/g;
   const seen = new Set();
   let match;
 
-  while ((match = linkRegex.exec(blockContent)) !== null) {
-    const username = match[1];
-    if (!seen.has(username.toLowerCase())) {
-      seen.add(username.toLowerCase());
-      contributors.push({
-        username,
-        name: username,
-        avatarUrl: `https://github.com/${username}.png`,
-        htmlUrl: `https://github.com/${username}`,
-      });
+  while ((match = rowRegex.exec(blockContent)) !== null) {
+    const td = match[0];
+    const hrefMatch = td.match(/href="(https:\/\/github\.com\/([^"/]+))"/);
+    const srcMatch = td.match(/src="([^"]+)"/);
+    const nameMatch = td.match(/<sub><b>([^<]+)<\/b><\/sub>/);
+
+    if (hrefMatch && srcMatch) {
+      const username = hrefMatch[2];
+      if (!seen.has(username.toLowerCase())) {
+        seen.add(username.toLowerCase());
+        contributors.push({
+          username,
+          name: nameMatch ? nameMatch[1] : username,
+          avatarUrl: srcMatch[1],
+          htmlUrl: hrefMatch[1],
+        });
+      }
     }
   }
 
@@ -182,10 +252,12 @@ function buildContributorRow({ username, name, avatarUrl, htmlUrl }) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 
+  const separator = avatarUrl.includes("?") ? "&" : "?";
+
   return [
     `    <td align="center">`,
     `      <a href="${htmlUrl}" title="${safeName}">`,
-    `        <img src="${avatarUrl}&s=100" width="80px;" alt="${safeName}"/><br />`,
+    `        <img src="${avatarUrl}${separator}s=100" width="80px;" alt="${safeName}"/><br />`,
     `        <sub><b>${safeName}</b></sub>`,
     `      </a>`,
     `    </td>`,
@@ -290,11 +362,19 @@ async function main() {
     console.log("::endgroup::");
 
     console.log("::group::🚀 Committing seed");
-    sh(`git config user.name "github-actions[bot]"`);
-    sh(`git config user.email "github-actions[bot]@users.noreply.github.com"`);
-    sh(`git add README.md`);
-    sh(`git commit -m "docs: seed contributor table with all historical contributors"`);
-    sh(`git push origin HEAD:main`);
+    git("config", "user.name", "github-actions[bot]");
+    git("config", "user.email", "github-actions[bot]@users.noreply.github.com");
+    git("add", "README.md");
+    git("commit", "-m", "docs: seed contributor table with all historical contributors");
+
+    try {
+      git("pull", "--rebase", "origin", "main");
+    } catch (err) {
+      console.error("❌ Rebase failed — likely conflicting changes. Exiting.");
+      process.exit(1);
+    }
+
+    git("push", "origin", "HEAD:main");
     console.log("✅ Seed committed");
     console.log("::endgroup::");
     return;
@@ -342,14 +422,22 @@ async function main() {
   const commitMsg = `docs: add contributor(s) ${names} to README`;
 
   console.log("::group::🚀 Committing & pushing");
-  sh(`git config user.name "github-actions[bot]"`);
-  sh(`git config user.email "github-actions[bot]@users.noreply.github.com"`);
+  git("config", "user.name", "github-actions[bot]");
+  git("config", "user.email", "github-actions[bot]@users.noreply.github.com");
 
-  const status = sh("git status --porcelain README.md");
+  const status = git("status", "--porcelain", "README.md");
   if (status) {
-    sh(`git add README.md`);
-    sh(`git commit -m "${commitMsg}"`);
-    sh(`git push origin HEAD:main`);
+    git("add", "README.md");
+    git("commit", "-m", commitMsg);
+
+    try {
+      git("pull", "--rebase", "origin", "main");
+    } catch (err) {
+      console.error("❌ Rebase failed — likely conflicting changes. Exiting.");
+      process.exit(1);
+    }
+
+    git("push", "origin", "HEAD:main");
     console.log(`✅ Committed: ${commitMsg}`);
   } else {
     console.log("⚠️  No changes detected (README unchanged).");
