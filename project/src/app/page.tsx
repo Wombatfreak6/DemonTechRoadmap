@@ -59,6 +59,20 @@ export default function Home() {
             Documentation
           </a>
         </div>
+        <div className="mt-8 w-full flex flex-col items-center sm:items-start">
+          <a
+            href="https://discord.gg/yWtjK2Tb8T"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 rounded-full bg-indigo-600 px-5 py-3 text-white hover:bg-indigo-700"
+          >
+            Join our Discord
+          </a>
+          <p className="mt-3 text-sm text-zinc-600 dark:text-zinc-400 max-w-md">
+            Join the community on Discord to discuss roadmaps, ask questions, and
+            contribute to projects — we'd love to have you!
+          </p>
+        </div>
       </main>
     </div>
   );
