@@ -71,6 +71,7 @@ export default function Sidebar({
                 <button
                   key={item.id}
                   type="button"
+                  aria-pressed={isActive}
                   onClick={() => {
                     onSelect(item.id);
                     setIsOpen(false);

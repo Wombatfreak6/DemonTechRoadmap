@@ -19,7 +19,8 @@ export default function ResourceCard({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="block rounded-lg border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 hover:shadow-lg transition-shadow"
+      aria-label={`${title} – opens in a new tab`}
+      className="block rounded-lg border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 hover:shadow-lg transition-shadow focus:outline-none focus:ring-4 focus:ring-cyan-300/50"
     >
       <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">{title}</h3>
       {description && (

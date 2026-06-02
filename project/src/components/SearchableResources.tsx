@@ -68,7 +68,7 @@ export default function SearchableResources() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm dark:border-slate-800 dark:bg-slate-950">
+        <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm dark:border-slate-800 dark:bg-slate-950 focus-within:ring-4 focus-within:ring-cyan-300/50 focus-within:border-cyan-400 dark:focus-within:border-cyan-500">
           <label htmlFor="search" className="sr-only">
             Search roadmaps and topics
           </label>

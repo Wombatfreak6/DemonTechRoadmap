@@ -25,7 +25,8 @@ export default function Home() {
         variant="icon"
         onClick={() => setIsDarkMode(!isDarkMode)}
         className="fixed right-6 top-6 z-50"
-        aria-label="Toggle Theme"
+        aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+        aria-pressed={isDarkMode}
       >
         {isDarkMode ? "☀️" : "🌙"}
       </Button>
@@ -119,10 +120,15 @@ export default function Home() {
                       {step.detail}
                     </p>
                     <div className={`mt-4 h-2 overflow-hidden rounded-full ${isDarkMode ? "bg-slate-800" : "bg-slate-200"}`}>
-                      <div
+                    <div
+                        role="progressbar"
+                        aria-valuenow={(index + 1) * 28}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        aria-label={`${step.title} progress`}
                         className="h-full rounded-full bg-teal-500"
                         style={{ width: `${(index + 1) * 28}%` }}
-                      />
+                      ></div>
                     </div>
                   </div>
                 </div>
