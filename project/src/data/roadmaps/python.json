@@ -1,0 +1,357 @@
+{
+  "id": "python",
+  "title": "Python & OOP Fundamentals",
+  "description": "A beginner-friendly roadmap for learning Python from the ground up, with a focus on Object-Oriented Programming (OOP) concepts. This path takes you from Python basics all the way through classes, inheritance, and design patterns.",
+  "metadata": {
+    "difficulty": "Beginner to Intermediate",
+    "estimatedTime": "2 to 4 Months",
+    "version": "1.0.0",
+    "lastUpdated": "2026-06-01"
+  },
+  "phases": [
+    {
+      "phaseId": "phase-1-python-basics",
+      "title": "Phase 1: Python Basics",
+      "description": "Get comfortable with Python syntax, data types, and control flow before diving into OOP.",
+      "topics": [
+        {
+          "topicId": "python-syntax",
+          "name": "Python Syntax & Data Types",
+          "description": "Learn Python's clean syntax and built-in data types: integers, floats, strings, booleans, lists, tuples, sets, and dictionaries.",
+          "importance": "Critical",
+          "keyConcepts": [
+            "Variables and dynamic typing",
+            "String formatting (f-strings, .format())",
+            "Lists, tuples, sets, and dictionaries",
+            "Type conversion and type checking with type()"
+          ],
+          "resources": [
+            {
+              "name": "Python Official Tutorial",
+              "url": "https://docs.python.org/3/tutorial/",
+              "type": "documentation",
+              "duration": "Self-paced"
+            },
+            {
+              "name": "freeCodeCamp - Python for Beginners",
+              "url": "https://www.freecodecamp.org/learn/scientific-computing-with-python/",
+              "type": "interactive course",
+              "duration": "15 hours"
+            }
+          ],
+          "projects": [
+            {
+              "name": "Data Organizer Script",
+              "description": "Write a Python script that stores student names and grades in a dictionary, calculates averages, and prints a formatted report.",
+              "keyDeliverables": [
+                "Use of dictionaries and lists",
+                "String formatting with f-strings",
+                "Basic arithmetic operations"
+              ]
+            }
+          ]
+        },
+        {
+          "topicId": "control-flow",
+          "name": "Control Flow & Functions",
+          "description": "Master conditionals, loops, and reusable functions — the building blocks of any Python program.",
+          "importance": "Critical",
+          "keyConcepts": [
+            "if / elif / else statements",
+            "for and while loops, break and continue",
+            "Defining functions with def, parameters, and return values",
+            "Default and keyword arguments, *args and **kwargs"
+          ],
+          "resources": [
+            {
+              "name": "Real Python - Defining Functions",
+              "url": "https://realpython.com/defining-your-own-python-function/",
+              "type": "article",
+              "duration": "30 minutes"
+            }
+          ],
+          "projects": [
+            {
+              "name": "Number Guessing Game",
+              "description": "Build a simple CLI number guessing game using loops and conditionals that tracks the number of attempts.",
+              "keyDeliverables": [
+                "Use of while loop and break",
+                "Function to check the guess",
+                "Feedback messages to the user"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "phaseId": "phase-2-oop-fundamentals",
+      "title": "Phase 2: OOP Fundamentals",
+      "description": "Learn the four pillars of Object-Oriented Programming — Encapsulation, Abstraction, Inheritance, and Polymorphism — using hands-on Python examples.",
+      "topics": [
+        {
+          "topicId": "classes-and-objects",
+          "name": "Classes & Objects",
+          "description": "Understand how to define classes as blueprints and create objects (instances) from them. Learn about __init__, instance variables, and methods.",
+          "importance": "Critical",
+          "keyConcepts": [
+            "Defining a class with the class keyword",
+            "The __init__ constructor method and self",
+            "Instance variables vs class variables",
+            "Instance methods, class methods (@classmethod), and static methods (@staticmethod)"
+          ],
+          "resources": [
+            {
+              "name": "Real Python - Python Classes",
+              "url": "https://realpython.com/python3-object-oriented-programming/",
+              "type": "article",
+              "duration": "45 minutes"
+            },
+            {
+              "name": "Python Docs - Classes",
+              "url": "https://docs.python.org/3/tutorial/classes.html",
+              "type": "documentation",
+              "duration": "Self-paced"
+            }
+          ],
+          "projects": [
+            {
+              "name": "Library Book System",
+              "description": "Create a Book class with title, author, and year attributes, plus methods to display info and check availability.",
+              "keyDeliverables": [
+                "Book class with __init__",
+                "At least 2 instance methods",
+                "Create multiple Book objects"
+              ]
+            }
+          ]
+        },
+        {
+          "topicId": "encapsulation",
+          "name": "Encapsulation",
+          "description": "Encapsulation bundles data (attributes) and methods that operate on that data inside a class, and restricts direct access from outside using access modifiers.",
+          "importance": "High",
+          "keyConcepts": [
+            "Public, protected (_), and private (__) attributes",
+            "Getter and setter methods",
+            "The @property decorator for Pythonic getters/setters",
+            "Name mangling for private attributes"
+          ],
+          "resources": [
+            {
+              "name": "Python @property Decorator",
+              "url": "https://realpython.com/python-property/",
+              "type": "article",
+              "duration": "30 minutes"
+            }
+          ],
+          "projects": [
+            {
+              "name": "BankAccount Class",
+              "description": "Build a BankAccount class with a private balance, and deposit/withdraw methods that validate inputs using the @property decorator.",
+              "keyDeliverables": [
+                "Private __balance attribute",
+                "@property for safe access",
+                "Validation in setter (no negative balance)"
+              ]
+            }
+          ]
+        },
+        {
+          "topicId": "inheritance",
+          "name": "Inheritance",
+          "description": "Inheritance lets a child class reuse and extend the behavior of a parent class, avoiding code duplication.",
+          "importance": "Critical",
+          "keyConcepts": [
+            "Single inheritance with class Child(Parent)",
+            "Calling parent methods with super()",
+            "Method overriding",
+            "Multiple inheritance and MRO (Method Resolution Order)",
+            "isinstance() and issubclass() checks"
+          ],
+          "resources": [
+            {
+              "name": "Real Python - Inheritance & Composition",
+              "url": "https://realpython.com/inheritance-composition-python/",
+              "type": "article",
+              "duration": "60 minutes"
+            }
+          ],
+          "projects": [
+            {
+              "name": "Animal Hierarchy",
+              "description": "Create an Animal base class, then subclasses Dog, Cat, and Bird that override a make_sound() method and add unique attributes.",
+              "keyDeliverables": [
+                "Animal base class",
+                "3 subclasses with method overriding",
+                "Use of super() in __init__"
+              ]
+            }
+          ]
+        },
+        {
+          "topicId": "polymorphism",
+          "name": "Polymorphism",
+          "description": "Polymorphism allows different classes to be treated through the same interface, with each class providing its own implementation.",
+          "importance": "High",
+          "keyConcepts": [
+            "Method overriding (runtime polymorphism)",
+            "Duck typing — 'if it quacks like a duck...'",
+            "Operator overloading with dunder methods (__add__, __str__, __len__)",
+            "Abstract base classes (ABC) from the abc module"
+          ],
+          "resources": [
+            {
+              "name": "Python ABC Module",
+              "url": "https://docs.python.org/3/library/abc.html",
+              "type": "documentation",
+              "duration": "Self-paced"
+            }
+          ],
+          "projects": [
+            {
+              "name": "Shape Area Calculator",
+              "description": "Define an abstract Shape base class with an abstract area() method, then implement Circle, Rectangle, and Triangle subclasses.",
+              "keyDeliverables": [
+                "Abstract class using ABC",
+                "3 concrete shape subclasses",
+                "Loop through a list of mixed shapes and print areas"
+              ]
+            }
+          ]
+        },
+        {
+          "topicId": "abstraction",
+          "name": "Abstraction",
+          "description": "Abstraction hides complex internal details and exposes only what is necessary. In Python this is achieved through abstract classes and interfaces.",
+          "importance": "High",
+          "keyConcepts": [
+            "Abstract classes with ABC and @abstractmethod",
+            "Interfaces via abstract base classes",
+            "Difference between abstraction and encapsulation",
+            "Design by contract principles"
+          ],
+          "resources": [
+            {
+              "name": "Real Python - Abstract Base Classes",
+              "url": "https://realpython.com/python-interface/",
+              "type": "article",
+              "duration": "40 minutes"
+            }
+          ],
+          "projects": [
+            {
+              "name": "Payment Gateway Interface",
+              "description": "Define an abstract PaymentProcessor class, then implement CreditCard and PayPal subclasses with their own process_payment() logic.",
+              "keyDeliverables": [
+                "Abstract PaymentProcessor class",
+                "2 concrete implementations",
+                "Demonstrate polymorphic calls"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "phaseId": "phase-3-advanced-oop",
+      "title": "Phase 3: Advanced OOP & Best Practices",
+      "description": "Level up with special methods, composition, and introductory design patterns.",
+      "topics": [
+        {
+          "topicId": "dunder-methods",
+          "name": "Magic / Dunder Methods",
+          "description": "Python's special methods (surrounded by double underscores) let you define how objects behave with built-in operations.",
+          "importance": "High",
+          "keyConcepts": [
+            "__str__ and __repr__ for string representation",
+            "__len__, __getitem__, __setitem__ for sequence behavior",
+            "__eq__, __lt__, __gt__ for comparison operators",
+            "__enter__ and __exit__ for context managers"
+          ],
+          "resources": [
+            {
+              "name": "Python Data Model Reference",
+              "url": "https://docs.python.org/3/reference/datamodel.html",
+              "type": "documentation",
+              "duration": "Self-paced"
+            }
+          ],
+          "projects": [
+            {
+              "name": "Custom Vector Class",
+              "description": "Build a 2D Vector class that supports +, -, * operators, comparison, and a readable __repr__.",
+              "keyDeliverables": [
+                "__add__, __sub__, __mul__",
+                "__eq__ for equality check",
+                "__repr__ and __str__"
+              ]
+            }
+          ]
+        },
+        {
+          "topicId": "composition-vs-inheritance",
+          "name": "Composition vs Inheritance",
+          "description": "Learn when to prefer composition ('has-a') over inheritance ('is-a') to write more flexible and maintainable code.",
+          "importance": "Medium",
+          "keyConcepts": [
+            "Is-a vs has-a relationships",
+            "Combining objects via composition",
+            "The 'favor composition over inheritance' principle",
+            "Mixins for sharing behavior"
+          ],
+          "resources": [
+            {
+              "name": "Real Python - Composition vs Inheritance",
+              "url": "https://realpython.com/inheritance-composition-python/",
+              "type": "article",
+              "duration": "50 minutes"
+            }
+          ],
+          "projects": [
+            {
+              "name": "RPG Character Builder",
+              "description": "Design an RPG character system using composition: a Character class that holds a Weapon, Armor, and Skill objects.",
+              "keyDeliverables": [
+                "Separate Weapon, Armor, Skill classes",
+                "Character composed of those classes",
+                "Method to display full character stats"
+              ]
+            }
+          ]
+        },
+        {
+          "topicId": "design-patterns-intro",
+          "name": "Intro to Design Patterns",
+          "description": "Get a beginner-level introduction to the most common OOP design patterns.",
+          "importance": "Medium",
+          "keyConcepts": [
+            "Singleton pattern — ensure only one instance of a class",
+            "Factory pattern — delegate object creation to a factory method",
+            "Observer pattern — event-driven communication between objects",
+            "Strategy pattern — swap algorithms at runtime"
+          ],
+          "resources": [
+            {
+              "name": "Refactoring Guru - Design Patterns in Python",
+              "url": "https://refactoring.guru/design-patterns/python",
+              "type": "interactive guide",
+              "duration": "Self-paced"
+            }
+          ],
+          "projects": [
+            {
+              "name": "Logger Singleton",
+              "description": "Implement a Logger class using the Singleton pattern so the same logger instance is shared across your entire application.",
+              "keyDeliverables": [
+                "Singleton __new__ override",
+                "Log method with timestamp",
+                "Verify single instance across imports"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
