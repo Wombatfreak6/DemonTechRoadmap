@@ -1,0 +1,130 @@
+{
+  "id": "ai-ml",
+  "title": "AI & Machine Learning",
+  "description": "A curated database of premium learning resources to master mathematics for ML, classical algorithms, neural networks, deep learning, and transformers.",
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-06-02"
+  },
+  "categories": [
+    {
+      "categoryId": "math-foundations",
+      "name": "Mathematics & Data Foundations",
+      "description": "Master linear algebra, calculus, probability, and statistics needed for machine learning.",
+      "resources": [
+        {
+          "id": "3blue1brown-lin-alg",
+          "name": "Essence of Linear Algebra",
+          "url": "https://www.3blue1brown.com/topics/linear-algebra",
+          "type": "Video Tutorial",
+          "difficulty": "Beginner to Intermediate",
+          "cost": "Free",
+          "duration": "4 hours",
+          "rating": 4.9,
+          "sourceOrAuthor": "Grant Sanderson (3Blue1Brown)",
+          "lastReviewed": "2026-05-25",
+          "description": "An incredibly intuitive, highly visual introduction to matrices, vectors, determinants, and eigenvectors that makes linear algebra clear and simple.",
+          "tags": ["Linear Algebra", "Vectors", "Matrices", "Visualization"]
+        },
+        {
+          "id": "kaggle-pandas",
+          "name": "Kaggle Pandas Tutorial",
+          "url": "https://www.kaggle.com/learn/pandas",
+          "type": "Interactive Course",
+          "difficulty": "Beginner",
+          "cost": "Free",
+          "duration": "4 hours",
+          "rating": 4.7,
+          "sourceOrAuthor": "Kaggle Team",
+          "lastReviewed": "2026-05-10",
+          "description": "Hands-on, notebook-based tutorial teaching data manipulation, cleaning, and aggregation using the Python Pandas library.",
+          "tags": ["Pandas", "Python", "Data Wrangling", "Data Science"]
+        }
+      ]
+    },
+    {
+      "categoryId": "classical-ml",
+      "name": "Classical Machine Learning",
+      "description": "Learn predictive modeling, classification, regression, clustering, and data preprocessing.",
+      "resources": [
+        {
+          "id": "andrew-ng-ml",
+          "name": "Machine Learning Specialization",
+          "url": "https://www.coursera.org/specializations/machine-learning-introduction",
+          "type": "Interactive Course",
+          "difficulty": "Beginner to Intermediate",
+          "cost": "Free to Paid",
+          "duration": "60 hours",
+          "rating": 4.9,
+          "sourceOrAuthor": "Dr. Andrew Ng (DeepLearning.AI / Stanford)",
+          "lastReviewed": "2026-06-01",
+          "description": "The gold-standard introduction to machine learning. Covers supervised algorithms (regression, logistic classification), neural networks, decision trees, unsupervised learning, and practical ML pipeline advice.",
+          "tags": ["Supervised Learning", "Unsupervised Learning", "Scikit-Learn", "Algorithms"]
+        },
+        {
+          "id": "statquest-ml",
+          "name": "StatQuest Machine Learning Videos",
+          "url": "https://statquest.org/",
+          "type": "Video Tutorial",
+          "difficulty": "Beginner to Intermediate",
+          "cost": "Free",
+          "duration": "Ongoing",
+          "rating": 4.9,
+          "sourceOrAuthor": "Josh Starmer",
+          "lastReviewed": "2026-05-28",
+          "description": "Breaks down complex statistics and machine learning concepts (such as SVMs, Random Forests, XGBoost, and PCA) into small, simple, and beautifully visual explanations.",
+          "tags": ["Statistics", "Random Forest", "Gradient Boosting", "PCA"]
+        }
+      ]
+    },
+    {
+      "categoryId": "deep-learning-nlp",
+      "name": "Deep Learning & Modern AI",
+      "description": "Build neural networks, train computer vision models, and master transformers and large language models (LLMs).",
+      "resources": [
+        {
+          "id": "fast-ai-deep-learning",
+          "name": "Practical Deep Learning for Coders",
+          "url": "https://course.fast.ai/",
+          "type": "Platform",
+          "difficulty": "Intermediate",
+          "cost": "Free",
+          "duration": "40 hours",
+          "rating": 4.9,
+          "sourceOrAuthor": "Jeremy Howard (Fast.ai)",
+          "lastReviewed": "2026-05-30",
+          "description": "A brilliant 'top-down' course that teaches deep learning by training state-of-the-art computer vision and text models immediately, before diving into underlying matrix calculus and architecture details.",
+          "tags": ["Deep Learning", "PyTorch", "Computer Vision", "Fastai"]
+        },
+        {
+          "id": "huggingface-course",
+          "name": "The Hugging Face NLP Course",
+          "url": "https://huggingface.co/course/chapter1/1",
+          "type": "Documentation",
+          "difficulty": "Intermediate to Advanced",
+          "cost": "Free",
+          "duration": "25 hours",
+          "rating": 4.8,
+          "sourceOrAuthor": "Hugging Face Team",
+          "lastReviewed": "2026-05-20",
+          "description": "The ultimate course for mastering modern Natural Language Processing. Covers using pre-trained Transformer models, tokenizers, fine-tuning models on custom datasets, and deploying models to production.",
+          "tags": ["Transformers", "NLP", "LLMs", "Fine-Tuning", "PyTorch"]
+        },
+        {
+          "id": "3blue1brown-neural-nets",
+          "name": "Neural Networks Deep Dive",
+          "url": "https://www.3blue1brown.com/topics/neural-networks",
+          "type": "Video Tutorial",
+          "difficulty": "Beginner",
+          "cost": "Free",
+          "duration": "2 hours",
+          "rating": 4.9,
+          "sourceOrAuthor": "Grant Sanderson",
+          "lastReviewed": "2026-05-12",
+          "description": "An unmatched 4-part visual series detailing what a neural network actually is, how it processes data, and the mathematical mechanics of backpropagation.",
+          "tags": ["Neural Networks", "Backpropagation", "Gradient Descent", "Weights"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "id": "python",
+  "title": "Python Development",
+  "description": "A curated database of premium learning resources to master Python programming, scripting, data engineering, and web development.",
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-06-02"
+  },
+  "categories": [
+    {
+      "categoryId": "syntax-basics",
+      "name": "Python Language Basics",
+      "description": "Master core syntax, data types, functions, and procedural logic.",
+      "resources": [
+        {
+          "id": "py4e",
+          "name": "Python for Everybody (PY4E)",
+          "url": "https://www.py4e.com/",
+          "type": "Platform",
+          "difficulty": "Beginner",
+          "cost": "Free",
+          "duration": "40 hours",
+          "rating": 4.8,
+          "sourceOrAuthor": "Dr. Charles Severance (Univ. of Michigan)",
+          "lastReviewed": "2026-05-29",
+          "description": "An excellent first step into coding. Teaches core computing concepts using Python, complete with lecture videos, exercises, and autograded coding challenges.",
+          "tags": ["Syntax Basics", "Data Structures", "Web Scraping", "Databases"]
+        },
+        {
+          "id": "python-official-tutorial",
+          "name": "Python Official Tutorial",
+          "url": "https://docs.python.org/3/tutorial/",
+          "type": "Documentation",
+          "difficulty": "Beginner to Intermediate",
+          "cost": "Free",
+          "duration": "Self-paced",
+          "rating": 4.6,
+          "sourceOrAuthor": "Python Software Foundation",
+          "lastReviewed": "2026-05-20",
+          "description": "The official handbook introducing the language's core syntax, standard libraries, modules, and built-in datatypes systematically.",
+          "tags": ["Official Documentation", "Standard Library", "Modules"]
+        },
+        {
+          "id": "automate-boring-stuff",
+          "name": "Automate the Boring Stuff with Python",
+          "url": "https://automatetheboringstuff.com/",
+          "type": "Book",
+          "difficulty": "Beginner",
+          "cost": "Free",
+          "duration": "Self-paced",
+          "rating": 4.8,
+          "sourceOrAuthor": "Al Sweigart",
+          "lastReviewed": "2026-05-25",
+          "description": "A highly practical book focused on applying Python to automate daily spreadsheet, document, file-handling, and scraping tasks.",
+          "tags": ["Automation", "File Operations", "Web Scraping", "Scripting"]
+        }
+      ]
+    },
+    {
+      "categoryId": "oop-advanced",
+      "name": "OOP & Advanced Concepts",
+      "description": "Dive deep into Python's object-oriented paradigms, decorators, memory handling, and concurrency.",
+      "resources": [
+        {
+          "id": "real-python",
+          "name": "Real Python Tutorials",
+          "url": "https://realpython.com/",
+          "type": "Platform",
+          "difficulty": "Intermediate to Advanced",
+          "cost": "Free",
+          "duration": "Self-paced",
+          "rating": 4.9,
+          "sourceOrAuthor": "Real Python Team",
+          "lastReviewed": "2026-06-01",
+          "description": "Extremely thorough, peer-reviewed articles and video courses explaining complex intermediate mechanics like decorators, generators, pytest, and multithreading.",
+          "tags": ["Advanced Python", "Pytest", "Decorators", "OOP"]
+        },
+        {
+          "id": "corey-schafer-tutorials",
+          "name": "Corey Schafer's Python Playlist",
+          "url": "https://youtube.com/user/schafer5",
+          "type": "Video Tutorial",
+          "difficulty": "Intermediate",
+          "cost": "Free",
+          "duration": "35 hours",
+          "rating": 4.9,
+          "sourceOrAuthor": "Corey Schafer",
+          "lastReviewed": "2026-05-31",
+          "description": "Widely regarded as the best free modular video course. Highly recommended for its deep-dive series on Object-Oriented Python, virtual environments, and SQL databases.",
+          "tags": ["OOP", "Virtual Environments", "Subprocess", "SQLAlchemy"]
+        }
+      ]
+    },
+    {
+      "categoryId": "web-frameworks",
+      "name": "Python Web Ecosystem",
+      "description": "Build high-performance REST APIs, real-time microservices, and server-rendered SaaS portals.",
+      "resources": [
+        {
+          "id": "fastapi-docs",
+          "name": "FastAPI Official Documentation",
+          "url": "https://fastapi.tiangolo.com/",
+          "type": "Documentation",
+          "difficulty": "Intermediate",
+          "cost": "Free",
+          "duration": "Self-paced",
+          "rating": 4.8,
+          "sourceOrAuthor": "Sebastián Ramírez",
+          "lastReviewed": "2026-05-24",
+          "description": "The gold standard of framework docs, featuring clean code snippets, automatic interactive documentation guides, and deep type-safe practices.",
+          "tags": ["FastAPI", "Pydantic", "REST APIs", "Asyncio"]
+        },
+        {
+          "id": "django-docs-tutorial",
+          "name": "Django 'Polls' Tutorial & Documentation",
+          "url": "https://docs.djangoproject.com/en/stable/intro/tutorial01/",
+          "type": "Documentation",
+          "difficulty": "Intermediate to Advanced",
+          "cost": "Free",
+          "duration": "10 hours",
+          "rating": 4.7,
+          "sourceOrAuthor": "Django Software Foundation",
+          "lastReviewed": "2026-05-18",
+          "description": "A comprehensive introductory tutorial that guides developers through building a production-grade database-driven poll app using Django's MVC/MTV structure.",
+          "tags": ["Django", "ORM", "Admin Panel", "MVC Pattern"]
+        }
+      ]
+    }
+  ]
+}

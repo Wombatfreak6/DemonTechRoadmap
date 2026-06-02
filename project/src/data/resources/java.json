@@ -1,0 +1,130 @@
+{
+  "id": "java",
+  "title": "Java Development",
+  "description": "A curated database of premium learning resources to master Java programming, JVM internals, multithreading, and Spring Boot enterprise development.",
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-06-02"
+  },
+  "categories": [
+    {
+      "categoryId": "foundations",
+      "name": "Java & OOP Foundations",
+      "description": "Master strongly typed object-oriented programming, standard syntax, loops, collections, and error handling.",
+      "resources": [
+        {
+          "id": "helsinki-mooc-java",
+          "name": "University of Helsinki Java Programming MOOC",
+          "url": "https://java-programming.mooc.fi/",
+          "type": "Interactive Course",
+          "difficulty": "Beginner",
+          "cost": "Free",
+          "duration": "80 hours",
+          "rating": 4.9,
+          "sourceOrAuthor": "University of Helsinki",
+          "lastReviewed": "2026-05-28",
+          "description": "Widely considered the best absolute introductory course for programming and Java. Fully interactive with dozens of autograded coding exercises checked directly via NetBeans IDE.",
+          "tags": ["OOP Basics", "Java Syntax", "IDE Practice", "Collections API"]
+        },
+        {
+          "id": "head-first-java",
+          "name": "Head First Java (3rd Edition)",
+          "url": "https://www.oreilly.com/library/view/head-first-java/9781492091615/",
+          "type": "Book",
+          "difficulty": "Beginner to Intermediate",
+          "cost": "Paid",
+          "duration": "Self-paced",
+          "rating": 4.8,
+          "sourceOrAuthor": "Kathy Sierra, Bert Bates, Trisha Gee",
+          "lastReviewed": "2026-05-15",
+          "description": "A visually engaging, highly interactive textbook that explains core OOP paradigms, threading, networking, and clean design structures in Java.",
+          "tags": ["OOP Patterns", "Multithreading", "Memory Model", "Generics"]
+        },
+        {
+          "id": "oracle-java-tutorials",
+          "name": "The Java Tutorials",
+          "url": "https://docs.oracle.com/javase/tutorial/",
+          "type": "Documentation",
+          "difficulty": "Beginner to Intermediate",
+          "cost": "Free",
+          "duration": "Self-paced",
+          "rating": 4.5,
+          "sourceOrAuthor": "Oracle Corporation",
+          "lastReviewed": "2026-05-10",
+          "description": "The official documentation guide containing exhaustive, practical tutorials detailing the entire standard library API.",
+          "tags": ["Standard Library", "APIs", "JDBC", "Official Reference"]
+        }
+      ]
+    },
+    {
+      "categoryId": "advanced-jvm",
+      "name": "Advanced JVM & Concurrency",
+      "description": "Dive deep into memory allocations, JVM flags, Garbage Collectors, and Java Concurrency Utilities.",
+      "resources": [
+        {
+          "id": "baeldung-java",
+          "name": "Baeldung Java Tutorials",
+          "url": "https://www.baeldung.com/",
+          "type": "Platform",
+          "difficulty": "Intermediate to Advanced",
+          "cost": "Free",
+          "duration": "Self-paced",
+          "rating": 4.9,
+          "sourceOrAuthor": "Eugen Paraschiv",
+          "lastReviewed": "2026-06-01",
+          "description": "The absolute go-to tutorial directory for Java and Spring framework developers. Offers highly specific, code-first articles detailing everything from stream performance to custom class loaders.",
+          "tags": ["JVM Internals", "Streams API", "Classloaders", "Reflection"]
+        },
+        {
+          "id": "java-concurrency-in-practice",
+          "name": "Java Concurrency in Practice",
+          "url": "https://jcip.net/",
+          "type": "Book",
+          "difficulty": "Advanced",
+          "cost": "Paid",
+          "duration": "Self-paced",
+          "rating": 4.9,
+          "sourceOrAuthor": "Brian Goetz",
+          "lastReviewed": "2026-05-20",
+          "description": "The ultimate book detailing standard multi-threaded systems architecture in Java. Essential reading for understanding thread safety, synchronization, and advanced concurrent collections.",
+          "tags": ["Concurrency", "Thread Safety", "Synchronization", "Executors"]
+        }
+      ]
+    },
+    {
+      "categoryId": "enterprise",
+      "name": "Enterprise Frameworks",
+      "description": "Build high-throughput, secure REST microservices and databases using the Spring ecosystem.",
+      "resources": [
+        {
+          "id": "spring-academy",
+          "name": "Spring Academy",
+          "url": "https://spring.academy/",
+          "type": "Platform",
+          "difficulty": "Intermediate to Advanced",
+          "cost": "Free to Paid",
+          "duration": "Self-paced",
+          "rating": 4.7,
+          "sourceOrAuthor": "VMware",
+          "lastReviewed": "2026-05-24",
+          "description": "Official Spring learning path courses that guide developers through building high-security APIs using Spring Boot, Hibernate, MVC, and cloud microservice patterns.",
+          "tags": ["Spring Boot", "Spring MVC", "Spring Security", "Microservices"]
+        },
+        {
+          "id": "codegym-platform",
+          "name": "CodeGym",
+          "url": "https://codegym.cc/",
+          "type": "Interactive Course",
+          "difficulty": "Beginner to Intermediate",
+          "cost": "Paid",
+          "duration": "Self-paced",
+          "rating": 4.7,
+          "sourceOrAuthor": "CodeGym Team",
+          "lastReviewed": null,
+          "description": "A gamified, practical Java platform featuring 1200+ structured exercises designed to teach syntax and design logic through repetitive, engaging problem-solving.",
+          "tags": ["Interactive Practice", "Gamified Learning", "Web Development"]
+        }
+      ]
+    }
+  ]
+}

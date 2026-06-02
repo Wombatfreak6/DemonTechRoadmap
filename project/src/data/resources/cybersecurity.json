@@ -1,0 +1,116 @@
+{
+  "id": "cybersecurity",
+  "title": "Cybersecurity",
+  "description": "A curated database of premium learning resources to master computer networking, Linux systems, ethical hacking, and enterprise cyber defense.",
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-06-02"
+  },
+  "categories": [
+    {
+      "categoryId": "fundamentals",
+      "name": "Security & Linux Fundamentals",
+      "description": "Build foundations in Linux terminal operations, networking protocols, and standard security principles.",
+      "resources": [
+        {
+          "id": "otw-bandit",
+          "name": "OverTheWire: Bandit",
+          "url": "https://overthewire.org/wargames/bandit/",
+          "type": "Interactive Course",
+          "difficulty": "Beginner",
+          "cost": "Free",
+          "duration": "15 hours",
+          "rating": 4.8,
+          "sourceOrAuthor": "OverTheWire Community",
+          "lastReviewed": "2026-05-28",
+          "description": "An outstanding SSH-based wargame aimed at absolute beginners. Players learn basic Linux command-line commands, file operations, permissions, and scripting to retrieve passwords and unlock consecutive levels.",
+          "tags": ["Linux", "CLI", "SSH", "Basics", "Wargame"]
+        },
+        {
+          "id": "sans-cyber-aces",
+          "name": "SANS Cyber Aces Online",
+          "url": "https://www.cyberaces.org/",
+          "type": "Platform",
+          "difficulty": "Beginner",
+          "cost": "Free",
+          "duration": "12 hours",
+          "rating": 4.7,
+          "sourceOrAuthor": "SANS Institute",
+          "lastReviewed": "2026-05-10",
+          "description": "A high-quality foundational course developed by the prestigious SANS Institute, covering operating system security, basic networking, and core cryptography principles.",
+          "tags": ["Networking", "OS Security", "System Maintenance"]
+        }
+      ]
+    },
+    {
+      "categoryId": "pentesting-labs",
+      "name": "Ethical Hacking & Pentesting Labs",
+      "description": "Learn defensive analysis, web application exploitation, and practical penetration testing in active sandbox labs.",
+      "resources": [
+        {
+          "id": "tryhackme",
+          "name": "TryHackMe Learning Paths",
+          "url": "https://tryhackme.com/",
+          "type": "Platform",
+          "difficulty": "Beginner to Intermediate",
+          "cost": "Free to Paid",
+          "duration": "Self-paced",
+          "rating": 4.8,
+          "sourceOrAuthor": "TryHackMe Ltd",
+          "lastReviewed": "2026-06-01",
+          "description": "A highly interactive, gamified platform featuring complete learning paths (e.g., Complete Beginner, Junior Penetration Tester) that guide users through hacking sandbox computers directly via an in-browser cloud instance.",
+          "tags": ["Active Labs", "Junior Pentester", "CTF", "Ethical Hacking"]
+        },
+        {
+          "id": "portswigger-academy",
+          "name": "PortSwigger Web Security Academy",
+          "url": "https://portswigger.net/web-security",
+          "type": "Platform",
+          "difficulty": "Intermediate to Advanced",
+          "cost": "Free",
+          "duration": "Self-paced",
+          "rating": 4.9,
+          "sourceOrAuthor": "PortSwigger (Creators of Burp Suite)",
+          "lastReviewed": "2026-05-30",
+          "description": "The gold-standard resource for learning web application security. Features interactive labs and academic material covering SQL injection, Cross-Site Scripting (XSS), CSRF, API security, and access control bypasses.",
+          "tags": ["Web Hacking", "SQLi", "XSS", "Burp Suite", "Web Security"]
+        },
+        {
+          "id": "hackthebox",
+          "name": "Hack The Box Labs",
+          "url": "https://www.hackthebox.com/",
+          "type": "Platform",
+          "difficulty": "Intermediate to Advanced",
+          "cost": "Free to Paid",
+          "duration": "Self-paced",
+          "rating": 4.9,
+          "sourceOrAuthor": "Hack The Box Team",
+          "lastReviewed": "2026-06-01",
+          "description": "An advanced, highly respected platform offering live sandbox environments to practice system exploits, privilege escalation, Active Directory attacks, and reverse engineering.",
+          "tags": ["Privilege Escalation", "Active Directory", "Reverse Engineering", "Exploitation"]
+        }
+      ]
+    },
+    {
+      "categoryId": "certifications-defense",
+      "name": "Frameworks & Cyber Defense",
+      "description": "Master professional industry frameworks, threat intelligence, and certifications standard.",
+      "resources": [
+        {
+          "id": "prof-messer-security",
+          "name": "CompTIA Security+ SY0-701 Course",
+          "url": "https://www.professormesser.com/",
+          "type": "Video Tutorial",
+          "difficulty": "Beginner to Intermediate",
+          "cost": "Free",
+          "duration": "25 hours",
+          "rating": 4.8,
+          "sourceOrAuthor": "James 'Professor' Messer",
+          "lastReviewed": "2026-05-18",
+          "description": "The complete, highly thorough video tutorial playlist covering every domain of the CompTIA Security+ certification. Explains network structures, risk management, threat vectors, and incident response.",
+          "tags": ["CompTIA Security+", "Incident Response", "Cryptography", "Risk Management"]
+        }
+      ]
+    }
+  ]
+}

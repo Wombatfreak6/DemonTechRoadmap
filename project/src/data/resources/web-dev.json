@@ -1,0 +1,144 @@
+{
+  "id": "web-dev",
+  "title": "Web Development",
+  "description": "A curated database of premium learning resources to master frontend and full-stack web development.",
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-06-02"
+  },
+  "categories": [
+    {
+      "categoryId": "foundations",
+      "name": "HTML & CSS Foundations",
+      "description": "Learn the structuring and styling languages of the web.",
+      "resources": [
+        {
+          "id": "mdn-html-css",
+          "name": "MDN Web Docs - HTML & CSS",
+          "url": "https://developer.mozilla.org/en-US/docs/Learn",
+          "type": "Documentation",
+          "difficulty": "Beginner",
+          "cost": "Free",
+          "duration": "Self-paced",
+          "rating": 4.9,
+          "sourceOrAuthor": "Mozilla Developer Network",
+          "lastReviewed": "2026-05-30",
+          "description": "The absolute gold standard for web development documentation, offering clear tutorials, interactive examples, and reference guides for HTML and CSS structure.",
+          "tags": ["HTML", "CSS", "Reference", "Semantic Web"]
+        },
+        {
+          "id": "fcc-responsive-design",
+          "name": "Responsive Web Design Course",
+          "url": "https://www.freecodecamp.org/learn/2022/responsive-web-design/",
+          "type": "Interactive Course",
+          "difficulty": "Beginner",
+          "cost": "Free",
+          "duration": "300 hours",
+          "rating": 4.8,
+          "sourceOrAuthor": "freeCodeCamp",
+          "lastReviewed": "2026-05-25",
+          "description": "Learn semantic HTML and responsive CSS layouts interactively by building dozens of real-world page layouts directly in your browser.",
+          "tags": ["HTML5", "CSS3", "Responsive Design", "Flexbox", "CSS Grid"]
+        },
+        {
+          "id": "css-tricks-guides",
+          "name": "CSS-Tricks Complete Layout Guides",
+          "url": "https://css-tricks.com/snippets/css/a-guide-to-flexbox/",
+          "type": "Platform",
+          "difficulty": "Intermediate",
+          "cost": "Free",
+          "duration": "Self-paced",
+          "rating": 4.8,
+          "sourceOrAuthor": "CSS-Tricks / DigitalOcean",
+          "lastReviewed": "2026-05-18",
+          "description": "Unrivaled, highly visual guides outlining the complete API and practical applications of CSS Flexbox and CSS Grid.",
+          "tags": ["CSS Grid", "Flexbox", "Layout Cheat-Sheets"]
+        }
+      ]
+    },
+    {
+      "categoryId": "javascript",
+      "name": "JavaScript & DOM Scripting",
+      "description": "Bring static structures to life with logical programming and dynamic interactivity.",
+      "resources": [
+        {
+          "id": "modern-js-tutorial",
+          "name": "The Modern JavaScript Tutorial",
+          "url": "https://javascript.info/",
+          "type": "Interactive Course",
+          "difficulty": "Beginner to Intermediate",
+          "cost": "Free",
+          "duration": "Self-paced",
+          "rating": 4.9,
+          "sourceOrAuthor": "Ilya Kantor",
+          "lastReviewed": "2026-05-28",
+          "description": "An incredibly detailed, textbook-quality guide starting from core programming fundamentals and extending all the way to complex asynchronous operations, promises, and browser DOM manipulation.",
+          "tags": ["JavaScript ES6+", "DOM Manipulation", "Asynchronous JS", "Promises"]
+        },
+        {
+          "id": "odin-project-js",
+          "name": "The Odin Project - Full Stack JavaScript",
+          "url": "https://www.theodinproject.com/",
+          "type": "Platform",
+          "difficulty": "Beginner to Intermediate",
+          "cost": "Free",
+          "duration": "Self-paced",
+          "rating": 4.9,
+          "sourceOrAuthor": "The Odin Project Community",
+          "lastReviewed": "2026-06-01",
+          "description": "A fully open-source, highly respected curriculum that takes you through a rigorous project-focused learning path using git, webpack, and pure JavaScript interfaces.",
+          "tags": ["Git", "Vanilla JS", "Object Oriented JS", "Webpack"]
+        }
+      ]
+    },
+    {
+      "categoryId": "frameworks",
+      "name": "Modern Frameworks & Tools",
+      "description": "Build production-grade applications using modern components, styling libraries, and state engines.",
+      "resources": [
+        {
+          "id": "react-dev-docs",
+          "name": "React.dev Official Documentation",
+          "url": "https://react.dev/",
+          "type": "Documentation",
+          "difficulty": "Intermediate",
+          "cost": "Free",
+          "duration": "Self-paced",
+          "rating": 4.8,
+          "sourceOrAuthor": "React Core Team",
+          "lastReviewed": "2026-05-15",
+          "description": "The beautifully rewritten official interactive tutorial and reference guides detailing state management, performance optimization, and custom react hooks.",
+          "tags": ["ReactJS", "Virtual DOM", "React Hooks", "State Management"]
+        },
+        {
+          "id": "nextjs-learn",
+          "name": "Next.js Learn Hub",
+          "url": "https://nextjs.org/learn",
+          "type": "Interactive Course",
+          "difficulty": "Intermediate to Advanced",
+          "cost": "Free",
+          "duration": "20 hours",
+          "rating": 4.7,
+          "sourceOrAuthor": "Vercel",
+          "lastReviewed": "2026-05-22",
+          "description": "Interactive, official course covering file-system routing under the Next.js App Router, Server Components, data fetching, caching, and server actions.",
+          "tags": ["Next.js", "React Server Components", "SSR", "Static Site Generation"]
+        },
+        {
+          "id": "frontend-masters",
+          "name": "Frontend Masters Web Tracks",
+          "url": "https://frontendmasters.com/",
+          "type": "Video Tutorial",
+          "difficulty": "Advanced",
+          "cost": "Paid",
+          "duration": "Ongoing",
+          "rating": 4.9,
+          "sourceOrAuthor": "Frontend Masters",
+          "lastReviewed": "2026-06-01",
+          "description": "Extremely high-quality, professional video courses taught by actual industry leaders, covering advanced CSS, deep-dive JS performance, compiler theory, and systems engineering.",
+          "tags": ["Advanced JS", "Web Performance", "Build Tools", "Node.js"]
+        }
+      ]
+    }
+  ]
+}
