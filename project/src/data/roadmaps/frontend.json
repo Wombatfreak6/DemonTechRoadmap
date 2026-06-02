@@ -37,6 +37,13 @@
               "url": "https://www.freecodecamp.org/learn/2022/responsive-web-design/",
               "type": "interactive course",
               "duration": "40 hours"
+            },
+            {
+               "name": "Youtube (Hindi) - Chai aur HTML",
+              "url": "https://youtube.com/playlist?list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI",
+              "type": "Youtube Playlist",
+              "duration": "2+ hours",
+              "author": "Hitesh Choudhary"
             }
           ],
           "projects": [
@@ -91,6 +98,9 @@
                 "Mobile-first responsive design",
                 "Smooth hover animations"
               ]
+            },
+            {
+
             }
           ]
         }
