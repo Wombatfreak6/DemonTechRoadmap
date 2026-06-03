@@ -21,6 +21,34 @@ function git(...args) {
   }).trim();
 }
 
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function checkRateLimit(response) {
+  const remaining = response.headers.get("X-RateLimit-Remaining");
+  const resetTime = response.headers.get("X-RateLimit-Reset");
+
+  if (remaining === null || resetTime === null) return;
+
+  const remainingNum = parseInt(remaining, 10);
+  const resetTimeNum = parseInt(resetTime, 10);
+
+  if (isNaN(remainingNum) || isNaN(resetTimeNum)) return;
+
+  if (remainingNum === 0) {
+    const waitMs = Math.max(0, resetTimeNum * 1000 - Date.now() + 5000);
+    console.log(
+      `    ⚠ Rate limit exhausted. Sleeping ${Math.ceil(waitMs / 1000)}s until reset (${new Date(resetTimeNum * 1000).toISOString()})...`
+    );
+    await delay(waitMs);
+  } else if (remainingNum < 100) {
+    console.warn(
+      `    ⚠ Rate limit running low: ${remainingNum} remaining, resets at ${new Date(resetTimeNum * 1000).toISOString()}`
+    );
+  }
+}
+
 function getNewCommitters() {
   const before = process.env.BEFORE_SHA;
   const after  = process.env.AFTER_SHA;
@@ -97,6 +125,7 @@ async function enrichContributor({ guessedUsername, name, email }) {
           }
         }
       );
+      await checkRateLimit(commitSearch);
       if (commitSearch.ok) {
         const data = await commitSearch.json();
         if (data.items && data.items.length > 0) {
@@ -122,10 +151,12 @@ async function enrichContributor({ guessedUsername, name, email }) {
   const isNoreplyGithub = email && /@users\.noreply\.github\.com$/.test(email);
   if (isNoreplyGithub) {
     try {
+      await delay(200);
       const direct = await fetch(
         `https://api.github.com/users/${guessedUsername}`,
         { headers }
       );
+      await checkRateLimit(direct);
       if (direct.ok) {
         const data = await direct.json();
         if (
@@ -328,7 +359,7 @@ async function main() {
     git("config", "user.name", "github-actions[bot]");
     git("config", "user.email", "github-actions[bot]@users.noreply.github.com");
     git("add", "README.md");
-    git("commit", "-m", "docs: seed contributor table with all historical contributors");
+    git("commit", "-m", "docs: seed contributor table with all historical contributors [skip ci]");
 
     try {
       git("pull", "--rebase", "origin", "main");
@@ -382,7 +413,7 @@ async function main() {
   console.log("::endgroup::");
 
   const names = trulyNew.map((c) => `@${c.username}`).join(", ");
-  const commitMsg = `docs: add contributor(s) ${names} to README`;
+  const commitMsg = `docs: add contributor(s) ${names} to README [skip ci]`;
 
   console.log("::group::🚀 Committing & pushing");
   git("config", "user.name", "github-actions[bot]");
@@ -398,6 +429,15 @@ async function main() {
     } catch (err) {
       console.error("❌ Rebase failed — likely conflicting changes. Exiting.");
       process.exit(1);
+    }
+
+    // After rebase, re-read README to detect concurrent modifications
+    const freshContent = fs.readFileSync(README_PATH, "utf8");
+    const { usernames: freshExisting } = getExistingContributors(freshContent);
+    const stillNew = trulyNew.filter(p => !freshExisting.has(p.username.toLowerCase()));
+    if (stillNew.length === 0) {
+      console.log("ℹ️  All new contributors were already added by another workflow. Nothing to push.");
+      return;
     }
 
     git("push", "origin", "HEAD:main");
