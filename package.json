@@ -5,7 +5,8 @@
     "project"
   ],
   "scripts": {
-    "build": "rm -rf .next && npm --workspace project run build && cp -R project/.next .next",
+    "build": "npm --workspace project run build",
+    "clean": "rm -rf .next project/.next",
     "dev": "npm --workspace project run dev",
     "lint": "npm --workspace project run lint"
   },

@@ -53,6 +53,15 @@ const roadmapStats = [
 
 const roadmapCards = [
   {
+    title: "JavaScript Roadmap",
+    detail: "Document-backed path from JS fundamentals to ES2024, async, performance, and patterns.",
+    topics: "20 Topics",
+    level: "Beginner to Advanced",
+    progress: "90%",
+    tags: ["JavaScript", "ES2024", "Async", "Patterns", "+5"],
+    href: "/roadmaps/javascript",
+  },
+  {
     title: "Frontend Developer",
     detail: "Step-by-step guide to becoming a modern frontend developer.",
     topics: "42 Topics",
@@ -408,11 +417,9 @@ export default function AllRoadmaps() {
             </section>
 
             <section className="mt-6 grid gap-5 xl:grid-cols-3">
-              {roadmapCards.map((roadmap) => (
-                <article
-                  className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5 transition hover:border-red-500/45 hover:shadow-[0_20px_60px_rgba(127,29,29,0.18)]"
-                  key={roadmap.title}
-                >
+              {roadmapCards.map((roadmap) => {
+                const cardContent = (
+                  <>
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <h2 className="text-xl font-black text-[var(--text-primary)]">
@@ -453,8 +460,26 @@ export default function AllRoadmaps() {
                       </span>
                     ))}
                   </div>
-                </article>
-              ))}
+                  </>
+                );
+
+                return roadmap.href ? (
+                  <Link
+                    className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5 transition hover:border-red-500/45 hover:shadow-[0_20px_60px_rgba(127,29,29,0.18)]"
+                    href={roadmap.href}
+                    key={roadmap.title}
+                  >
+                    {cardContent}
+                  </Link>
+                ) : (
+                  <article
+                    className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5 transition hover:border-red-500/45 hover:shadow-[0_20px_60px_rgba(127,29,29,0.18)]"
+                    key={roadmap.title}
+                  >
+                    {cardContent}
+                  </article>
+                );
+              })}
             </section>
 
             <section className="mt-9 rounded-xl border border-[var(--border)] bg-black/20 p-6">

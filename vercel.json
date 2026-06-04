@@ -4,5 +4,5 @@
   "ignoreCommand": "git diff --quiet HEAD^ HEAD -- .",
   "installCommand": "if [ -f package-lock.json ]; then npm ci; else npm --prefix project ci; fi",
   "buildCommand": "npm run build",
-  "outputDirectory": ".next"
+  "outputDirectory": "project/.next"
 }
