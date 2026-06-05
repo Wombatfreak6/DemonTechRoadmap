@@ -226,7 +226,7 @@ export default function Changelog() {
       <div className={`fixed inset-0 -z-10 transition-colors duration-300 ${isDarkMode ? "bg-[radial-gradient(circle_at_66%_12%,rgba(127,29,29,0.2),transparent_26%),radial-gradient(circle_at_86%_70%,rgba(127,29,29,0.15),transparent_30%),linear-gradient(180deg,#050505_0%,#030303_100%)]" : "bg-[radial-gradient(circle_at_68%_12%,rgba(239,68,68,0.1),transparent_28%),linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)]"}`} />
 
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
-        <div className="mx-auto flex h-[86px] max-w-[1510px] items-center gap-8 px-6 lg:px-10">
+        <div className="mx-auto flex h-[72px] max-w-[1260px] items-center gap-6 px-5 lg:px-8">
           <DemonTechLogo />
           <nav className="ml-auto hidden items-center gap-12 text-[15px] font-bold text-[var(--text-secondary)] lg:flex">
             {navItems.map((item) => (
@@ -236,7 +236,7 @@ export default function Changelog() {
               </a>
             ))}
           </nav>
-          <label className="ml-auto hidden h-11 w-[286px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] lg:ml-8 xl:flex">
+          <label className="ml-auto hidden h-11 w-[235px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] lg:ml-8 xl:flex">
             <Icon className="h-5 w-5" name="search" />
             <span className="flex-1">Search anything...</span>
             <kbd className="rounded border border-[var(--border)] bg-[var(--panel-strong)] px-2 py-0.5 text-xs">K</kbd>
@@ -251,10 +251,10 @@ export default function Changelog() {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-[1510px] grid-cols-1 lg:grid-cols-[290px_minmax(0,1fr)]">
-        <aside className="hidden min-h-[calc(100vh-86px)] border-r border-[var(--border)] px-5 py-5 lg:block">
+      <div className="mx-auto grid max-w-[1260px] grid-cols-1 lg:grid-cols-[235px_minmax(0,1fr)]">
+        <aside className="hidden min-h-[calc(100vh-72px)] border-r border-[var(--border)] px-5 py-5 lg:block">
           <div className="sticky top-[106px]">
-            <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-6 shadow-2xl shadow-[var(--shadow)]">
+            <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-5 shadow-2xl shadow-[var(--shadow)]">
               <div className="space-y-7">
                 {sidebarGroups.map((group) => (
                   <section key={group.title}>
@@ -293,8 +293,8 @@ export default function Changelog() {
           </div>
         </aside>
 
-        <section className="px-5 py-8 sm:px-8 lg:px-6">
-          <div className="mx-auto max-w-[1200px] rounded-xl border border-[var(--border)] bg-[rgba(5,5,6,0.34)] px-5 py-8 shadow-2xl shadow-[var(--shadow)] sm:px-7 lg:px-8">
+        <section className="px-5 py-6 sm:px-8 lg:px-5">
+          <div className="mx-auto max-w-[1000px] rounded-xl border border-[var(--border)] bg-[rgba(5,5,6,0.34)] px-5 py-6 shadow-2xl shadow-[var(--shadow)] sm:px-7 lg:px-6">
             <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--text-muted)]">
               <Icon className="h-4 w-4 text-red-500" name="home" />
               <Link className="transition hover:text-red-500" href="/">Home</Link>
@@ -302,9 +302,9 @@ export default function Changelog() {
               <span className="font-semibold text-[var(--text-primary)]">Changelog</span>
             </div>
 
-            <section className="relative mt-10 grid min-h-[300px] gap-8 overflow-hidden lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <section className="relative mt-10 grid min-h-[250px] gap-6 overflow-hidden lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
               <div className="relative z-10">
-                <h1 className="text-5xl font-black leading-[1.04] tracking-normal text-[var(--text-primary)] sm:text-6xl">
+                <h1 className="text-4xl font-black leading-[1.04] tracking-normal text-[var(--text-primary)] sm:text-5xl">
                   Change Log
                   <span className="block text-red-500">Project Updates</span>
                 </h1>
@@ -312,7 +312,7 @@ export default function Changelog() {
                   Track the latest updates, improvements, and fixes across DemonTech Roadmap.
                 </p>
               </div>
-              <div className="relative min-h-[260px]">
+              <div className="relative min-h-[220px]">
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(239,68,68,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(239,68,68,0.12)_1px,transparent_1px)] bg-[length:42px_42px] opacity-30" />
                 <div className="absolute left-1/2 top-1/2 h-44 w-[420px] -translate-x-1/2 -translate-y-1/2 rotate-[-14deg] rounded-[50%] border border-red-500/35" />
                 <div className="absolute left-1/2 top-1/2 h-52 w-44 -translate-x-1/2 -translate-y-1/2 rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-7 shadow-[0_0_60px_rgba(239,68,68,0.18)]">
@@ -327,7 +327,7 @@ export default function Changelog() {
               </div>
             </section>
 
-            <section className="mt-8 rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-4">
+            <section className="mt-6 rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-4">
               <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
                 <div className="flex flex-wrap gap-3">
                   {tabs.map((tab) => (
@@ -348,18 +348,18 @@ export default function Changelog() {
               <div className="relative space-y-6">
                 <span className="absolute bottom-16 left-[198px] top-12 hidden w-px bg-[var(--border)] xl:block" />
                 {updates.map((update) => (
-                  <article className="relative grid gap-5 xl:grid-cols-[140px_92px_1fr]" key={update.version}>
+                  <article className="relative grid gap-5 xl:grid-cols-[118px_78px_1fr]" key={update.version}>
                     <div className="pt-7 text-sm font-bold text-[var(--text-primary)]">
                       <p>{update.date}</p>
                       {update.isNew && <span className="mt-4 inline-flex rounded-md border border-red-500/35 bg-red-950/30 px-3 py-1 text-[10px] font-black uppercase tracking-[0.1em] text-red-500">New</span>}
                     </div>
                     <div className="relative hidden items-start justify-center pt-4 xl:flex">
-                      <span className="mt-8 h-2 w-2 rounded-full bg-[var(--text-muted)]" />
+                      <span className="mt-6 h-2 w-2 rounded-full bg-[var(--text-muted)]" />
                       <span className="absolute right-1 top-5 grid h-16 w-16 place-items-center rounded-full border border-red-500/45 bg-[var(--panel-strong)] text-red-500 shadow-[0_0_24px_rgba(239,68,68,0.18)]">
                         <Icon className="h-8 w-8" name={update.icon} />
                       </span>
                     </div>
-                    <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-6 shadow-2xl shadow-[var(--shadow)]">
+                    <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-5 shadow-2xl shadow-[var(--shadow)]">
                       <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                         <div>
                           <div className="flex flex-wrap items-center gap-3">
@@ -385,8 +385,8 @@ export default function Changelog() {
               </div>
             </section>
 
-            <section className="mt-10 overflow-hidden rounded-lg border border-red-500/45 bg-[radial-gradient(circle_at_10%_50%,rgba(239,68,68,0.18),transparent_28%),linear-gradient(135deg,rgba(127,29,29,0.22),rgba(12,12,14,0.78))] p-8 shadow-2xl shadow-[var(--shadow)]">
-              <div className="grid gap-7 lg:grid-cols-[130px_1fr_310px] lg:items-center">
+            <section className="mt-10 overflow-hidden rounded-lg border border-red-500/45 bg-[radial-gradient(circle_at_10%_50%,rgba(239,68,68,0.18),transparent_28%),linear-gradient(135deg,rgba(127,29,29,0.22),rgba(12,12,14,0.78))] p-6 shadow-2xl shadow-[var(--shadow)]">
+              <div className="grid gap-7 lg:grid-cols-[110px_1fr_260px] lg:items-center">
                 <div className="grid h-24 w-24 place-items-center overflow-hidden rounded-full bg-black shadow-[0_0_45px_rgba(239,68,68,0.28)]">
                   <Image alt="DemonTech update emblem" className="h-full w-full object-cover" height={96} src="/demontech-logo.png" width={96} />
                 </div>
@@ -395,12 +395,12 @@ export default function Changelog() {
                   <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--text-secondary)]">We have many exciting features and roadmaps coming your way. Stay tuned!</p>
                 </div>
                 <div className="space-y-4">
-                  <a className="flex h-14 items-center justify-center gap-3 rounded-md bg-red-700 px-6 text-sm font-black text-white transition hover:bg-red-600" href="https://discord.gg/yWtjK2Tb8T" rel="noreferrer" target="_blank">
+                  <a className="flex h-14 items-center justify-center gap-3 rounded-md bg-red-700 px-5 text-sm font-black text-white transition hover:bg-red-600" href="https://discord.gg/yWtjK2Tb8T" rel="noreferrer" target="_blank">
                     <Icon className="h-5 w-5" name="discord" />
                     Join Our Community
                     <Icon className="h-4 w-4" name="chevron" />
                   </a>
-                  <Link className="flex h-14 items-center justify-center gap-3 rounded-md border border-[var(--border)] bg-[var(--panel-bg)] px-6 text-sm font-black text-[var(--text-primary)] transition hover:border-red-500 hover:text-red-500" href="/docs/all-roadmaps">
+                  <Link className="flex h-14 items-center justify-center gap-3 rounded-md border border-[var(--border)] bg-[var(--panel-bg)] px-5 text-sm font-black text-[var(--text-primary)] transition hover:border-red-500 hover:text-red-500" href="/docs/all-roadmaps">
                     View Roadmaps
                     <Icon className="h-4 w-4" name="chevron" />
                   </Link>
@@ -409,9 +409,9 @@ export default function Changelog() {
             </section>
           </div>
 
-          <footer className="mx-auto mt-6 flex max-w-[1200px] flex-col gap-5 py-4 text-sm text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
+          <footer className="mx-auto mt-6 flex max-w-[1000px] flex-col gap-5 py-4 text-sm text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
             <p>© 2024 DemonTech Roadmap. All rights reserved.</p>
-            <div className="flex flex-wrap gap-8">
+            <div className="flex flex-wrap gap-6">
               <a className="transition hover:text-red-500" href="https://github.com/Demon-Die/DemonTechRoadmap" rel="noreferrer" target="_blank">GitHub</a>
               <a className="transition hover:text-red-500" href="https://discord.gg/yWtjK2Tb8T" rel="noreferrer" target="_blank">Discord</a>
               <a className="transition hover:text-red-500" href="#">Privacy Policy</a>

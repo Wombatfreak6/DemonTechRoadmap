@@ -189,7 +189,7 @@ export default function CommonQuestions() {
       <div className={`fixed inset-0 -z-10 transition-colors duration-300 ${isDarkMode ? "bg-[radial-gradient(circle_at_68%_12%,rgba(127,29,29,0.2),transparent_27%),radial-gradient(circle_at_80%_68%,rgba(127,29,29,0.16),transparent_28%),linear-gradient(180deg,#050505_0%,#030303_100%)]" : "bg-[radial-gradient(circle_at_68%_12%,rgba(239,68,68,0.1),transparent_28%),linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)]"}`} />
 
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
-        <div className="mx-auto flex h-[86px] max-w-[1510px] items-center gap-8 px-6 lg:px-10">
+        <div className="mx-auto flex h-[72px] max-w-[1260px] items-center gap-6 px-5 lg:px-8">
           <DemonTechLogo />
           <nav className="ml-auto hidden items-center gap-12 text-[15px] font-bold text-[var(--text-secondary)] lg:flex">
             {navItems.map((item) => (
@@ -199,7 +199,7 @@ export default function CommonQuestions() {
               </a>
             ))}
           </nav>
-          <label className="ml-auto hidden h-11 w-[286px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] lg:ml-8 xl:flex">
+          <label className="ml-auto hidden h-11 w-[235px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] lg:ml-8 xl:flex">
             <Icon className="h-5 w-5" name="search" />
             <span className="flex-1">Search anything...</span>
             <kbd className="rounded border border-[var(--border)] bg-[var(--panel-strong)] px-2 py-0.5 text-xs">K</kbd>
@@ -214,9 +214,9 @@ export default function CommonQuestions() {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-[1510px] grid-cols-1 lg:grid-cols-[270px_minmax(0,1fr)]">
-        <aside className="hidden min-h-[calc(100vh-86px)] border-r border-[var(--border)] px-5 py-5 lg:block">
-          <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-6 shadow-2xl shadow-[var(--shadow)]">
+      <div className="mx-auto grid max-w-[1260px] grid-cols-1 lg:grid-cols-[220px_minmax(0,1fr)]">
+        <aside className="hidden min-h-[calc(100vh-72px)] border-r border-[var(--border)] px-5 py-5 lg:block">
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-5 shadow-2xl shadow-[var(--shadow)]">
             <div className="space-y-7">
               {sidebarGroups.map((group) => (
                 <section key={group.title}>
@@ -250,7 +250,7 @@ export default function CommonQuestions() {
           </div>
         </aside>
 
-        <section className="px-5 py-6 sm:px-8 lg:px-10">
+        <section className="px-5 py-6 sm:px-8 lg:px-8">
           <div className="rounded-2xl border border-[var(--border)] bg-[var(--panel-bg)] px-5 py-6 shadow-2xl shadow-[var(--shadow)] sm:px-8">
             <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--text-muted)]">
               <Icon className="h-4 w-4 text-[var(--text-muted)]" name="home" />
@@ -259,9 +259,9 @@ export default function CommonQuestions() {
               <span className="font-semibold text-[var(--text-primary)]">Common Questions</span>
             </div>
 
-            <section className="mt-8 grid gap-8 xl:grid-cols-[1fr_370px]">
+            <section className="mt-6 grid gap-6 xl:grid-cols-[1fr_310px]">
               <div>
-                <h1 className="text-5xl font-black tracking-normal text-[var(--text-primary)] sm:text-6xl">
+                <h1 className="text-4xl font-black tracking-normal text-[var(--text-primary)] sm:text-5xl">
                   Common Questions
                   <Icon className="ml-5 inline-block h-8 w-8 align-top text-red-500" name="spark" />
                 </h1>
@@ -272,8 +272,8 @@ export default function CommonQuestions() {
                 </p>
               </div>
 
-              <aside className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-6">
-                <h2 className="text-xl font-black text-[var(--text-primary)]">Can&apos;t find your answer?</h2>
+              <aside className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5">
+                <h2 className="text-lg font-black text-[var(--text-primary)]">Can&apos;t find your answer?</h2>
                 <p className="mt-5 text-sm leading-7 text-[var(--text-secondary)]">
                   Our community is super helpful. Ask your question there.
                 </p>
@@ -295,8 +295,8 @@ export default function CommonQuestions() {
               </label>
             </section>
 
-            <section className="mt-8">
-              <h2 className="text-xl font-black text-[var(--text-primary)]">Browse by Category</h2>
+            <section className="mt-6">
+              <h2 className="text-lg font-black text-[var(--text-primary)]">Browse by Category</h2>
               <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-6">
                 {categories.map(({ title, count, icon, active }) => (
                   <article className={`rounded-lg border p-5 transition ${active ? "border-red-500 bg-red-950/15" : "border-[var(--border)] bg-[var(--panel-strong)] hover:border-red-500/45"}`} key={title}>
@@ -308,10 +308,10 @@ export default function CommonQuestions() {
               </div>
             </section>
 
-            <section className="mt-8 grid gap-6 xl:grid-cols-[1fr_285px]">
+            <section className="mt-6 grid gap-5 xl:grid-cols-[1fr_240px]">
               <div>
                 <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
-                  <h2 className="text-xl font-black text-[var(--text-primary)]">All Questions (128)</h2>
+                  <h2 className="text-lg font-black text-[var(--text-primary)]">All Questions (128)</h2>
                   <label className="flex h-11 items-center gap-3 text-sm text-[var(--text-muted)]">
                     Sort by:
                     <button className="flex h-11 items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 font-bold text-[var(--text-primary)]" type="button">
@@ -341,7 +341,7 @@ export default function CommonQuestions() {
                             It helps you stay focused, avoid confusion, and track
                             your progress step by step.
                           </p>
-                          <div className="mt-8 flex flex-wrap items-center gap-8 text-sm text-[var(--text-muted)]">
+                          <div className="mt-6 flex flex-wrap items-center gap-6 text-sm text-[var(--text-muted)]">
                             <span>Was this helpful?</span>
                             <span className="flex items-center gap-2">
                               <Icon className="h-4 w-4" name="thumbsUp" />
@@ -401,7 +401,7 @@ export default function CommonQuestions() {
                   <Icon className="h-7 w-7" name="book" />
                 </span>
                 <div>
-                  <h2 className="text-xl font-black text-[var(--text-primary)]">Explore Help Topics</h2>
+                  <h2 className="text-lg font-black text-[var(--text-primary)]">Explore Help Topics</h2>
                   <p className="mt-1 text-sm text-[var(--text-secondary)]">Quick guides and resources to help you on your journey.</p>
                 </div>
               </div>
@@ -421,14 +421,14 @@ export default function CommonQuestions() {
                 ))}
               </div>
 
-              <div className="mt-7 flex flex-col gap-5 rounded-lg border border-red-500/35 bg-red-950/10 p-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="mt-7 flex flex-col gap-5 rounded-lg border border-red-500/35 bg-red-950/10 p-5 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <h2 className="text-xl font-black text-[var(--text-primary)]">Still have questions?</h2>
+                  <h2 className="text-lg font-black text-[var(--text-primary)]">Still have questions?</h2>
                   <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
                     Our community is always here to help you grow and succeed.
                   </p>
                 </div>
-                <a className="flex h-12 shrink-0 items-center justify-center gap-3 rounded-md bg-red-700/80 px-6 text-sm font-black text-white transition hover:bg-red-600" href="https://discord.gg/yWtjK2Tb8T" rel="noreferrer" target="_blank">
+                <a className="flex h-12 shrink-0 items-center justify-center gap-3 rounded-md bg-red-700/80 px-5 text-sm font-black text-white transition hover:bg-red-600" href="https://discord.gg/yWtjK2Tb8T" rel="noreferrer" target="_blank">
                   <Icon className="h-5 w-5" name="discord" />
                   Join Discord Community
                   <Icon className="h-4 w-4" name="chevron" />

@@ -542,7 +542,7 @@ function DemonTechLogo() {
         <Image alt="DemonTech logo" className="h-full w-full object-cover" height={48} src="/demontech-logo.png" width={48} />
       </span>
       <span>
-        <span className="block text-xl font-black leading-6 text-white">
+        <span className="block text-lg font-black leading-6 text-white">
           Demon<span className="text-red-500">Tech</span>
         </span>
         <span className="mt-1 block text-[11px] font-bold uppercase text-zinc-500">Roadmap</span>
@@ -634,7 +634,7 @@ function RoadmapNodeCard({
                 {node.duration}
               </span>
             </span>
-            <span className="mt-3 block text-xl font-black text-white">{node.title}</span>
+            <span className="mt-3 block text-lg font-black text-white">{node.title}</span>
             <span className="mt-2 block max-w-3xl text-sm leading-6 text-zinc-400">{node.description}</span>
           </span>
           <span className="flex items-center gap-3 md:justify-end">
@@ -647,7 +647,7 @@ function RoadmapNodeCard({
 
         {expanded ? (
           <div className="border-t border-zinc-800 px-5 pb-5 pl-10" id={`${node.id}-panel`}>
-            <div className="grid gap-6 pt-5 xl:grid-cols-[minmax(0,1fr)_300px]">
+            <div className="grid gap-5 pt-5 xl:grid-cols-[minmax(0,1fr)_255px]">
               <div className="space-y-6">
                 <section>
                   <h3 className="text-sm font-black text-white">Prerequisites</h3>
@@ -790,7 +790,7 @@ export default function FrontendDeveloperRoadmap() {
       <div className="fixed inset-0 -z-10 bg-[linear-gradient(rgba(239,68,68,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(239,68,68,0.04)_1px,transparent_1px)] bg-[size:44px_44px]" />
 
       <header className="sticky top-0 z-40 border-b border-zinc-900 bg-[#050505]/95 backdrop-blur-xl">
-        <div className="mx-auto flex h-20 max-w-[1540px] items-center gap-6 px-5 lg:px-8">
+        <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-5 px-5 lg:px-6">
           <DemonTechLogo />
           <nav className="ml-auto hidden items-center gap-7 text-sm font-bold text-zinc-400 lg:flex">
             <Link className="text-red-400" href="/docs/all-roadmaps">Roadmaps</Link>
@@ -804,7 +804,7 @@ export default function FrontendDeveloperRoadmap() {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-[1540px] gap-8 px-5 py-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:px-8">
+      <div className="mx-auto grid max-w-[1280px] gap-6 px-5 py-6 lg:grid-cols-[minmax(0,1fr)_300px] lg:px-6">
         <section>
           <div className="flex flex-wrap items-center gap-2 text-sm text-zinc-500">
             <Link className="hover:text-red-400" href="/">Home</Link>
@@ -814,14 +814,14 @@ export default function FrontendDeveloperRoadmap() {
             <span className="font-bold text-zinc-300">Frontend Developer</span>
           </div>
 
-          <section className="mt-8 overflow-hidden rounded-md border border-zinc-800 bg-zinc-950">
-            <div className="grid gap-8 p-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:p-8">
+          <section className="mt-6 overflow-hidden rounded-md border border-zinc-800 bg-zinc-950">
+            <div className="grid gap-6 p-5 lg:grid-cols-[minmax(0,1fr)_285px] lg:p-6">
               <div>
                 <div className="inline-flex items-center gap-2 rounded-md border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-xs font-black text-red-300">
                   <Icon className="h-4 w-4" name="spark" />
                   Professional Frontend Learning Path
                 </div>
-                <h1 className="mt-5 max-w-4xl text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
+                <h1 className="mt-5 max-w-4xl text-4xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
                   Frontend Developer Roadmap
                 </h1>
                 <p className="mt-5 max-w-3xl text-base leading-8 text-zinc-300">
@@ -868,7 +868,7 @@ export default function FrontendDeveloperRoadmap() {
             </div>
           </section>
 
-          <section className="mt-8">
+          <section className="mt-6">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <h2 className="text-2xl font-black text-white">Vertical Learning Journey</h2>
@@ -901,7 +901,7 @@ export default function FrontendDeveloperRoadmap() {
             </div>
           </section>
 
-          <section className="mt-8 rounded-md border border-zinc-800 bg-zinc-950 p-6">
+          <section className="mt-6 rounded-md border border-zinc-800 bg-zinc-950 p-5">
             <h2 className="text-2xl font-black text-white">Resource Library</h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">
               Start with official docs, reinforce with focused videos, then practice with interactive and community-driven challenges.

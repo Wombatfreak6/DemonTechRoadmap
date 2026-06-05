@@ -57,10 +57,10 @@ export default function SearchableResources() {
   }, [activeCategory, q]);
 
   return (
-    <section className="mt-8 w-full">
+    <section className="mt-6 w-full">
       <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h3 className="text-xl font-bold text-slate-950 dark:text-white">
+          <h3 className="text-lg font-bold text-slate-950 dark:text-white">
             Browse resources
           </h3>
           <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
@@ -85,7 +85,7 @@ export default function SearchableResources() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
         <Sidebar
           title="Categories"
           description="Choose a topic to focus the learning list."
@@ -95,7 +95,7 @@ export default function SearchableResources() {
         />
 
         <div className="min-w-0 flex-1">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {filtered.map((resource) => (
               <ResourceCard
                 key={resource.id}

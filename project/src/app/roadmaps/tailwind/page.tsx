@@ -37,7 +37,7 @@ const topics: Topic[] = [
       "Recognize where Tailwind fits with React, Next.js, Vue, Svelte, and plain HTML.",
     ],
     practice: "Rebuild a simple card twice: once with custom CSS and once with Tailwind utilities, then compare the workflow.",
-    code: `<article className="rounded-lg border border-cyan-500/30 bg-slate-950 p-6 text-slate-100 shadow-xl">
+    code: `<article className="rounded-lg border border-cyan-500/30 bg-slate-950 p-5 text-slate-100 shadow-xl">
   <h2 className="text-2xl font-bold text-cyan-300">Tailwind CSS</h2>
   <p className="mt-3 text-sm leading-6 text-slate-300">
     Build custom interfaces with utility classes.
@@ -81,8 +81,8 @@ const topics: Topic[] = [
 /* React component */
 export function Hero() {
   return (
-    <section className="mx-auto max-w-4xl px-6 py-20">
-      <h1 className="text-5xl font-black text-cyan-400">Ship faster</h1>
+    <section className="mx-auto max-w-4xl px-5 py-20">
+      <h1 className="text-4xl font-black text-cyan-400">Ship faster</h1>
     </section>
   );
 }`,
@@ -137,7 +137,7 @@ export function Button({ children, variant = "primary" }: ButtonProps) {
     level: "Beginner",
     summary: "Use Tailwind's spacing scale for margin, padding, width, height, gap, Flexbox, and Grid.",
     explanation:
-      "Tailwind's spacing scale is one of its biggest advantages. A value like p-4, gap-6, or mt-8 comes from a shared scale, so UI spacing stays consistent across the app. Layout utilities cover display, Flexbox, Grid, sizing, overflow, and positioning without writing new CSS.",
+      "Tailwind's spacing scale is one of its biggest advantages. A value like p-4, gap-5, or mt-6 comes from a shared scale, so UI spacing stays consistent across the app. Layout utilities cover display, Flexbox, Grid, sizing, overflow, and positioning without writing new CSS.",
     subtopics: ["Spacing scale", "Margin", "Padding", "Width", "Flexbox", "Grid", "Gap"],
     goals: [
       "Use the spacing scale for consistent margin, padding, and gap.",
@@ -145,10 +145,10 @@ export function Button({ children, variant = "primary" }: ButtonProps) {
       "Build responsive two-dimensional layouts with Grid utilities.",
     ],
     practice: "Build a responsive pricing grid with cards that stack on mobile and become three columns on desktop.",
-    code: `<section className="mx-auto grid max-w-6xl gap-6 px-6 py-12 md:grid-cols-3">
+    code: `<section className="mx-auto grid max-w-5xl gap-5 px-5 py-12 md:grid-cols-3">
   {["Starter", "Pro", "Team"].map((plan) => (
-    <article key={plan} className="rounded-lg border border-slate-800 bg-slate-950 p-6">
-      <h3 className="text-xl font-bold text-white">{plan}</h3>
+    <article key={plan} className="rounded-lg border border-slate-800 bg-slate-950 p-5">
+      <h3 className="text-lg font-bold text-white">{plan}</h3>
       <p className="mt-3 text-sm text-slate-400">Consistent spacing from Tailwind.</p>
       <button className="mt-6 w-full rounded-md bg-cyan-500 py-2 font-bold text-black">
         Choose plan
@@ -157,7 +157,7 @@ export function Button({ children, variant = "primary" }: ButtonProps) {
   ))}
 </section>`,
     notes: [
-      "p-6 means padding from the shared spacing scale.",
+      "p-5 means padding from the shared spacing scale.",
       "md:grid-cols-3 applies only at the md breakpoint and above.",
       "gap utilities are usually cleaner than manually spacing children with margins.",
     ],
@@ -177,11 +177,11 @@ export function Button({ children, variant = "primary" }: ButtonProps) {
       "Create simple gradients and transparent overlays with utilities.",
     ],
     practice: "Design a blog article header with title, metadata, gradient background, and readable body text.",
-    code: `<header className="bg-gradient-to-br from-slate-950 via-cyan-950 to-slate-900 px-6 py-20">
+    code: `<header className="bg-gradient-to-br from-slate-950 via-cyan-950 to-slate-900 px-5 py-20">
   <p className="text-sm font-bold uppercase tracking-wider text-cyan-300">
     Tailwind CSS
   </p>
-  <h1 className="mt-4 max-w-3xl text-5xl font-black leading-tight text-white">
+  <h1 className="mt-4 max-w-3xl text-4xl font-black leading-tight text-white">
     Build interfaces with a shared design system
   </h1>
   <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
@@ -399,17 +399,17 @@ function StatusBadge({ color }: { color: keyof typeof colorClasses }) {
     ],
     practice: "Build a portfolio, product landing page, admin dashboard, ecommerce store page, and SaaS pricing section.",
     code: `<main className="min-h-screen bg-slate-950 text-white">
-  <section className="mx-auto grid max-w-6xl gap-10 px-6 py-20 lg:grid-cols-[1.2fr_0.8fr]">
+  <section className="mx-auto grid max-w-5xl gap-10 px-5 py-20 lg:grid-cols-[1.2fr_0.8fr]">
     <div>
       <p className="font-bold uppercase tracking-wider text-cyan-300">SaaS Starter</p>
-      <h1 className="mt-4 text-5xl font-black leading-tight">
+      <h1 className="mt-4 text-4xl font-black leading-tight">
         Build production UI with Tailwind CSS
       </h1>
       <p className="mt-5 text-lg leading-8 text-slate-300">
         Responsive layout, strong spacing, and reusable components.
       </p>
     </div>
-    <div className="rounded-lg border border-cyan-500/30 bg-cyan-500/10 p-6">
+    <div className="rounded-lg border border-cyan-500/30 bg-cyan-500/10 p-5">
       <p className="text-sm text-cyan-100">Project card</p>
     </div>
   </section>
@@ -531,7 +531,7 @@ export default function TailwindRoadmap() {
       />
 
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
-        <div className="mx-auto flex h-[82px] max-w-[1540px] items-center gap-8 px-5 lg:px-8">
+        <div className="mx-auto flex h-[68px] max-w-[1280px] items-center gap-6 px-5 lg:px-6">
           <DemonTechLogo />
           <nav className="ml-auto hidden items-center gap-10 text-sm font-bold text-[var(--text-secondary)] lg:flex">
             {navItems.map((item) => (
@@ -540,7 +540,7 @@ export default function TailwindRoadmap() {
               </a>
             ))}
           </nav>
-          <label className="hidden h-11 w-[280px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] xl:flex">
+          <label className="hidden h-11 w-[230px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] xl:flex">
             <Icon className="h-5 w-5" name="search" />
             <span className="flex-1">Search anything...</span>
             <kbd className="rounded border border-[var(--border)] bg-[var(--panel-strong)] px-2 py-0.5 text-xs">K</kbd>
@@ -566,8 +566,8 @@ export default function TailwindRoadmap() {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-[1540px] grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)]">
-        <aside className="hidden min-h-[calc(100vh-82px)] border-r border-[var(--border)] px-5 py-5 lg:block">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 lg:grid-cols-[225px_minmax(0,1fr)]">
+        <aside className="hidden min-h-[calc(100vh-68px)] border-r border-[var(--border)] px-5 py-5 lg:block">
           <div className="sticky top-[102px] rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-5 shadow-2xl shadow-[var(--shadow)]">
             <p className="text-xs font-black uppercase tracking-[0.18em] text-cyan-400">Get Started</p>
             <nav className="mt-5 space-y-1 text-sm text-[var(--text-secondary)]">
@@ -579,7 +579,7 @@ export default function TailwindRoadmap() {
               ))}
             </nav>
 
-            <p className="mt-8 text-xs font-black uppercase tracking-[0.18em] text-cyan-400">Roadmap</p>
+            <p className="mt-6 text-xs font-black uppercase tracking-[0.18em] text-cyan-400">Roadmap</p>
             <nav className="mt-5 space-y-1">
               {(["Beginner", "Intermediate", "Advanced"] as const).map((level) => (
                 <button
@@ -595,7 +595,7 @@ export default function TailwindRoadmap() {
             </nav>
 
             <div className="mt-9 rounded-lg border border-cyan-400/25 bg-black/20 p-4">
-              <div className="grid h-20 w-full place-items-center rounded-md border border-cyan-400/35 bg-black/40 text-4xl font-black text-cyan-400">
+              <div className="grid h-16 w-full place-items-center rounded-md border border-cyan-400/35 bg-black/40 text-4xl font-black text-cyan-400">
                 TW
               </div>
               <p className="mt-4 text-sm font-black text-[var(--text-primary)]">Rapid UI. Clean code.</p>
@@ -604,8 +604,8 @@ export default function TailwindRoadmap() {
           </div>
         </aside>
 
-        <section className="px-5 py-8 sm:px-8 lg:px-10">
-          <div className="mx-auto max-w-[1240px]">
+        <section className="px-5 py-6 sm:px-8 lg:px-8">
+          <div className="mx-auto max-w-[1040px]">
             <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--text-muted)]">
               <Icon className="h-4 w-4 text-cyan-400" name="home" />
               <Link className="hover:text-cyan-400" href="/docs/all-roadmaps">Roadmaps</Link>
@@ -613,20 +613,20 @@ export default function TailwindRoadmap() {
               <span className="font-semibold text-[var(--text-primary)]">Tailwind CSS Roadmap</span>
             </div>
 
-            <section className="mt-8 grid gap-8 xl:grid-cols-[minmax(0,1fr)_360px]">
+            <section className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_255px]">
               <div>
                 <div className="inline-flex items-center gap-2 rounded-md border border-cyan-400/40 bg-cyan-500 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-black">
                   <Icon className="h-4 w-4" name="spark" />
                   Tailwind CSS Learning Roadmap
                 </div>
-                <h1 className="mt-5 max-w-3xl text-5xl font-black leading-tight tracking-normal sm:text-6xl">
+                <h1 className="mt-5 max-w-3xl text-4xl font-black leading-tight tracking-normal sm:text-5xl">
                   Tailwind CSS <span className="text-cyan-400">Roadmap</span>
                 </h1>
                 <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--text-secondary)]">
                   A documentation-backed Tailwind CSS roadmap from utility-first fundamentals to responsive variants,
                   design tokens, reusable components, performance, accessibility, and real-world projects.
                 </p>
-                <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                <div className="mt-6 grid gap-4 sm:grid-cols-3">
                   {[
                     ["Level", "Beginner to Advanced", "levels"],
                     ["Time", "1-2 Months", "clock"],
@@ -641,7 +641,7 @@ export default function TailwindRoadmap() {
                 </div>
               </div>
 
-              <div className="relative min-h-[300px] overflow-hidden rounded-lg border border-cyan-400/25 bg-black shadow-[0_0_80px_rgba(34,211,238,0.16)]">
+              <div className="relative min-h-[250px] overflow-hidden rounded-lg border border-cyan-400/25 bg-black shadow-[0_0_80px_rgba(34,211,238,0.16)]">
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(34,211,238,0.14)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.14)_1px,transparent_1px)] bg-[size:24px_24px]" />
                 <div className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-400/35 bg-cyan-950/45 shadow-[0_0_60px_rgba(34,211,238,0.28)]" />
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-8xl font-black text-cyan-300 drop-shadow-[0_0_28px_rgba(34,211,238,0.7)]">
@@ -650,7 +650,7 @@ export default function TailwindRoadmap() {
               </div>
             </section>
 
-            <section className="mt-9 grid gap-7 xl:grid-cols-[minmax(0,1fr)_360px]">
+            <section className="mt-9 grid gap-7 xl:grid-cols-[minmax(0,1fr)_255px]">
               <div className="relative">
                 <div className="absolute bottom-8 left-6 top-8 hidden w-px bg-cyan-400/45 sm:block" />
                 <div className="space-y-4">
@@ -665,7 +665,7 @@ export default function TailwindRoadmap() {
                           </span>
                           <span>
                             <span className="flex flex-wrap items-center gap-3">
-                              <span className="text-xl font-black text-[var(--text-primary)]">{topic.title}</span>
+                              <span className="text-lg font-black text-[var(--text-primary)]">{topic.title}</span>
                               <span className="rounded border border-[var(--border)] px-2 py-1 text-xs font-bold text-cyan-400">{topic.level}</span>
                             </span>
                             <span className="mt-2 block text-sm leading-6 text-[var(--text-secondary)]">{topic.summary}</span>

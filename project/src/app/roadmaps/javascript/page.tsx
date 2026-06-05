@@ -980,7 +980,7 @@ export default function JavaScriptRoadmap() {
       />
 
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
-        <div className="mx-auto flex h-[82px] max-w-[1540px] items-center gap-8 px-5 lg:px-8">
+        <div className="mx-auto flex h-[68px] max-w-[1280px] items-center gap-6 px-5 lg:px-6">
           <DemonTechLogo />
 
           <nav className="ml-auto hidden items-center gap-10 text-sm font-bold text-[var(--text-secondary)] lg:flex">
@@ -995,7 +995,7 @@ export default function JavaScriptRoadmap() {
             ))}
           </nav>
 
-          <label className="hidden h-11 w-[280px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] xl:flex">
+          <label className="hidden h-11 w-[230px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] xl:flex">
             <Icon className="h-5 w-5" name="search" />
             <span className="flex-1">Search anything...</span>
             <kbd className="rounded border border-[var(--border)] bg-[var(--panel-strong)] px-2 py-0.5 text-xs">
@@ -1025,8 +1025,8 @@ export default function JavaScriptRoadmap() {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-[1540px] grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)]">
-        <aside className="hidden min-h-[calc(100vh-82px)] border-r border-[var(--border)] px-5 py-5 lg:block">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 lg:grid-cols-[225px_minmax(0,1fr)]">
+        <aside className="hidden min-h-[calc(100vh-68px)] border-r border-[var(--border)] px-5 py-5 lg:block">
           <div className="sticky top-[102px] rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-5 shadow-2xl shadow-[var(--shadow)]">
             <p className="text-xs font-black uppercase tracking-[0.18em] text-yellow-400">Get Started</p>
             <nav className="mt-5 space-y-1 text-sm text-[var(--text-secondary)]">
@@ -1042,7 +1042,7 @@ export default function JavaScriptRoadmap() {
               ))}
             </nav>
 
-            <p className="mt-8 text-xs font-black uppercase tracking-[0.18em] text-yellow-400">Roadmap</p>
+            <p className="mt-6 text-xs font-black uppercase tracking-[0.18em] text-yellow-400">Roadmap</p>
             <nav className="mt-5 space-y-1">
               {(["Beginner", "Intermediate", "Advanced"] as const).map((level) => (
                 <button
@@ -1058,7 +1058,7 @@ export default function JavaScriptRoadmap() {
             </nav>
 
             <div className="mt-9 rounded-lg border border-yellow-500/25 bg-black/20 p-4">
-              <div className="grid h-20 w-full place-items-center rounded-md border border-red-500/25 bg-black/40 text-4xl font-black text-red-500">
+              <div className="grid h-16 w-full place-items-center rounded-md border border-red-500/25 bg-black/40 text-4xl font-black text-red-500">
                 JS
               </div>
               <p className="mt-4 text-sm font-black text-[var(--text-primary)]">Level up your JavaScript.</p>
@@ -1067,8 +1067,8 @@ export default function JavaScriptRoadmap() {
           </div>
         </aside>
 
-        <section className="px-5 py-8 sm:px-8 lg:px-10">
-          <div className="mx-auto max-w-[1240px]">
+        <section className="px-5 py-6 sm:px-8 lg:px-8">
+          <div className="mx-auto max-w-[1040px]">
             <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--text-muted)]">
               <Icon className="h-4 w-4 text-yellow-400" name="home" />
               <Link className="hover:text-yellow-400" href="/docs/all-roadmaps">
@@ -1078,20 +1078,20 @@ export default function JavaScriptRoadmap() {
               <span className="font-semibold text-[var(--text-primary)]">JavaScript Roadmap</span>
             </div>
 
-            <section className="mt-8 grid gap-8 xl:grid-cols-[minmax(0,1fr)_360px]">
+            <section className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_255px]">
               <div>
                 <div className="inline-flex items-center gap-2 rounded-md border border-yellow-400/40 bg-yellow-400 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-black">
                   <Icon className="h-4 w-4" name="spark" />
                   ECMAScript 2024
                 </div>
-                <h1 className="mt-5 max-w-3xl text-5xl font-black leading-tight tracking-normal sm:text-6xl">
+                <h1 className="mt-5 max-w-3xl text-4xl font-black leading-tight tracking-normal sm:text-5xl">
                   JavaScript <span className="text-yellow-400">Roadmap</span>
                 </h1>
                 <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--text-secondary)]">
                   A clickable beginner-to-advanced path based on your JavaScript document. Pick any topic to reveal its explanation, key concepts, practice task, and resource count.
                 </p>
 
-                <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                <div className="mt-6 grid gap-4 sm:grid-cols-3">
                   {[
                     ["Level", "Beginner to Advanced", "levels"],
                     ["Time", "8-14 Months", "clock"],
@@ -1106,7 +1106,7 @@ export default function JavaScriptRoadmap() {
                 </div>
               </div>
 
-              <div className="relative min-h-[300px] overflow-hidden rounded-lg border border-yellow-400/25 bg-black shadow-[0_0_80px_rgba(250,204,21,0.12)]">
+              <div className="relative min-h-[250px] overflow-hidden rounded-lg border border-yellow-400/25 bg-black shadow-[0_0_80px_rgba(250,204,21,0.12)]">
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(250,204,21,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(250,204,21,0.12)_1px,transparent_1px)] bg-[size:24px_24px]" />
                 <div className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-[28px] border border-yellow-400/40 bg-black/80 shadow-[0_0_60px_rgba(250,204,21,0.24)]" />
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-8xl font-black text-yellow-400 drop-shadow-[0_0_28px_rgba(250,204,21,0.65)]">
@@ -1115,7 +1115,7 @@ export default function JavaScriptRoadmap() {
               </div>
             </section>
 
-            <section className="mt-9 grid gap-7 xl:grid-cols-[minmax(0,1fr)_360px]">
+            <section className="mt-9 grid gap-7 xl:grid-cols-[minmax(0,1fr)_255px]">
               <div className="relative">
                 <div className="absolute bottom-8 left-6 top-8 hidden w-px bg-yellow-400/45 sm:block" />
                 <div className="space-y-4">
@@ -1144,7 +1144,7 @@ export default function JavaScriptRoadmap() {
                           </span>
                           <span>
                             <span className="flex flex-wrap items-center gap-3">
-                              <span className="text-xl font-black text-[var(--text-primary)]">{topic.title}</span>
+                              <span className="text-lg font-black text-[var(--text-primary)]">{topic.title}</span>
                               <span className="rounded border border-[var(--border)] px-2 py-1 text-xs font-bold text-yellow-400">
                                 {topic.level}
                               </span>

@@ -163,7 +163,7 @@ export default function OurMission() {
       <div className={`fixed inset-0 -z-10 transition-colors duration-300 ${isDarkMode ? "bg-[radial-gradient(circle_at_65%_10%,rgba(127,29,29,0.2),transparent_26%),radial-gradient(circle_at_86%_70%,rgba(127,29,29,0.15),transparent_30%),linear-gradient(180deg,#050505_0%,#030303_100%)]" : "bg-[radial-gradient(circle_at_68%_12%,rgba(239,68,68,0.1),transparent_28%),linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)]"}`} />
 
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
-        <div className="mx-auto flex h-[86px] max-w-[1510px] items-center gap-8 px-6 lg:px-10">
+        <div className="mx-auto flex h-[72px] max-w-[1260px] items-center gap-6 px-5 lg:px-8">
           <DemonTechLogo />
           <nav className="ml-auto hidden items-center gap-12 text-[15px] font-bold text-[var(--text-secondary)] lg:flex">
             {navItems.map((item) => (
@@ -173,7 +173,7 @@ export default function OurMission() {
               </a>
             ))}
           </nav>
-          <label className="ml-auto hidden h-11 w-[286px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] lg:ml-8 xl:flex">
+          <label className="ml-auto hidden h-11 w-[235px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] lg:ml-8 xl:flex">
             <Icon className="h-5 w-5" name="search" />
             <span className="flex-1">Search anything...</span>
             <kbd className="rounded border border-[var(--border)] bg-[var(--panel-strong)] px-2 py-0.5 text-xs">K</kbd>
@@ -188,10 +188,10 @@ export default function OurMission() {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-[1510px] grid-cols-1 lg:grid-cols-[300px_minmax(0,1fr)]">
-        <aside className="hidden min-h-[calc(100vh-86px)] border-r border-[var(--border)] px-6 py-5 lg:block">
+      <div className="mx-auto grid max-w-[1260px] grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)]">
+        <aside className="hidden min-h-[calc(100vh-72px)] border-r border-[var(--border)] px-5 py-5 lg:block">
           <div className="sticky top-[106px]">
-            <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-6 shadow-2xl shadow-[var(--shadow)]">
+            <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-5 shadow-2xl shadow-[var(--shadow)]">
               <div className="space-y-7">
                 {sidebarGroups.map((group) => (
                   <section key={group.title}>
@@ -227,8 +227,8 @@ export default function OurMission() {
           </div>
         </aside>
 
-        <section className="px-5 py-8 sm:px-8 lg:px-12">
-          <div className="mx-auto max-w-[1180px]">
+        <section className="px-5 py-6 sm:px-8 lg:px-12">
+          <div className="mx-auto max-w-[980px]">
             <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--text-muted)]">
               <Icon className="h-4 w-4 text-red-500" name="home" />
               <Link className="transition hover:text-red-500" href="/">Home</Link>
@@ -236,18 +236,18 @@ export default function OurMission() {
               <span className="font-semibold text-[var(--text-primary)]">Our Mission</span>
             </div>
 
-            <section className="relative mt-8 grid min-h-[390px] gap-10 overflow-hidden lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+            <section className="relative mt-6 grid min-h-[270px] gap-10 overflow-hidden lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
               <div className="relative z-10">
-                <h1 className="text-5xl font-black leading-[1.04] tracking-normal text-[var(--text-primary)] sm:text-6xl">
+                <h1 className="text-4xl font-black leading-[1.04] tracking-normal text-[var(--text-primary)] sm:text-5xl">
                   Our <span className="text-red-500">Mission</span>
                 </h1>
                 <div className="mt-6 h-1 w-48 rounded-full bg-[linear-gradient(90deg,#ef4444,rgba(239,68,68,0))]" />
-                <p className="mt-8 max-w-xl text-base leading-9 text-[var(--text-secondary)]">
+                <p className="mt-6 max-w-xl text-base leading-9 text-[var(--text-secondary)]">
                   At DemonTech Roadmap, our mission is simple but powerful: to empower every learner and developer to navigate their tech journey with clarity, confidence, and purpose.
                 </p>
               </div>
 
-              <div className="relative min-h-[310px]">
+              <div className="relative min-h-[220px]">
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(239,68,68,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(239,68,68,0.12)_1px,transparent_1px)] bg-[length:42px_42px] opacity-30" />
                 <div className="absolute left-1/2 top-1/2 h-[330px] w-[330px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-red-500/28 shadow-[0_0_70px_rgba(239,68,68,0.22)] sm:h-[430px] sm:w-[430px]" />
                 <div className="absolute left-1/2 top-1/2 grid h-56 w-56 -translate-x-1/2 -translate-y-1/2 place-items-center overflow-hidden rounded-full bg-black shadow-[0_0_80px_rgba(239,68,68,0.42)] sm:h-72 sm:w-72">
@@ -258,10 +258,10 @@ export default function OurMission() {
 
             <section className="mt-10">
               <SectionLabel>Our Mission Pillars</SectionLabel>
-              <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+              <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                 {pillars.map(([title, detail, icon]) => (
                   <article className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-7 text-center shadow-2xl shadow-[var(--shadow)]" key={title}>
-                    <span className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-red-950/20 text-red-500 shadow-[0_0_32px_rgba(239,68,68,0.2)]">
+                    <span className="mx-auto grid h-16 w-20 place-items-center rounded-full bg-red-950/20 text-red-500 shadow-[0_0_32px_rgba(239,68,68,0.2)]">
                       <Icon className="h-10 w-10" name={icon} />
                     </span>
                     <h2 className="mt-7 text-lg font-black leading-7 text-[var(--text-primary)]">{title}</h2>
@@ -271,7 +271,7 @@ export default function OurMission() {
               </div>
             </section>
 
-            <section className="mt-12 grid gap-8 rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-8 shadow-2xl shadow-[var(--shadow)] lg:grid-cols-[1fr_0.95fr]">
+            <section className="mt-12 grid gap-6 rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-6 shadow-2xl shadow-[var(--shadow)] lg:grid-cols-[1fr_0.95fr]">
               <div>
                 <h2 className="text-2xl font-black tracking-normal text-[var(--text-primary)]">What Drives Us</h2>
                 <div className="mt-4 h-1 w-16 rounded-full bg-red-500" />
@@ -295,7 +295,7 @@ export default function OurMission() {
 
             <section className="mt-12 rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-7 shadow-2xl shadow-[var(--shadow)]">
               <SectionLabel>Our Impact So Far</SectionLabel>
-              <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
                 {impact.map(([value, label, icon], index) => (
                   <article className={`text-center ${index > 0 ? "lg:border-l lg:border-[var(--border)]" : ""}`} key={value}>
                     <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-red-950/20 text-red-500">
@@ -308,19 +308,19 @@ export default function OurMission() {
               </div>
             </section>
 
-            <section className="mt-10 overflow-hidden rounded-lg border border-red-500/45 bg-[radial-gradient(circle_at_90%_40%,rgba(239,68,68,0.2),transparent_26%),linear-gradient(135deg,rgba(127,29,29,0.22),rgba(12,12,14,0.78))] p-8 shadow-2xl shadow-[var(--shadow)]">
-              <div className="grid gap-7 lg:grid-cols-[1fr_310px_180px] lg:items-center">
+            <section className="mt-10 overflow-hidden rounded-lg border border-red-500/45 bg-[radial-gradient(circle_at_90%_40%,rgba(239,68,68,0.2),transparent_26%),linear-gradient(135deg,rgba(127,29,29,0.22),rgba(12,12,14,0.78))] p-6 shadow-2xl shadow-[var(--shadow)]">
+              <div className="grid gap-7 lg:grid-cols-[1fr_260px_150px] lg:items-center">
                 <div>
                   <h2 className="text-3xl font-black tracking-normal text-[var(--text-primary)]">Together, We Can Go Further</h2>
                   <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--text-secondary)]">Our mission is ongoing, and we cannot do it alone. Join our community and be a part of something that is helping thousands of developers every day.</p>
                 </div>
                 <div className="space-y-4">
-                  <a className="flex h-14 items-center justify-center gap-3 rounded-md bg-red-700 px-6 text-sm font-black text-white transition hover:bg-red-600" href="https://discord.gg/yWtjK2Tb8T" rel="noreferrer" target="_blank">
+                  <a className="flex h-14 items-center justify-center gap-3 rounded-md bg-red-700 px-5 text-sm font-black text-white transition hover:bg-red-600" href="https://discord.gg/yWtjK2Tb8T" rel="noreferrer" target="_blank">
                     <Icon className="h-5 w-5" name="discord" />
                     Join Our Community
                     <Icon className="h-4 w-4" name="chevron" />
                   </a>
-                  <a className="flex h-14 items-center justify-center gap-3 rounded-md border border-[var(--border)] bg-[var(--panel-bg)] px-6 text-sm font-black text-[var(--text-primary)] transition hover:border-red-500 hover:text-red-500" href="https://github.com/Demon-Die/DemonTechRoadmap" rel="noreferrer" target="_blank">
+                  <a className="flex h-14 items-center justify-center gap-3 rounded-md border border-[var(--border)] bg-[var(--panel-bg)] px-5 text-sm font-black text-[var(--text-primary)] transition hover:border-red-500 hover:text-red-500" href="https://github.com/Demon-Die/DemonTechRoadmap" rel="noreferrer" target="_blank">
                     <Icon className="h-5 w-5" name="github" />
                     Contribute on GitHub
                     <Icon className="h-4 w-4" name="chevron" />
@@ -334,7 +334,7 @@ export default function OurMission() {
 
             <footer className="mt-10 flex flex-col gap-5 border-t border-[var(--border)] py-7 text-sm text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
               <p>© 2024 DemonTech Roadmap. All rights reserved.</p>
-              <div className="flex flex-wrap gap-8">
+              <div className="flex flex-wrap gap-6">
                 <a className="transition hover:text-red-500" href="https://github.com/Demon-Die/DemonTechRoadmap" rel="noreferrer" target="_blank">GitHub</a>
                 <a className="transition hover:text-red-500" href="https://discord.gg/yWtjK2Tb8T" rel="noreferrer" target="_blank">Discord</a>
                 <a className="transition hover:text-red-500" href="#">Privacy Policy</a>

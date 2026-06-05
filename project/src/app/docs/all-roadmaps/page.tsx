@@ -90,35 +90,39 @@ const roadmapCards = [
   },
   {
     title: "Full Stack Developer",
-    detail: "Complete roadmap to become a versatile full stack developer.",
-    topics: "65 Topics",
-    level: "Beginner to Advanced",
-    progress: "75%",
-    tags: ["React", "Node.js", "MongoDB", "DevOps", "+4"],
+    detail: "End-to-end path through frontend, backend, databases, DevOps, cloud, system design, production engineering, and leadership.",
+    topics: "33 Stages",
+    level: "Beginner to Expert",
+    progress: "90%",
+    tags: ["React", "Next.js", "Node.js", "Cloud", "+12"],
+    href: "/roadmaps/full-stack-developer",
   },
   {
     title: "DevOps Engineer",
-    detail: "Learn DevOps tools, CI/CD, cloud, and infrastructure.",
-    topics: "38 Topics",
-    level: "Intermediate to Advanced",
-    progress: "70%",
-    tags: ["Docker", "Kubernetes", "AWS", "CI/CD", "+4"],
+    detail: "Hands-on path through Linux, networking, CI/CD, containers, Kubernetes, cloud, observability, DevSecOps, SRE, and platform engineering.",
+    topics: "29 Stages",
+    level: "Beginner to Expert",
+    progress: "88%",
+    tags: ["Linux", "CI/CD", "Docker", "Kubernetes", "+10"],
+    href: "/roadmaps/devops-engineer",
   },
   {
     title: "Data Scientist",
-    detail: "Master data analysis, machine learning, and data visualization.",
-    topics: "45 Topics",
-    level: "Intermediate to Advanced",
-    progress: "65%",
-    tags: ["Python", "Pandas", "ML", "SQL", "+4"],
+    detail: "Project-based path through statistics, Python, analytics, machine learning, deep learning, GenAI, MLOps, big data, and research.",
+    topics: "32 Stages",
+    level: "Beginner to Expert",
+    progress: "86%",
+    tags: ["Python", "Pandas", "ML", "GenAI", "+12"],
+    href: "/roadmaps/data-scientist",
   },
   {
     title: "Mobile Developer",
-    detail: "Build mobile apps for iOS and Android platforms.",
-    topics: "40 Topics",
-    level: "Beginner to Advanced",
-    progress: "60%",
-    tags: ["Flutter", "Dart", "React Native", "Firebase", "+3"],
+    detail: "Production mobile path through Android, iOS, Flutter, React Native, architecture, backend integration, security, performance, and releases.",
+    topics: "33 Stages",
+    level: "Beginner to Expert",
+    progress: "84%",
+    tags: ["Android", "iOS", "Flutter", "React Native", "+10"],
+    href: "/roadmaps/mobile-developer",
   },
 ];
 
@@ -268,7 +272,7 @@ export default function AllRoadmaps() {
       />
 
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
-        <div className="mx-auto flex h-[86px] max-w-[1510px] items-center gap-8 px-6 lg:px-10">
+        <div className="mx-auto flex h-[72px] max-w-[1260px] items-center gap-6 px-5 lg:px-8">
           <DemonTechLogo />
           <nav className="ml-auto hidden items-center gap-12 text-[15px] font-bold text-[var(--text-secondary)] lg:flex">
             {navItems.map((item) => (
@@ -286,7 +290,7 @@ export default function AllRoadmaps() {
               </a>
             ))}
           </nav>
-          <label className="ml-auto hidden h-11 w-[286px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] lg:ml-8 xl:flex">
+          <label className="ml-auto hidden h-11 w-[235px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] lg:ml-8 xl:flex">
             <Icon className="h-5 w-5" name="search" />
             <span className="flex-1">Search anything...</span>
             <kbd className="rounded border border-[var(--border)] bg-[var(--panel-strong)] px-2 py-0.5 text-xs">
@@ -313,9 +317,9 @@ export default function AllRoadmaps() {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-[1510px] grid-cols-1 lg:grid-cols-[270px_minmax(0,1fr)]">
-        <aside className="hidden min-h-[calc(100vh-86px)] border-r border-[var(--border)] px-5 py-5 lg:block">
-          <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-6 shadow-2xl shadow-[var(--shadow)]">
+      <div className="mx-auto grid max-w-[1260px] grid-cols-1 lg:grid-cols-[220px_minmax(0,1fr)]">
+        <aside className="hidden min-h-[calc(100vh-72px)] border-r border-[var(--border)] px-5 py-5 lg:block">
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-5 shadow-2xl shadow-[var(--shadow)]">
             <div className="space-y-7">
               {sidebarGroups.map((group) => (
                 <section key={group.title}>
@@ -360,7 +364,7 @@ export default function AllRoadmaps() {
           </div>
         </aside>
 
-        <section className="px-5 py-6 sm:px-8 lg:px-10">
+        <section className="px-5 py-6 sm:px-8 lg:px-8">
           <div className="rounded-2xl border border-[var(--border)] bg-[var(--panel-bg)] px-5 py-6 shadow-2xl shadow-[var(--shadow)] sm:px-8">
             <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--text-muted)]">
               <Icon className="h-4 w-4 text-red-500" name="home" />
@@ -371,12 +375,12 @@ export default function AllRoadmaps() {
               </span>
             </div>
 
-            <section className="mt-8">
+            <section className="mt-6">
               <div className="inline-flex items-center gap-2 rounded-md border border-red-500/30 bg-red-950/20 px-4 py-2 text-xs font-black uppercase tracking-[0.12em] text-red-400">
                 <Icon className="h-4 w-4" name="flame" />
                 Explore All Possibilities
               </div>
-              <h1 className="mt-5 text-5xl font-black tracking-normal text-[var(--text-primary)] sm:text-6xl">
+              <h1 className="mt-5 text-4xl font-black tracking-normal text-[var(--text-primary)] sm:text-5xl">
                 All Roadmaps
               </h1>
               <div className="mt-2 h-1 w-64 rounded-full bg-[linear-gradient(90deg,#ef4444,rgba(239,68,68,0))]" />
@@ -390,7 +394,7 @@ export default function AllRoadmaps() {
             <section className="mt-9 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
               {roadmapStats.map(([value, label]) => (
                 <article
-                  className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-6"
+                  className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5"
                   key={label}
                 >
                   <p className="text-2xl font-black text-red-500">{value}</p>
@@ -401,7 +405,7 @@ export default function AllRoadmaps() {
               ))}
             </section>
 
-            <section className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-[1.35fr_0.9fr_0.9fr_1fr_1fr]">
+            <section className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-[1.35fr_0.9fr_0.9fr_1fr_1fr]">
               <label className="flex h-12 items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)]">
                 <span className="flex-1">Search roadmaps...</span>
                 <Icon className="h-5 w-5" name="search" />
@@ -433,7 +437,7 @@ export default function AllRoadmaps() {
                   <>
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <h2 className="text-xl font-black text-[var(--text-primary)]">
+                      <h2 className="text-lg font-black text-[var(--text-primary)]">
                         {roadmap.title}
                       </h2>
                       <p className="mt-3 min-h-[52px] text-sm leading-6 text-[var(--text-secondary)]">
@@ -493,12 +497,12 @@ export default function AllRoadmaps() {
               })}
             </section>
 
-            <section className="mt-9 rounded-xl border border-[var(--border)] bg-black/20 p-6">
+            <section className="mt-9 rounded-xl border border-[var(--border)] bg-black/20 p-5">
               <h2 className="flex items-center gap-3 text-2xl font-black text-[var(--text-primary)]">
                 <Icon className="h-7 w-7 text-red-500" name="spark" />
                 Why Choose Our Roadmaps?
               </h2>
-              <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+              <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
                 {whyRoadmaps.map((item) => (
                   <article className="text-center" key={item.title}>
                     <span className="mx-auto grid h-16 w-16 place-items-center rounded-full border border-red-500/20 bg-red-950/20 text-red-500">

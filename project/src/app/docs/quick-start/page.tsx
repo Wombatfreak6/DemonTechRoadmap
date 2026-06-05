@@ -219,7 +219,7 @@ export default function QuickStart() {
       />
 
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
-        <div className="mx-auto flex h-[86px] max-w-[1510px] items-center gap-8 px-6 lg:px-10">
+        <div className="mx-auto flex h-[72px] max-w-[1260px] items-center gap-6 px-5 lg:px-8">
           <DemonTechLogo />
 
           <nav className="ml-auto hidden items-center gap-12 text-[15px] font-bold text-[var(--text-secondary)] lg:flex">
@@ -239,7 +239,7 @@ export default function QuickStart() {
             ))}
           </nav>
 
-          <label className="ml-auto hidden h-11 w-[286px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] lg:ml-8 xl:flex">
+          <label className="ml-auto hidden h-11 w-[235px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] lg:ml-8 xl:flex">
             <Icon className="h-5 w-5" name="search" />
             <span className="flex-1">Search documentation...</span>
             <kbd className="rounded border border-[var(--border)] bg-[var(--panel-strong)] px-2 py-0.5 text-xs">
@@ -269,9 +269,9 @@ export default function QuickStart() {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-[1510px] grid-cols-1 lg:grid-cols-[300px_minmax(0,1fr)]">
-        <aside className="hidden min-h-[calc(100vh-86px)] border-r border-[var(--border)] px-6 py-5 lg:block">
-          <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-6 shadow-2xl shadow-[var(--shadow)]">
+      <div className="mx-auto grid max-w-[1260px] grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)]">
+        <aside className="hidden min-h-[calc(100vh-72px)] border-r border-[var(--border)] px-5 py-5 lg:block">
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-5 shadow-2xl shadow-[var(--shadow)]">
             <h2 className="text-xs font-black uppercase tracking-[0.14em] text-[var(--text-primary)]">
               Documentation
             </h2>
@@ -326,8 +326,8 @@ export default function QuickStart() {
           </div>
         </aside>
 
-        <section className="px-5 py-8 sm:px-8 lg:px-12">
-          <div className="mx-auto max-w-[1180px]">
+        <section className="px-5 py-6 sm:px-8 lg:px-12">
+          <div className="mx-auto max-w-[980px]">
             <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--text-muted)]">
               <Icon className="h-4 w-4 text-red-500" name="home" />
               <span>Docs</span>
@@ -339,24 +339,24 @@ export default function QuickStart() {
               </span>
             </div>
 
-            <div className="mt-8 grid gap-10 xl:grid-cols-[0.84fr_1.35fr]">
+            <div className="mt-6 grid gap-10 xl:grid-cols-[0.84fr_1.35fr]">
               <section>
                 <div className="inline-flex rounded-full border border-red-500/35 bg-red-950/30 px-4 py-1.5 text-xs font-black uppercase tracking-[0.14em] text-red-400">
                   Get Started
                 </div>
-                <h1 className="mt-5 text-5xl font-black tracking-normal text-[var(--text-primary)]">
+                <h1 className="mt-5 text-4xl font-black tracking-normal text-[var(--text-primary)]">
                   Quick Start
                 </h1>
                 <p className="mt-6 max-w-xl text-sm leading-7 text-[var(--text-secondary)]">
                   Get up and running with DemonTech Roadmap in just a few minutes.
                   Follow these simple steps to start your learning journey.
                 </p>
-                <div className="mt-8 h-px bg-[var(--border)]" />
+                <div className="mt-6 h-px bg-[var(--border)]" />
 
                 <div className="mt-9 space-y-8">
                   {quickFeatures.map((feature) => (
                     <article
-                      className="grid grid-cols-[58px_1fr] gap-6"
+                      className="grid grid-cols-[58px_1fr] gap-5"
                       key={feature.title}
                     >
                       <div className="grid h-14 w-14 place-items-center rounded-md border border-red-500/30 bg-red-950/10 text-red-500 shadow-[0_0_24px_rgba(127,29,29,0.12)]">
@@ -376,7 +376,7 @@ export default function QuickStart() {
               </section>
 
               <section className="overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] shadow-2xl shadow-[var(--shadow)] ring-1 ring-red-500/30">
-                <div className="flex items-center justify-between gap-4 border-b border-[var(--border)] px-6 py-5">
+                <div className="flex items-center justify-between gap-4 border-b border-[var(--border)] px-5 py-5">
                   <div className="flex items-center gap-3">
                     <Icon className="h-5 w-5 text-red-500" name="code" />
                     <h2 className="text-base font-bold text-[var(--text-primary)]">
@@ -385,8 +385,8 @@ export default function QuickStart() {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border)] px-6">
-                  <div className="flex gap-8">
+                <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border)] px-5">
+                  <div className="flex gap-6">
                     {["HTML", "CSS", "JavaScript"].map((tab) => (
                       <button
                         className={`relative h-14 text-sm font-bold transition ${
@@ -417,8 +417,8 @@ export default function QuickStart() {
                   </div>
                 </div>
 
-                <div className="grid min-h-[390px] lg:grid-cols-[1fr_0.9fr]">
-                  <div className="border-b border-[var(--border)] p-6 font-mono text-sm leading-7 lg:border-b-0 lg:border-r">
+                <div className="grid min-h-[270px] lg:grid-cols-[1fr_0.9fr]">
+                  <div className="border-b border-[var(--border)] p-5 font-mono text-sm leading-7 lg:border-b-0 lg:border-r">
                     {codeLines.map((line, index) => (
                       <div className="grid grid-cols-[28px_1fr] gap-5" key={`${line}-${index}`}>
                         <span className="text-right text-[var(--text-muted)]">
@@ -430,7 +430,7 @@ export default function QuickStart() {
                       </div>
                     ))}
                   </div>
-                  <div className="relative min-h-[320px] overflow-hidden p-8">
+                  <div className="relative min-h-[270px] overflow-hidden p-6">
                     <div className="absolute inset-x-0 bottom-0 h-32 bg-[radial-gradient(circle_at_72%_100%,rgba(220,38,38,0.34),transparent_52%)]" />
                     <p className="relative text-xs font-black uppercase tracking-[0.14em] text-[var(--text-muted)]">
                       Live Preview
@@ -446,18 +446,18 @@ export default function QuickStart() {
                   </div>
                 </div>
 
-                <div className="border-t border-[var(--border)] px-6 py-4 text-sm text-[var(--text-muted)]">
+                <div className="border-t border-[var(--border)] px-5 py-4 text-sm text-[var(--text-muted)]">
                   <span className="font-bold text-red-500">Tip:</span> Edit the
                   code on the left and see the changes in real-time.
                 </div>
               </section>
             </div>
 
-            <section className="mt-8 grid gap-8 rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-8 shadow-2xl shadow-[var(--shadow)] lg:grid-cols-[1fr_2fr]">
+            <section className="mt-6 grid gap-6 rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-6 shadow-2xl shadow-[var(--shadow)] lg:grid-cols-[1fr_2fr]">
               <div className="flex gap-5">
                 <Icon className="mt-1 h-9 w-9 shrink-0 text-red-500" name="spark" />
                 <div>
-                  <h2 className="text-xl font-black text-[var(--text-primary)]">
+                  <h2 className="text-lg font-black text-[var(--text-primary)]">
                     Why Interactive Docs?
                   </h2>
                   <p className="mt-5 text-sm leading-7 text-[var(--text-secondary)]">
@@ -467,7 +467,7 @@ export default function QuickStart() {
                 </div>
               </div>
 
-              <div className="grid gap-6 border-t border-[var(--border)] pt-7 sm:grid-cols-3 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+              <div className="grid gap-5 border-t border-[var(--border)] pt-7 sm:grid-cols-3 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
                 {interactiveFeatures.map((feature) => (
                   <article className="text-center" key={feature.title}>
                     <Icon className="mx-auto h-9 w-9 text-red-500" name={feature.icon} />

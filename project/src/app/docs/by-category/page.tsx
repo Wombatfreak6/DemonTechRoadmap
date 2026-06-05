@@ -268,7 +268,7 @@ export default function AllRoadmaps() {
       />
 
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
-        <div className="mx-auto flex h-[86px] max-w-[1510px] items-center gap-8 px-6 lg:px-10">
+        <div className="mx-auto flex h-[72px] max-w-[1260px] items-center gap-6 px-5 lg:px-8">
           <DemonTechLogo />
           <nav className="ml-auto hidden items-center gap-12 text-[15px] font-bold text-[var(--text-secondary)] lg:flex">
             {navItems.map((item) => (
@@ -286,7 +286,7 @@ export default function AllRoadmaps() {
               </a>
             ))}
           </nav>
-          <label className="ml-auto hidden h-11 w-[286px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] lg:ml-8 xl:flex">
+          <label className="ml-auto hidden h-11 w-[235px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] lg:ml-8 xl:flex">
             <Icon className="h-5 w-5" name="search" />
             <span className="flex-1">Search anything...</span>
             <kbd className="rounded border border-[var(--border)] bg-[var(--panel-strong)] px-2 py-0.5 text-xs">
@@ -313,9 +313,9 @@ export default function AllRoadmaps() {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-[1510px] grid-cols-1 lg:grid-cols-[270px_minmax(0,1fr)]">
-        <aside className="hidden min-h-[calc(100vh-86px)] border-r border-[var(--border)] px-5 py-5 lg:block">
-          <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-6 shadow-2xl shadow-[var(--shadow)]">
+      <div className="mx-auto grid max-w-[1260px] grid-cols-1 lg:grid-cols-[220px_minmax(0,1fr)]">
+        <aside className="hidden min-h-[calc(100vh-72px)] border-r border-[var(--border)] px-5 py-5 lg:block">
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-5 shadow-2xl shadow-[var(--shadow)]">
             <div className="space-y-7">
               {sidebarGroups.map((group) => (
                 <section key={group.title}>
@@ -360,7 +360,7 @@ export default function AllRoadmaps() {
           </div>
         </aside>
 
-        <section className="px-5 py-6 sm:px-8 lg:px-10">
+        <section className="px-5 py-6 sm:px-8 lg:px-8">
           <div className="rounded-2xl border border-[var(--border)] bg-[var(--panel-bg)] px-5 py-6 shadow-2xl shadow-[var(--shadow)] sm:px-8">
             <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--text-muted)]">
               <Icon className="h-4 w-4 text-red-500" name="home" />
@@ -371,12 +371,12 @@ export default function AllRoadmaps() {
               </span>
             </div>
 
-            <section className="mt-8">
+            <section className="mt-6">
               <div className="inline-flex items-center gap-2 rounded-md border border-red-500/30 bg-red-950/20 px-4 py-2 text-xs font-black uppercase tracking-[0.12em] text-red-400">
                 <Icon className="h-4 w-4" name="flame" />
                 Browse Roadmaps By Category
               </div>
-              <h1 className="mt-5 text-5xl font-black tracking-normal text-[var(--text-primary)] sm:text-6xl">
+              <h1 className="mt-5 text-4xl font-black tracking-normal text-[var(--text-primary)] sm:text-5xl">
                 By Category
               </h1>
               <div className="mt-2 h-1 w-64 rounded-full bg-[linear-gradient(90deg,#ef4444,rgba(239,68,68,0))]" />
@@ -389,7 +389,7 @@ export default function AllRoadmaps() {
             <section className="mt-9 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {categoryStats.map(([icon, value, label]) => (
                 <article
-                  className="flex items-center gap-5 rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-6"
+                  className="flex items-center gap-5 rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5"
                   key={label}
                 >
                   <span className="grid h-12 w-12 place-items-center rounded-md border border-red-500/20 bg-red-950/25 text-red-500">
@@ -472,8 +472,8 @@ export default function AllRoadmaps() {
               </div>
             </section>
 
-            <section className="mt-9 rounded-xl border border-red-500/30 bg-[linear-gradient(135deg,rgba(18,18,20,0.9),rgba(9,9,10,0.92))] p-6">
-              <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+            <section className="mt-9 rounded-xl border border-red-500/30 bg-[linear-gradient(135deg,rgba(18,18,20,0.9),rgba(9,9,10,0.92))] p-5">
+              <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-center">
                 <div className="flex gap-4">
                   <Icon className="mt-1 h-7 w-7 shrink-0 text-red-500" name="spark" />
                   <div>

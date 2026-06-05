@@ -229,7 +229,7 @@ function DemonTechLogo() {
 
 function SectionTitle({ children }: { children: ReactNode }) {
   return (
-    <h2 className="flex items-center gap-3 text-xl font-black text-[var(--text-primary)]">
+    <h2 className="flex items-center gap-3 text-lg font-black text-[var(--text-primary)]">
       <span className="h-6 w-0.5 rounded-full bg-red-500 shadow-[0_0_14px_rgba(239,68,68,0.8)]" />
       {children}
     </h2>
@@ -254,7 +254,7 @@ export default function ProjectIdeas() {
       />
 
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
-        <div className="mx-auto flex h-[86px] max-w-[1510px] items-center gap-8 px-6 lg:px-10">
+        <div className="mx-auto flex h-[72px] max-w-[1260px] items-center gap-6 px-5 lg:px-8">
           <DemonTechLogo />
           <nav className="ml-auto hidden items-center gap-12 text-[15px] font-bold text-[var(--text-secondary)] lg:flex">
             {navItems.map((item) => (
@@ -272,7 +272,7 @@ export default function ProjectIdeas() {
               </a>
             ))}
           </nav>
-          <label className="ml-auto hidden h-11 w-[286px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] lg:ml-8 xl:flex">
+          <label className="ml-auto hidden h-11 w-[235px] items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)] lg:ml-8 xl:flex">
             <Icon className="h-5 w-5" name="search" />
             <span className="flex-1">Search anything...</span>
             <kbd className="rounded border border-[var(--border)] bg-[var(--panel-strong)] px-2 py-0.5 text-xs">
@@ -299,9 +299,9 @@ export default function ProjectIdeas() {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-[1510px] grid-cols-1 lg:grid-cols-[270px_minmax(0,1fr)]">
-        <aside className="hidden min-h-[calc(100vh-86px)] border-r border-[var(--border)] px-5 py-5 lg:block">
-          <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-6 shadow-2xl shadow-[var(--shadow)]">
+      <div className="mx-auto grid max-w-[1260px] grid-cols-1 lg:grid-cols-[220px_minmax(0,1fr)]">
+        <aside className="hidden min-h-[calc(100vh-72px)] border-r border-[var(--border)] px-5 py-5 lg:block">
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-5 shadow-2xl shadow-[var(--shadow)]">
             <div className="space-y-7">
               {sidebarGroups.map((group) => (
                 <section key={group.title}>
@@ -346,7 +346,7 @@ export default function ProjectIdeas() {
           </div>
         </aside>
 
-        <section className="px-5 py-6 sm:px-8 lg:px-10">
+        <section className="px-5 py-6 sm:px-8 lg:px-8">
           <div className="rounded-2xl border border-[var(--border)] bg-[var(--panel-bg)] px-5 py-6 shadow-2xl shadow-[var(--shadow)] sm:px-8">
             <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--text-muted)]">
               <Icon className="h-4 w-4 text-red-500" name="home" />
@@ -357,13 +357,13 @@ export default function ProjectIdeas() {
               </span>
             </div>
 
-            <section className="mt-8 grid gap-8 xl:grid-cols-[1fr_430px]">
+            <section className="mt-6 grid gap-6 xl:grid-cols-[1fr_430px]">
               <div>
                 <div className="inline-flex items-center gap-2 rounded-md border border-red-500/30 bg-red-950/20 px-4 py-2 text-xs font-black uppercase tracking-[0.12em] text-red-400">
                   <Icon className="h-4 w-4" name="flame" />
                   Build. Learn. Grow.
                 </div>
-                <h1 className="mt-5 text-5xl font-black tracking-normal text-[var(--text-primary)] sm:text-6xl">
+                <h1 className="mt-5 text-4xl font-black tracking-normal text-[var(--text-primary)] sm:text-5xl">
                   Project Ideas
                 </h1>
                 <div className="mt-2 h-1 w-64 rounded-full bg-[linear-gradient(90deg,#ef4444,rgba(239,68,68,0))]" />
@@ -373,8 +373,8 @@ export default function ProjectIdeas() {
                 </p>
               </div>
 
-              <aside className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-6">
-                <h2 className="text-xl font-black text-[var(--text-primary)]">
+              <aside className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5">
+                <h2 className="text-lg font-black text-[var(--text-primary)]">
                   Why Build Projects?
                 </h2>
                 <div className="mt-6 space-y-4">
@@ -427,7 +427,7 @@ export default function ProjectIdeas() {
                     <Icon className="h-7 w-7" name={icon} />
                   </span>
                   <div>
-                    <p className="text-xl font-black text-[var(--text-primary)]">
+                    <p className="text-lg font-black text-[var(--text-primary)]">
                       {value}
                     </p>
                     <p className="mt-1 text-sm text-[var(--text-secondary)]">
@@ -443,7 +443,7 @@ export default function ProjectIdeas() {
               <div className="mt-4 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                 {featuredProjects.map((project) => (
                   <article
-                    className="flex min-h-[310px] flex-col rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5 transition hover:border-red-500/45 hover:shadow-[0_20px_60px_rgba(127,29,29,0.18)]"
+                    className="flex min-h-[220px] flex-col rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5 transition hover:border-red-500/45 hover:shadow-[0_20px_60px_rgba(127,29,29,0.18)]"
                     key={project.title}
                   >
                     <span
@@ -508,7 +508,7 @@ export default function ProjectIdeas() {
               <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
                 {categories.map(([title, count, icon]) => (
                   <article
-                    className="flex min-h-20 items-center gap-4 rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-4 transition hover:border-red-500/45"
+                    className="flex min-h-16 items-center gap-4 rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-4 transition hover:border-red-500/45"
                     key={title}
                   >
                     <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md border border-red-500/20 bg-red-950/25 text-red-500">
@@ -535,7 +535,7 @@ export default function ProjectIdeas() {
                     className="relative rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5 text-center"
                     key={title}
                   >
-                    <span className="absolute left-4 top-4 rounded-md border border-red-500/20 bg-red-950/20 px-2 py-1 text-xl font-black text-red-500">
+                    <span className="absolute left-4 top-4 rounded-md border border-red-500/20 bg-red-950/20 px-2 py-1 text-lg font-black text-red-500">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span className="mx-auto mt-7 grid h-16 w-16 place-items-center rounded-full bg-red-950/25 text-red-500">
