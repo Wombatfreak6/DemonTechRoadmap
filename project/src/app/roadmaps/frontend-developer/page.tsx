@@ -1,36 +1,22 @@
-"use client";
+import { RoadmapPageShell } from "../../../components/roadmap/RoadmapPageShell";
+import type { ReadinessMetric, RoadmapNode, StageSummary, ProjectTrack } from "../../../components/roadmap/RoadmapPageShell";
 
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import type { ReactNode } from "react";
+type ResourceCategory = string;
 
-type Stage = "Beginner" | "Intermediate" | "Advanced" | "Expert";
-type Difficulty = "Starter" | "Core" | "Applied" | "Advanced" | "Expert";
-type ResourceCategory = "Official documentation" | "Video resources" | "Interactive practice" | "Community resources";
-
-type RoadmapResource = {
+type FrontendResource = {
   label: string;
   href: string;
   category: ResourceCategory;
 };
 
-type RoadmapNode = {
-  id: string;
-  title: string;
-  description: string;
-  stage: Stage;
-  difficulty: Difficulty;
-  duration: string;
-  prerequisites: string[];
+type FrontendRoadmapNode = Omit<RoadmapNode, "topics" | "skillsGained" | "practiceExercises" | "resources"> & {
   keyConcepts: string[];
-  resources: RoadmapResource[];
   practiceTasks: string[];
-  miniProject: string;
+  resources: FrontendResource[];
 };
 
 type StageDefinition = {
-  stage: Stage;
+  stage: StageSummary["stage"];
   summary: string;
   duration: string;
 };
@@ -58,7 +44,7 @@ const stageDefinitions: StageDefinition[] = [
   },
 ];
 
-const roadmapNodes: RoadmapNode[] = [
+const frontendNodes: FrontendRoadmapNode[] = [
   {
     id: "internet-browser-fundamentals",
     title: "Internet & Browser Fundamentals",
@@ -476,528 +462,78 @@ const resourceCategories: ResourceCategory[] = [
   "Community resources",
 ];
 
-const statusStorageKey = "demontech-frontend-roadmap-completed";
+const stageSummaries: StageSummary[] = stageDefinitions.map(({ stage, duration, summary }) => ({
+  stage,
+  duration,
+  outcome: summary,
+}));
 
-const icons: Record<string, ReactNode> = {
-  arrow: <path d="m9 18 6-6-6-6" />,
-  book: <path d="M5 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H5V4Zm10 0h4v14h-4" />,
-  check: <path d="m5 12 4 4L19 6" />,
-  clock: <path d="M12 7v5l3 2m6-2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />,
-  code: <path d="m8 8-4 4 4 4m8-8 4 4-4 4M14 4l-4 16" />,
-  flame: <path d="M12 22c4 0 7-3 7-7 0-3-2-5-4-7 .2 2-.8 3.4-2 4-1-4-4-6-4-9-3 2-5 6-5 10 0 5 4 9 8 9Z" />,
-  gauge: <path d="M4 14a8 8 0 1 1 16 0m-8 0 4-4M6 18h12" />,
-  github: <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-1-2.6c3.2-.4 6.5-1.6 6.5-7A5.4 5.4 0 0 0 20 4.7 5 5 0 0 0 19.9 1S18.7.6 16 2.5a13.4 13.4 0 0 0-7 0C6.3.6 5.1 1 5.1 1A5 5 0 0 0 5 4.7a5.4 5.4 0 0 0-1.5 3.8c0 5.4 3.3 6.6 6.5 7a3.4 3.4 0 0 0-1 2.6V22" />,
-  layers: <path d="m12 2 9 5-9 5-9-5 9-5Zm9 10-9 5-9-5m18 5-9 5-9-5" />,
-  link: <path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1m4 6a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1" />,
-  lock: <path d="M6 11V8a6 6 0 0 1 12 0v3m-1 0H7a1 1 0 0 0-1 1v8h12v-8a1 1 0 0 0-1-1Z" />,
-  play: <path d="M8 5v14l11-7-11-7Z" />,
-  spark: <path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3Z" />,
-  target: <path d="M21 12a9 9 0 1 1-9-9m6 3 3-3m0 0v5m0-5h-5M15 9l-3 3m3 0a3 3 0 1 1-3-3" />,
-};
+const roadmapNodes: RoadmapNode[] = frontendNodes.map((node) => ({
+  id: node.id,
+  title: node.title,
+  stage: node.stage,
+  difficulty: node.difficulty,
+  duration: node.duration,
+  description: node.description,
+  prerequisites: node.prerequisites,
+  topics: node.keyConcepts,
+  skillsGained: node.keyConcepts,
+  resources: node.resources,
+  practiceExercises: node.practiceTasks,
+  miniProject: node.miniProject,
+}));
 
-function Icon({ name, className = "" }: { name: keyof typeof icons; className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.8"
-      viewBox="0 0 24 24"
-    >
-      {icons[name]}
-    </svg>
-  );
-}
+const projectTracks: ProjectTrack[] = [
+  { stage: "Beginner", projects: ["Browser Loading Explainer", "Semantic Portfolio Page", "Responsive Landing Page"] },
+  { stage: "Intermediate", projects: ["TypeScript Component Library", "Vite Dashboard", "API-Driven App"] },
+  { stage: "Advanced", projects: ["Production React App", "Next.js Auth App", "Stateful Product Dashboard"] },
+  { stage: "Expert", projects: ["Accessible Design System", "Performance Audit Suite", "Realtime PWA"] },
+];
 
-function difficultyClass(difficulty: Difficulty) {
-  const classes: Record<Difficulty, string> = {
-    Starter: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300",
-    Core: "border-sky-500/30 bg-sky-500/10 text-sky-300",
-    Applied: "border-amber-500/30 bg-amber-500/10 text-amber-300",
-    Advanced: "border-red-500/35 bg-red-500/10 text-red-300",
-    Expert: "border-red-400/50 bg-red-500/15 text-red-200",
-  };
+const achievementBadges: string[] = ["Web Foundations", "CSS Architect", "TypeScript Builder", "React Engineer", "Next.js Operator", "Accessibility Advocate", "Performance Tuner", "Frontend DevOps"];
 
-  return classes[difficulty];
-}
+const missingTopics: string[] = ["Browser rendering", "Core Web Vitals", "Frontend security", "Design systems", "Web workers", "Microfrontends", "PWA strategy", "AI-assisted frontend workflows"];
 
-function stageClass(stage: Stage) {
-  const classes: Record<Stage, string> = {
-    Beginner: "border-zinc-700 bg-zinc-950 text-zinc-200",
-    Intermediate: "border-red-950 bg-red-950/30 text-red-200",
-    Advanced: "border-red-800 bg-red-950/50 text-red-100",
-    Expert: "border-red-600 bg-red-600/15 text-white",
-  };
+const gamificationCards: Array<[string, string]> = [
+  ["Topic Bookmarks", "Save high-priority frontend topics while moving through the timeline."],
+  ["Practice Notes", "Capture implementation notes for CSS, React, testing, accessibility, and deployment."],
+  ["Achievement Badges", "Unlock visible progress across foundations, UI engineering, framework depth, quality, and DevOps."],
+];
 
-  return classes[stage];
-}
-
-function DemonTechLogo() {
-  return (
-    <Link className="flex min-w-fit items-center gap-3" href="/">
-      <span className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-md border border-red-500/30 bg-black">
-        <Image alt="DemonTech logo" className="h-full w-full object-cover" height={48} src="/demontech-logo.png" width={48} />
-      </span>
-      <span>
-        <span className="block text-lg font-black leading-6 text-white">
-          Demon<span className="text-red-500">Tech</span>
-        </span>
-        <span className="mt-1 block text-[11px] font-bold uppercase text-zinc-500">Roadmap</span>
-      </span>
-    </Link>
-  );
-}
-
-function ProgressRing({ percentage }: { percentage: number }) {
-  const radius = 42;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (percentage / 100) * circumference;
-
-  return (
-    <div className="relative grid h-28 w-28 place-items-center">
-      <svg aria-hidden="true" className="h-28 w-28 -rotate-90" viewBox="0 0 100 100">
-        <circle className="stroke-zinc-900" cx="50" cy="50" fill="none" r={radius} strokeWidth="8" />
-        <circle
-          className="stroke-red-500"
-          cx="50"
-          cy="50"
-          fill="none"
-          r={radius}
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          strokeLinecap="round"
-          strokeWidth="8"
-        />
-      </svg>
-      <span className="absolute text-2xl font-black text-white">{percentage}%</span>
-    </div>
-  );
-}
-
-function CompletionButton({ completed, onToggle, title }: { completed: boolean; onToggle: () => void; title: string }) {
-  return (
-    <button
-      aria-pressed={completed}
-      className={`inline-flex h-10 items-center gap-2 rounded-md border px-3 text-sm font-bold transition ${
-        completed ? "border-red-500 bg-red-500 text-white" : "border-zinc-800 bg-zinc-950 text-zinc-300 hover:border-red-500/70"
-      }`}
-      onClick={(event) => {
-        event.stopPropagation();
-        onToggle();
-      }}
-      type="button"
-    >
-      <Icon className="h-4 w-4" name="check" />
-      {completed ? "Completed" : `Mark ${title} done`}
-    </button>
-  );
-}
-
-function RoadmapNodeCard({
-  node,
-  index,
-  expanded,
-  completed,
-  onExpand,
-  onToggleComplete,
-}: {
-  node: RoadmapNode;
-  index: number;
-  expanded: boolean;
-  completed: boolean;
-  onExpand: () => void;
-  onToggleComplete: () => void;
-}) {
-  return (
-    <article className="relative">
-      <span className={`absolute left-0 top-7 z-10 grid h-12 w-12 place-items-center rounded-md border text-sm font-black ${completed ? "border-red-500 bg-red-500 text-white" : "border-zinc-800 bg-[#050505] text-zinc-300"}`}>
-        {completed ? <Icon className="h-5 w-5" name="check" /> : String(index + 1).padStart(2, "0")}
-      </span>
-
-      <div className={`ml-7 rounded-md border bg-zinc-950/80 transition ${expanded ? "border-red-500/70" : "border-zinc-800 hover:border-red-500/40"}`}>
-        <button
-          aria-controls={`${node.id}-panel`}
-          aria-expanded={expanded}
-          className="grid w-full gap-5 p-5 pl-10 text-left md:grid-cols-[minmax(0,1fr)_auto]"
-          onClick={onExpand}
-          type="button"
-        >
-          <span>
-            <span className="flex flex-wrap items-center gap-2">
-              <span className={`rounded-md border px-2.5 py-1 text-xs font-bold ${stageClass(node.stage)}`}>{node.stage}</span>
-              <span className={`rounded-md border px-2.5 py-1 text-xs font-bold ${difficultyClass(node.difficulty)}`}>{node.difficulty}</span>
-              <span className="inline-flex items-center gap-1 rounded-md border border-zinc-800 bg-black px-2.5 py-1 text-xs font-bold text-zinc-400">
-                <Icon className="h-3.5 w-3.5 text-red-400" name="clock" />
-                {node.duration}
-              </span>
-            </span>
-            <span className="mt-3 block text-lg font-black text-white">{node.title}</span>
-            <span className="mt-2 block max-w-3xl text-sm leading-6 text-zinc-400">{node.description}</span>
-          </span>
-          <span className="flex items-center gap-3 md:justify-end">
-            <span className={completed ? "text-sm font-bold text-red-300" : "text-sm font-bold text-zinc-500"}>
-              {completed ? "Done" : "Pending"}
-            </span>
-            <Icon className={`h-5 w-5 text-zinc-500 transition ${expanded ? "rotate-90 text-red-400" : ""}`} name="arrow" />
-          </span>
-        </button>
-
-        {expanded ? (
-          <div className="border-t border-zinc-800 px-5 pb-5 pl-10" id={`${node.id}-panel`}>
-            <div className="grid gap-5 pt-5 xl:grid-cols-[minmax(0,1fr)_255px]">
-              <div className="space-y-6">
-                <section>
-                  <h3 className="text-sm font-black text-white">Prerequisites</h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {node.prerequisites.map((prerequisite) => (
-                      <span className="inline-flex items-center gap-2 rounded-md border border-zinc-800 bg-black px-3 py-2 text-xs font-bold text-zinc-300" key={prerequisite}>
-                        <Icon className="h-3.5 w-3.5 text-red-400" name="lock" />
-                        {prerequisite}
-                      </span>
-                    ))}
-                  </div>
-                </section>
-
-                <section>
-                  <h3 className="text-sm font-black text-white">Key Concepts</h3>
-                  <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                    {node.keyConcepts.map((concept) => (
-                      <span className="rounded-md border border-zinc-800 bg-[#050505] px-3 py-2 text-sm text-zinc-300" key={concept}>
-                        {concept}
-                      </span>
-                    ))}
-                  </div>
-                </section>
-
-                <section>
-                  <h3 className="text-sm font-black text-white">Practice Tasks</h3>
-                  <ul className="mt-3 grid gap-3">
-                    {node.practiceTasks.map((task) => (
-                      <li className="flex gap-3 text-sm leading-6 text-zinc-300" key={task}>
-                        <Icon className="mt-0.5 h-4 w-4 shrink-0 text-red-400" name="target" />
-                        <span>{task}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              </div>
-
-              <aside className="space-y-5">
-                <section className="border-l border-red-500/40 pl-4">
-                  <h3 className="text-sm font-black text-white">Mini Project</h3>
-                  <p className="mt-2 text-sm leading-6 text-zinc-300">{node.miniProject}</p>
-                </section>
-
-                <section className="border-l border-zinc-800 pl-4">
-                  <h3 className="text-sm font-black text-white">Resources</h3>
-                  <div className="mt-3 space-y-2">
-                    {node.resources.map((resource) => (
-                      <a
-                        className="flex items-center justify-between rounded-md border border-zinc-800 bg-black px-3 py-2 text-sm font-bold text-zinc-300 transition hover:border-red-500/60 hover:text-white"
-                        href={resource.href}
-                        key={`${node.id}-${resource.label}`}
-                        rel={resource.href.startsWith("http") ? "noreferrer" : undefined}
-                        target={resource.href.startsWith("http") ? "_blank" : undefined}
-                      >
-                        <span>{resource.label}</span>
-                        <Icon className="h-4 w-4 text-red-400" name="arrow" />
-                      </a>
-                    ))}
-                  </div>
-                </section>
-
-                <CompletionButton completed={completed} onToggle={onToggleComplete} title={node.title} />
-              </aside>
-            </div>
-          </div>
-        ) : null}
-      </div>
-    </article>
-  );
-}
-
-function SidebarWidget({ children, title }: { children: ReactNode; title: string }) {
-  return (
-    <section className="rounded-md border border-zinc-800 bg-zinc-950/90 p-5">
-      <h2 className="text-sm font-black text-white">{title}</h2>
-      {children}
-    </section>
-  );
-}
+const readinessMetrics: ReadinessMetric[] = [
+  { label: "UI readiness", icon: "server", topicTitles: ["HTML5", "CSS3", "Responsive Design", "Flexbox & CSS Grid"] },
+  { label: "App readiness", icon: "layers", topicTitles: ["JavaScript", "TypeScript", "React.js", "Next.js"] },
+  { label: "Production readiness", icon: "shield", topicTitles: ["Testing", "Accessibility", "Performance Optimization", "Deployment & Frontend DevOps"] },
+];
 
 export default function FrontendDeveloperRoadmap() {
-  const [expandedNodeId, setExpandedNodeId] = useState(roadmapNodes[0].id);
-  const [completedIds, setCompletedIds] = useState<Set<string>>(() => {
-    if (typeof window === "undefined") {
-      return new Set();
-    }
-
-    const stored = window.localStorage.getItem(statusStorageKey);
-    return stored ? new Set(JSON.parse(stored) as string[]) : new Set();
-  });
-
-  useEffect(() => {
-    window.localStorage.setItem(statusStorageKey, JSON.stringify(Array.from(completedIds)));
-  }, [completedIds]);
-
-  const completedCount = completedIds.size;
-  const progressPercentage = Math.round((completedCount / roadmapNodes.length) * 100);
-  const nextTopic = roadmapNodes.find((node) => !completedIds.has(node.id)) ?? roadmapNodes[roadmapNodes.length - 1];
-  const totalResources = roadmapNodes.reduce((count, node) => count + node.resources.length, 0);
-
-  const stageProgress = useMemo(
-    () =>
-      stageDefinitions.map((definition) => {
-        const nodes = roadmapNodes.filter((node) => node.stage === definition.stage);
-        const completed = nodes.filter((node) => completedIds.has(node.id)).length;
-        return {
-          ...definition,
-          completed,
-          total: nodes.length,
-          percentage: Math.round((completed / nodes.length) * 100),
-        };
-      }),
-    [completedIds],
-  );
-
-  const resourcesByCategory = useMemo(
-    () =>
-      resourceCategories.map((category) => ({
-        category,
-        resources: roadmapNodes.flatMap((node) => node.resources.filter((resource) => resource.category === category)).slice(0, 6),
-      })),
-    [],
-  );
-
-  const toggleCompleted = (nodeId: string) => {
-    setCompletedIds((current) => {
-      const next = new Set(current);
-      if (next.has(nodeId)) {
-        next.delete(nodeId);
-      } else {
-        next.add(nodeId);
-      }
-      return next;
-    });
-  };
-
   return (
-    <main className="min-h-screen bg-[#050505] text-zinc-100">
-      <div className="fixed inset-0 -z-10 bg-[linear-gradient(180deg,#050505_0%,#090909_48%,#050505_100%)]" />
-      <div className="fixed inset-0 -z-10 bg-[linear-gradient(rgba(239,68,68,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(239,68,68,0.04)_1px,transparent_1px)] bg-[size:44px_44px]" />
-
-      <header className="sticky top-0 z-40 border-b border-zinc-900 bg-[#050505]/95 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-5 px-5 lg:px-6">
-          <DemonTechLogo />
-          <nav className="ml-auto hidden items-center gap-7 text-sm font-bold text-zinc-400 lg:flex">
-            <Link className="text-red-400" href="/docs/all-roadmaps">Roadmaps</Link>
-            <Link className="transition hover:text-white" href="/docs/learning-paths">Learning Paths</Link>
-            <Link className="transition hover:text-white" href="/docs/best-practices">Best Practices</Link>
-            <Link className="transition hover:text-white" href="/docs/project-ideas">Projects</Link>
-          </nav>
-          <a className="hidden rounded-md border border-red-500/40 bg-red-500 px-4 py-2 text-sm font-black text-white transition hover:bg-red-400 md:inline-flex" href="https://discord.gg/yWtjK2Tb8T" rel="noreferrer" target="_blank">
-            Join Community
-          </a>
-        </div>
-      </header>
-
-      <div className="mx-auto grid max-w-[1280px] gap-6 px-5 py-6 lg:grid-cols-[minmax(0,1fr)_300px] lg:px-6">
-        <section>
-          <div className="flex flex-wrap items-center gap-2 text-sm text-zinc-500">
-            <Link className="hover:text-red-400" href="/">Home</Link>
-            <Icon className="h-3.5 w-3.5" name="arrow" />
-            <Link className="hover:text-red-400" href="/docs/all-roadmaps">Roadmaps</Link>
-            <Icon className="h-3.5 w-3.5" name="arrow" />
-            <span className="font-bold text-zinc-300">Frontend Developer</span>
-          </div>
-
-          <section className="mt-6 overflow-hidden rounded-md border border-zinc-800 bg-zinc-950">
-            <div className="grid gap-6 p-5 lg:grid-cols-[minmax(0,1fr)_285px] lg:p-6">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-md border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-xs font-black text-red-300">
-                  <Icon className="h-4 w-4" name="spark" />
-                  Professional Frontend Learning Path
-                </div>
-                <h1 className="mt-5 max-w-4xl text-4xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
-                  Frontend Developer Roadmap
-                </h1>
-                <p className="mt-5 max-w-3xl text-base leading-8 text-zinc-300">
-                  A complete red-team styled learning journey from browser fundamentals to senior-level frontend engineering. Track progress, expand each node, ship projects, and move through beginner, intermediate, advanced, and expert stages with intention.
-                </p>
-                <div className="mt-7 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                  {[
-                    ["24", "Roadmap nodes", "layers"],
-                    ["42-54 weeks", "Total duration", "clock"],
-                    [String(totalResources), "Curated resources", "book"],
-                    ["24", "Mini projects", "target"],
-                  ].map(([value, label, icon]) => (
-                    <div className="rounded-md border border-zinc-800 bg-[#050505] p-4" key={label}>
-                      <Icon className="h-5 w-5 text-red-400" name={icon as keyof typeof icons} />
-                      <p className="mt-3 text-2xl font-black text-white">{value}</p>
-                      <p className="mt-1 text-sm text-zinc-500">{label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-md border border-zinc-800 bg-[#050505] p-5">
-                <p className="text-sm font-black text-white">Learning Architecture</p>
-                <div className="mt-5 space-y-4">
-                  {stageProgress.map((stage) => (
-                    <button
-                      className="w-full text-left"
-                      key={stage.stage}
-                      onClick={() => setExpandedNodeId(roadmapNodes.find((node) => node.stage === stage.stage)?.id ?? roadmapNodes[0].id)}
-                      type="button"
-                    >
-                      <span className="flex items-center justify-between gap-4 text-sm">
-                        <span className="font-bold text-zinc-200">{stage.stage}</span>
-                        <span className="text-zinc-500">{stage.completed}/{stage.total}</span>
-                      </span>
-                      <span className="mt-2 block h-2 overflow-hidden rounded-full bg-zinc-900">
-                        <span className="block h-full rounded-full bg-red-500" style={{ width: `${stage.percentage}%` }} />
-                      </span>
-                      <span className="mt-2 block text-xs leading-5 text-zinc-500">{stage.duration}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="mt-6">
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <h2 className="text-2xl font-black text-white">Vertical Learning Journey</h2>
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
-                  Each node includes difficulty, duration, prerequisites, core concepts, resources, practice tasks, and a mini project.
-                </p>
-              </div>
-              <button
-                className="rounded-md border border-zinc-800 px-4 py-2 text-sm font-bold text-zinc-300 transition hover:border-red-500/60 hover:text-white"
-                onClick={() => setCompletedIds(new Set())}
-                type="button"
-              >
-                Reset Progress
-              </button>
-            </div>
-
-            <div className="relative mt-6 space-y-5">
-              <div className="absolute bottom-8 left-6 top-8 hidden w-px bg-zinc-800 sm:block" />
-              {roadmapNodes.map((node, index) => (
-                <RoadmapNodeCard
-                  completed={completedIds.has(node.id)}
-                  expanded={expandedNodeId === node.id}
-                  index={index}
-                  key={node.id}
-                  node={node}
-                  onExpand={() => setExpandedNodeId((current) => (current === node.id ? "" : node.id))}
-                  onToggleComplete={() => toggleCompleted(node.id)}
-                />
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-6 rounded-md border border-zinc-800 bg-zinc-950 p-5">
-            <h2 className="text-2xl font-black text-white">Resource Library</h2>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">
-              Start with official docs, reinforce with focused videos, then practice with interactive and community-driven challenges.
-            </p>
-            <div className="mt-6 grid gap-5 lg:grid-cols-2">
-              {resourcesByCategory.map(({ category, resources }) => (
-                <section className="border-t border-zinc-800 pt-4" key={category}>
-                  <h3 className="text-sm font-black text-white">{category}</h3>
-                  <div className="mt-3 space-y-2">
-                    {resources.map((resource) => (
-                      <a
-                        className="flex items-center justify-between rounded-md border border-zinc-800 bg-[#050505] px-3 py-2 text-sm font-bold text-zinc-300 transition hover:border-red-500/60 hover:text-white"
-                        href={resource.href}
-                        key={`${category}-${resource.label}`}
-                        rel={resource.href.startsWith("http") ? "noreferrer" : undefined}
-                        target={resource.href.startsWith("http") ? "_blank" : undefined}
-                      >
-                        {resource.label}
-                        <Icon className="h-4 w-4 text-red-400" name="arrow" />
-                      </a>
-                    ))}
-                  </div>
-                </section>
-              ))}
-            </div>
-          </section>
-        </section>
-
-        <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
-          <SidebarWidget title="Roadmap Progress">
-            <div className="mt-5 flex items-center gap-5">
-              <ProgressRing percentage={progressPercentage} />
-              <div>
-                <p className="text-3xl font-black text-white">{completedCount}/{roadmapNodes.length}</p>
-                <p className="mt-1 text-sm text-zinc-500">topics completed</p>
-                <p className="mt-4 text-sm font-bold text-red-300">{progressPercentage}% complete</p>
-              </div>
-            </div>
-          </SidebarWidget>
-
-          <SidebarWidget title="Learning Streak">
-            <div className="mt-4 flex items-center gap-4">
-              <span className="grid h-12 w-12 place-items-center rounded-md border border-red-500/30 bg-red-500/10 text-red-300">
-                <Icon className="h-6 w-6" name="flame" />
-              </span>
-              <div>
-                <p className="text-2xl font-black text-white">7 days</p>
-                <p className="text-sm text-zinc-500">current streak</p>
-              </div>
-            </div>
-          </SidebarWidget>
-
-          <SidebarWidget title="Recommended Next Topic">
-            <div className="mt-4">
-              <span className={`inline-flex rounded-md border px-2.5 py-1 text-xs font-bold ${difficultyClass(nextTopic.difficulty)}`}>{nextTopic.difficulty}</span>
-              <h3 className="mt-3 text-lg font-black text-white">{nextTopic.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-zinc-400">{nextTopic.description}</p>
-              <button
-                className="mt-4 inline-flex items-center gap-2 rounded-md border border-red-500/40 bg-red-500 px-4 py-2 text-sm font-black text-white transition hover:bg-red-400"
-                onClick={() => setExpandedNodeId(nextTopic.id)}
-                type="button"
-              >
-                Open topic
-                <Icon className="h-4 w-4" name="arrow" />
-              </button>
-            </div>
-          </SidebarWidget>
-
-          <SidebarWidget title="Completion Snapshot">
-            <div className="mt-4 space-y-4">
-              {stageProgress.map((stage) => (
-                <div key={stage.stage}>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-bold text-zinc-300">{stage.stage}</span>
-                    <span className="text-zinc-500">{stage.percentage}%</span>
-                  </div>
-                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-zinc-900">
-                    <div className="h-full rounded-full bg-red-500" style={{ width: `${stage.percentage}%` }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </SidebarWidget>
-
-          <SidebarWidget title="Missing Topics Added">
-            <ul className="mt-4 space-y-3 text-sm leading-6 text-zinc-400">
-              {["Browser internals", "Package managers", "Build tooling", "API integration", "Authentication", "Accessibility", "Performance", "Frontend security", "Design systems", "PWAs and realtime APIs"].map((topic) => (
-                <li className="flex gap-3" key={topic}>
-                  <Icon className="mt-0.5 h-4 w-4 shrink-0 text-red-400" name="check" />
-                  {topic}
-                </li>
-              ))}
-            </ul>
-          </SidebarWidget>
-        </aside>
-      </div>
-    </main>
+    <RoadmapPageShell
+      storageKey="demontech-frontend-roadmap"
+      breadcrumb="Frontend Developer"
+      eyebrow="Premium Frontend Engineering Path"
+      title="Frontend Developer Roadmap"
+      description="A complete red-team styled learning journey from browser fundamentals to senior-level frontend engineering. Track progress, expand each node, ship projects, and move through beginner, intermediate, advanced, and expert stages with intention."
+      stats={[["24", "Roadmap nodes", "layers"], ["40-52 weeks", "Total duration", "clock"], ["90+", "Skills tracked", "badge"], ["12", "Project builds", "target"]]}
+      architectureLabel="Frontend Learning Architecture"
+      projectIntro="Every phase ends with shippable frontend work that combines UI craft, typed code, framework depth, testing, accessibility, performance, and deployment."
+      journeyTitle="Vertical Frontend Journey"
+      journeyDescription="Expand each node for prerequisites, key concepts, official resources, practice tasks, mini projects, bookmarks, and notes."
+      resourceTitle="Frontend Resource Matrix"
+      gamificationTitle="Learning Features"
+      progressTitle="Frontend Progress"
+      readinessTitle="Frontend Readiness"
+      missingTitle="Missing Frontend Topics Added"
+      estimatedTime="40-52w"
+      miniProjectLabel="Mini Project"
+      stageSummaries={stageSummaries}
+      roadmapNodes={roadmapNodes}
+      projectTracks={projectTracks}
+      resourceCategories={resourceCategories}
+      gamificationCards={gamificationCards}
+      achievementBadges={achievementBadges}
+      missingTopics={missingTopics}
+      readinessMetrics={readinessMetrics}
+    />
   );
 }

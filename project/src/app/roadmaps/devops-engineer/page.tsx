@@ -1,54 +1,5 @@
-"use client";
-
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import type { ReactNode } from "react";
-
-type Stage = "Beginner" | "Intermediate" | "Advanced" | "Expert";
-type Difficulty = "Starter" | "Core" | "Applied" | "Advanced" | "Expert";
-type ResourceCategory = "Official Docs" | "Certification Resources" | "Labs & Sandboxes" | "Community Resources" | "Open Source Projects";
-
-type Resource = {
-  label: string;
-  href: string;
-  category: ResourceCategory;
-};
-
-type RoadmapNode = {
-  id: string;
-  title: string;
-  stage: Stage;
-  difficulty: Difficulty;
-  duration: string;
-  description: string;
-  prerequisites: string[];
-  topics: string[];
-  skillsGained: string[];
-  learningOutcomes: string[];
-  resources: Resource[];
-  practiceExercises: string[];
-  miniProject: string;
-  realWorldApplications: string[];
-  quiz: string;
-};
-
-type StageSummary = {
-  stage: Stage;
-  duration: string;
-  outcome: string;
-};
-
-type ProjectTrack = {
-  stage: Stage;
-  projects: string[];
-};
-
-const storageKeys = {
-  completed: "demontech-devops-roadmap-completed",
-  bookmarked: "demontech-devops-roadmap-bookmarked",
-  notes: "demontech-devops-roadmap-notes",
-};
+import { RoadmapPageShell } from "../../../components/roadmap/RoadmapPageShell";
+import type { ReadinessMetric, RoadmapNode, RoadmapPath, StageSummary, ProjectTrack } from "../../../components/roadmap/RoadmapPageShell";
 
 const stageSummaries: StageSummary[] = [
   {
@@ -1780,7 +1731,7 @@ const projectTracks: ProjectTrack[] = [
   }
 ];
 
-const missingTopics = [
+const missingTopics: string[] = [
   "GitOps and Argo CD",
   "Progressive delivery",
   "Policy as code",
@@ -1795,7 +1746,7 @@ const missingTopics = [
   "Capacity forecasting"
 ];
 
-const careerPaths = [
+const careerPaths: RoadmapPath[] = [
   {
     "title": "Junior DevOps Engineer",
     "focus": "Operate Linux servers, write scripts, support CI/CD, and document incidents with supervision.",
@@ -1852,7 +1803,7 @@ const careerPaths = [
   }
 ];
 
-const certificationPaths = [
+const certificationPaths: RoadmapPath[] = [
   {
     "title": "AWS Certified Solutions Architect",
     "focus": "Cloud architecture, networking, compute, databases, reliability, and cost controls.",
@@ -1927,7 +1878,7 @@ const certificationPaths = [
   }
 ];
 
-const achievementBadges = [
+const achievementBadges: string[] = [
   "Linux Operator",
   "Pipeline Builder",
   "Container Captain",
@@ -1938,7 +1889,7 @@ const achievementBadges = [
   "Platform Architect"
 ];
 
-const progressSchema = [
+const progressSchema: Array<[string, string]> = [
   [
     "users",
     "id, name, email, role, created_at"
@@ -1965,705 +1916,56 @@ const progressSchema = [
   ]
 ];
 
-const icons: Record<string, ReactNode> = {
-  arrow: <path d="m9 18 6-6-6-6" />,
-  badge: <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.2 6.4 20.2 7.5 14 3 9.6l6.2-.9L12 3Z" />,
-  bookmark: <path d="M6 4h12v18l-6-4-6 4V4Z" />,
-  check: <path d="m5 12 4 4L19 6" />,
-  clock: <path d="M12 7v5l3 2m6-2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />,
-  code: <path d="m8 8-4 4 4 4m8-8 4 4-4 4M14 4l-4 16" />,
-  database: <path d="M4 6c0-2 16-2 16 0v12c0 2-16 2-16 0V6Zm0 0c0 2 16 2 16 0M4 12c0 2 16 2 16 0" />,
-  flame: <path d="M12 22c4 0 7-3 7-7 0-3-2-5-4-7 .2 2-.8 3.4-2 4-1-4-4-6-4-9-3 2-5 6-5 10 0 5 4 9 8 9Z" />,
-  layers: <path d="m12 2 9 5-9 5-9-5 9-5Zm9 10-9 5-9-5m18 5-9 5-9-5" />,
-  lock: <path d="M6 11V8a6 6 0 0 1 12 0v3m-1 0H7a1 1 0 0 0-1 1v8h12v-8a1 1 0 0 0-1-1Z" />,
-  note: <path d="M6 3h10l3 3v18H6V3Zm10 0v6h6M9 13h8M9 17h8" />,
-  quiz: <path d="M10 9a3 3 0 1 1 4 2.83c-1.1.47-2 1.03-2 2.17m0 4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />,
-  server: <path d="M4 4h16v7H4V4Zm0 11h16v7H4v-7Zm3-7h.01M7 19h.01" />,
-  shield: <path d="M12 3 20 6v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-3Z" />,
-  target: <path d="M21 12a9 9 0 1 1-9-9m6 3 3-3m0 0v5m0-5h-5M15 9l-3 3m3 0a3 3 0 1 1-3-3" />,
-};
+const gamificationCards: Array<[string, string]> = [
+  ["Hands-on Labs", "Track Linux, pipelines, container, cloud, Kubernetes, and SRE labs as concrete milestones."],
+  ["Achievement Badges", "Unlock visible badges for Linux, pipelines, containers, cloud, Kubernetes, SRE, security, and platform mastery."],
+  ["Incident Notes", "Use notes and quizzes to record runbooks, failure modes, and postmortem lessons."],
+];
 
-const resourceCategories: ResourceCategory[] = ["Official Docs", "Certification Resources", "Labs & Sandboxes", "Community Resources", "Open Source Projects"];
+const resourceCategories: string[] = ["Official Docs", "Certification Resources", "Labs & Sandboxes", "Community Resources", "Open Source Projects"];
 
-function Icon({ name, className = "" }: { name: keyof typeof icons; className?: string }) {
-  return (
-    <svg aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" viewBox="0 0 24 24">
-      {icons[name]}
-    </svg>
-  );
-}
-
-function loadSet(key: string) {
-  if (typeof window === "undefined") {
-    return new Set<string>();
-  }
-
-  const stored = window.localStorage.getItem(key);
-  return stored ? new Set(JSON.parse(stored) as string[]) : new Set<string>();
-}
-
-function loadNotes() {
-  if (typeof window === "undefined") {
-    return {};
-  }
-
-  const stored = window.localStorage.getItem(storageKeys.notes);
-  return stored ? (JSON.parse(stored) as Record<string, string>) : {};
-}
-
-function difficultyClass(difficulty: Difficulty) {
-  const classes: Record<Difficulty, string> = {
-    Starter: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300",
-    Core: "border-sky-500/30 bg-sky-500/10 text-sky-300",
-    Applied: "border-amber-500/30 bg-amber-500/10 text-amber-300",
-    Advanced: "border-red-500/35 bg-red-500/10 text-red-300",
-    Expert: "border-red-400/50 bg-red-500/15 text-red-200",
-  };
-
-  return classes[difficulty];
-}
-
-function stageClass(stage: Stage) {
-  const classes: Record<Stage, string> = {
-    Beginner: "border-zinc-700 bg-zinc-950 text-zinc-200",
-    Intermediate: "border-red-950 bg-red-950/30 text-red-200",
-    Advanced: "border-red-800 bg-red-950/50 text-red-100",
-    Expert: "border-red-600 bg-red-600/15 text-white",
-  };
-
-  return classes[stage];
-}
-
-function DemonTechLogo() {
-  return (
-    <Link className="flex min-w-fit items-center gap-3" href="/">
-      <span className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-md border border-red-500/30 bg-black">
-        <Image alt="DemonTech logo" className="h-full w-full object-cover" height={48} src="/demontech-logo.png" width={48} />
-      </span>
-      <span>
-        <span className="block text-lg font-black leading-6 text-white">
-          Demon<span className="text-red-500">Tech</span>
-        </span>
-        <span className="mt-1 block text-[11px] font-bold uppercase text-zinc-500">Roadmap</span>
-      </span>
-    </Link>
-  );
-}
-
-function ProgressRing({ percentage }: { percentage: number }) {
-  const radius = 42;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (percentage / 100) * circumference;
-
-  return (
-    <div className="relative grid h-28 w-28 place-items-center">
-      <svg aria-hidden="true" className="h-28 w-28 -rotate-90" viewBox="0 0 100 100">
-        <circle className="stroke-zinc-900" cx="50" cy="50" fill="none" r={radius} strokeWidth="8" />
-        <circle className="stroke-red-500" cx="50" cy="50" fill="none" r={radius} strokeDasharray={circumference} strokeDashoffset={offset} strokeLinecap="round" strokeWidth="8" />
-      </svg>
-      <span className="absolute text-2xl font-black text-white">{percentage}%</span>
-    </div>
-  );
-}
-
-function SidebarPanel({ children, title }: { children: ReactNode; title: string }) {
-  return (
-    <section className="rounded-md border border-zinc-800 bg-zinc-950/90 p-5">
-      <h2 className="text-sm font-black text-white">{title}</h2>
-      {children}
-    </section>
-  );
-}
-
-function RoadmapNodeCard({
-  bookmarked,
-  completed,
-  expanded,
-  index,
-  node,
-  note,
-  onExpand,
-  onNoteChange,
-  onToggleBookmark,
-  onToggleComplete,
-}: {
-  bookmarked: boolean;
-  completed: boolean;
-  expanded: boolean;
-  index: number;
-  node: RoadmapNode;
-  note: string;
-  onExpand: () => void;
-  onNoteChange: (value: string) => void;
-  onToggleBookmark: () => void;
-  onToggleComplete: () => void;
-}) {
-  return (
-    <article className="relative">
-      <span className={`absolute left-0 top-7 z-10 grid h-12 w-12 place-items-center rounded-md border text-sm font-black ${completed ? "border-red-500 bg-red-500 text-white" : "border-zinc-800 bg-[#050505] text-zinc-300"}`}>
-        {completed ? <Icon className="h-5 w-5" name="check" /> : String(index + 1).padStart(2, "0")}
-      </span>
-
-      <div className={`ml-7 rounded-md border bg-zinc-950/80 transition ${expanded ? "border-red-500/70" : "border-zinc-800 hover:border-red-500/40"}`}>
-        <button aria-expanded={expanded} className="grid w-full gap-5 p-5 pl-10 text-left md:grid-cols-[minmax(0,1fr)_auto]" onClick={onExpand} type="button">
-          <span>
-            <span className="flex flex-wrap items-center gap-2">
-              <span className={`rounded-md border px-2.5 py-1 text-xs font-bold ${stageClass(node.stage)}`}>{node.stage}</span>
-              <span className={`rounded-md border px-2.5 py-1 text-xs font-bold ${difficultyClass(node.difficulty)}`}>{node.difficulty}</span>
-              <span className="inline-flex items-center gap-1 rounded-md border border-zinc-800 bg-black px-2.5 py-1 text-xs font-bold text-zinc-400">
-                <Icon className="h-3.5 w-3.5 text-red-400" name="clock" />
-                {node.duration}
-              </span>
-            </span>
-            <span className="mt-3 block text-lg font-black text-white">{node.title}</span>
-            <span className="mt-2 block max-w-3xl text-sm leading-6 text-zinc-400">{node.description}</span>
-          </span>
-          <span className="flex items-center gap-3 md:justify-end">
-            <span className={completed ? "text-sm font-bold text-red-300" : "text-sm font-bold text-zinc-500"}>{completed ? "Complete" : "In progress"}</span>
-            <Icon className={`h-5 w-5 text-zinc-500 transition ${expanded ? "rotate-90 text-red-400" : ""}`} name="arrow" />
-          </span>
-        </button>
-
-        {expanded ? (
-          <div className="border-t border-zinc-800 px-5 pb-5 pl-10">
-            <div className="grid gap-5 pt-5 xl:grid-cols-[minmax(0,1fr)_270px]">
-              <div className="space-y-6">
-                <section>
-                  <h3 className="text-sm font-black text-white">Core Topics</h3>
-                  <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                    {node.topics.map((topic) => (
-                      <span className="rounded-md border border-zinc-800 bg-[#050505] px-3 py-2 text-sm text-zinc-300" key={topic}>{topic}</span>
-                    ))}
-                  </div>
-                </section>
-
-                <section>
-                  <h3 className="text-sm font-black text-white">Skills Gained</h3>
-                  <ul className="mt-3 grid gap-3 md:grid-cols-2">
-                    {node.skillsGained.map((skill) => (
-                      <li className="flex gap-3 text-sm text-zinc-300" key={skill}>
-                        <Icon className="h-4 w-4 shrink-0 text-red-400" name="check" />
-                        {skill}
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-
-                <section>
-                  <h3 className="text-sm font-black text-white">Learning Outcomes</h3>
-                  <ul className="mt-3 grid gap-3 md:grid-cols-2">
-                    {node.learningOutcomes.map((outcome) => (
-                      <li className="flex gap-3 text-sm leading-6 text-zinc-300" key={outcome}>
-                        <Icon className="mt-0.5 h-4 w-4 shrink-0 text-red-400" name="badge" />
-                        {outcome}
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-
-                <section>
-                  <h3 className="text-sm font-black text-white">Practice Exercises</h3>
-                  <ul className="mt-3 grid gap-3">
-                    {node.practiceExercises.map((exercise) => (
-                      <li className="flex gap-3 text-sm leading-6 text-zinc-300" key={exercise}>
-                        <Icon className="mt-0.5 h-4 w-4 shrink-0 text-red-400" name="target" />
-                        {exercise}
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-
-                <section className="rounded-md border border-zinc-800 bg-[#050505] p-4">
-                  <label className="flex items-center gap-2 text-sm font-black text-white" htmlFor={`${node.id}-notes`}>
-                    <Icon className="h-4 w-4 text-red-400" name="note" />
-                    Notes
-                  </label>
-                  <textarea
-                    className="mt-3 min-h-28 w-full resize-y rounded-md border border-zinc-800 bg-black p-3 text-sm leading-6 text-zinc-200 outline-none transition placeholder:text-zinc-600 focus:border-red-500/70"
-                    id={`${node.id}-notes`}
-                    onChange={(event) => onNoteChange(event.target.value)}
-                    placeholder="Write implementation notes, links, or questions for this topic."
-                    value={note}
-                  />
-                </section>
-              </div>
-
-              <aside className="space-y-5">
-                <section className="border-l border-red-500/40 pl-4">
-                  <h3 className="text-sm font-black text-white">Prerequisites</h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {node.prerequisites.map((prerequisite) => (
-                      <span className="inline-flex items-center gap-2 rounded-md border border-zinc-800 bg-black px-3 py-2 text-xs font-bold text-zinc-300" key={prerequisite}>
-                        <Icon className="h-3.5 w-3.5 text-red-400" name="lock" />
-                        {prerequisite}
-                      </span>
-                    ))}
-                  </div>
-                </section>
-
-                <section className="border-l border-zinc-800 pl-4">
-                  <h3 className="text-sm font-black text-white">Hands-on Lab</h3>
-                  <p className="mt-2 text-sm leading-6 text-zinc-300">{node.miniProject}</p>
-                </section>
-
-                <section className="border-l border-zinc-800 pl-4">
-                  <h3 className="text-sm font-black text-white">Real-World Applications</h3>
-                  <ul className="mt-3 space-y-2 text-sm text-zinc-300">
-                    {node.realWorldApplications.map((application) => (
-                      <li className="flex gap-2" key={application}>
-                        <Icon className="mt-0.5 h-4 w-4 shrink-0 text-red-400" name="server" />
-                        {application}
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-
-                <section className="rounded-md border border-red-500/20 bg-red-500/10 p-4">
-                  <h3 className="flex items-center gap-2 text-sm font-black text-white">
-                    <Icon className="h-4 w-4 text-red-300" name="quiz" />
-                    Quiz Prompt
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-red-100">{node.quiz}</p>
-                </section>
-
-                <section>
-                  <h3 className="text-sm font-black text-white">Resources</h3>
-                  <div className="mt-3 space-y-2">
-                    {node.resources.map((resource) => (
-                      <a className="flex items-center justify-between rounded-md border border-zinc-800 bg-black px-3 py-2 text-sm font-bold text-zinc-300 transition hover:border-red-500/60 hover:text-white" href={resource.href} key={`${node.id}-${resource.label}`} rel={resource.href.startsWith("http") ? "noreferrer" : undefined} target={resource.href.startsWith("http") ? "_blank" : undefined}>
-                        <span>{resource.label}</span>
-                        <Icon className="h-4 w-4 text-red-400" name="arrow" />
-                      </a>
-                    ))}
-                  </div>
-                </section>
-
-                <div className="flex flex-wrap gap-2">
-                  <button aria-pressed={completed} className={`inline-flex h-10 items-center gap-2 rounded-md border px-3 text-sm font-bold transition ${completed ? "border-red-500 bg-red-500 text-white" : "border-zinc-800 bg-black text-zinc-300 hover:border-red-500/70"}`} onClick={onToggleComplete} type="button">
-                    <Icon className="h-4 w-4" name="check" />
-                    {completed ? "Completed" : "Mark complete"}
-                  </button>
-                  <button aria-pressed={bookmarked} className={`inline-flex h-10 items-center gap-2 rounded-md border px-3 text-sm font-bold transition ${bookmarked ? "border-red-500/70 bg-red-500/15 text-red-200" : "border-zinc-800 bg-black text-zinc-300 hover:border-red-500/70"}`} onClick={onToggleBookmark} type="button">
-                    <Icon className="h-4 w-4" name="bookmark" />
-                    {bookmarked ? "Bookmarked" : "Bookmark"}
-                  </button>
-                </div>
-              </aside>
-            </div>
-          </div>
-        ) : null}
-      </div>
-    </article>
-  );
-}
+const readinessMetrics: ReadinessMetric[] = [
+  { label: "Cloud readiness", icon: "server", topicTitles: ["Cloud Fundamentals", "Infrastructure as Code", "Networking for DevOps", "Advanced Cloud Architecture", "Disaster Recovery"] },
+  { label: "K8s readiness", icon: "layers", topicTitles: ["Kubernetes Fundamentals", "Advanced Kubernetes", "Advanced Infrastructure", "Platform Engineering"] },
+  { label: "Reliability readiness", icon: "shield", topicTitles: ["Observability", "SRE Fundamentals", "Security for DevOps", "Incident Management"] },
+];
 
 export default function DevOpsEngineerRoadmap() {
-  const [expandedNodeId, setExpandedNodeId] = useState(roadmapNodes[0].id);
-  const [completedIds, setCompletedIds] = useState<Set<string>>(() => loadSet(storageKeys.completed));
-  const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(() => loadSet(storageKeys.bookmarked));
-  const [notes, setNotes] = useState<Record<string, string>>(() => loadNotes());
-
-  useEffect(() => {
-    window.localStorage.setItem(storageKeys.completed, JSON.stringify(Array.from(completedIds)));
-  }, [completedIds]);
-
-  useEffect(() => {
-    window.localStorage.setItem(storageKeys.bookmarked, JSON.stringify(Array.from(bookmarkedIds)));
-  }, [bookmarkedIds]);
-
-  useEffect(() => {
-    window.localStorage.setItem(storageKeys.notes, JSON.stringify(notes));
-  }, [notes]);
-
-  const completedCount = completedIds.size;
-  const progressPercentage = Math.round((completedCount / roadmapNodes.length) * 100);
-  const nextNode = roadmapNodes.find((node) => !completedIds.has(node.id)) ?? roadmapNodes[roadmapNodes.length - 1];
-  const currentLevel = stageSummaries.find((stage) => roadmapNodes.filter((node) => node.stage === stage.stage).some((node) => !completedIds.has(node.id)))?.stage ?? "Expert";
-  const noteCount = Object.values(notes).filter((note) => note.trim()).length;
-  const cloudTopicIds = roadmapNodes.filter((node) => ["Cloud Fundamentals", "Infrastructure as Code", "Networking for DevOps", "Advanced Cloud Architecture", "Disaster Recovery"].includes(node.title)).map((node) => node.id);
-  const kubernetesTopicIds = roadmapNodes.filter((node) => ["Kubernetes Fundamentals", "Advanced Kubernetes", "Advanced Infrastructure", "Platform Engineering"].includes(node.title)).map((node) => node.id);
-  const cloudReadiness = Math.round((cloudTopicIds.filter((id) => completedIds.has(id)).length / cloudTopicIds.length) * 100);
-  const kubernetesReadiness = Math.round((kubernetesTopicIds.filter((id) => completedIds.has(id)).length / kubernetesTopicIds.length) * 100);
-  const devopsMaturityLevel = progressPercentage >= 80 ? "Production" : progressPercentage >= 55 ? "Platform" : progressPercentage >= 30 ? "Delivery" : "Foundation";
-
-  const stageProgress = useMemo(
-    () =>
-      stageSummaries.map((summary) => {
-        const nodes = roadmapNodes.filter((node) => node.stage === summary.stage);
-        const completed = nodes.filter((node) => completedIds.has(node.id)).length;
-        return { ...summary, completed, total: nodes.length, percentage: Math.round((completed / nodes.length) * 100) };
-      }),
-    [completedIds],
-  );
-
-  const resourcesByCategory = useMemo(
-    () =>
-      resourceCategories.map((category) => ({
-        category,
-        resources: roadmapNodes.flatMap((node) => node.resources.filter((resource) => resource.category === category)).slice(0, 6),
-      })),
-    [],
-  );
-
-  const toggleSet = (setter: (value: Set<string>) => void, current: Set<string>, id: string) => {
-    const next = new Set(current);
-    if (next.has(id)) {
-      next.delete(id);
-    } else {
-      next.add(id);
-    }
-    setter(next);
-  };
-
   return (
-    <main className="min-h-screen bg-[#050505] text-zinc-100">
-      <div className="fixed inset-0 -z-10 bg-[linear-gradient(180deg,#050505_0%,#090909_48%,#050505_100%)]" />
-      <div className="fixed inset-0 -z-10 bg-[linear-gradient(rgba(239,68,68,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(239,68,68,0.04)_1px,transparent_1px)] bg-[size:44px_44px]" />
-
-      <header className="sticky top-0 z-40 border-b border-zinc-900 bg-[#050505]/95 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-5 px-5 lg:px-6">
-          <DemonTechLogo />
-          <nav className="ml-auto hidden items-center gap-7 text-sm font-bold text-zinc-400 lg:flex">
-            <Link className="text-red-400" href="/docs/all-roadmaps">Roadmaps</Link>
-            <Link className="transition hover:text-white" href="/docs/learning-paths">Learning Paths</Link>
-            <Link className="transition hover:text-white" href="/docs/project-ideas">Projects</Link>
-            <Link className="transition hover:text-white" href="/docs/best-practices">Best Practices</Link>
-          </nav>
-          <a className="hidden rounded-md border border-red-500/40 bg-red-500 px-4 py-2 text-sm font-black text-white transition hover:bg-red-400 md:inline-flex" href="https://discord.gg/yWtjK2Tb8T" rel="noreferrer" target="_blank">
-            Join Community
-          </a>
-        </div>
-      </header>
-
-      <div className="mx-auto grid max-w-[1280px] gap-6 px-5 py-6 lg:grid-cols-[minmax(0,1fr)_310px] lg:px-6">
-        <section>
-          <div className="flex flex-wrap items-center gap-2 text-sm text-zinc-500">
-            <Link className="hover:text-red-400" href="/">Home</Link>
-            <Icon className="h-3.5 w-3.5" name="arrow" />
-            <Link className="hover:text-red-400" href="/docs/all-roadmaps">Roadmaps</Link>
-            <Icon className="h-3.5 w-3.5" name="arrow" />
-            <span className="font-bold text-zinc-300">DevOps Engineer</span>
-          </div>
-
-          <section className="mt-6 overflow-hidden rounded-md border border-zinc-800 bg-zinc-950">
-            <div className="grid gap-6 p-5 lg:grid-cols-[minmax(0,1fr)_300px] lg:p-6">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-md border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-xs font-black text-red-300">
-                  <Icon className="h-4 w-4" name="server" />
-                  Production Infrastructure Engineering Path
-                </div>
-                <h1 className="mt-5 max-w-4xl text-4xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
-                  DevOps Engineer Roadmap
-                </h1>
-                <p className="mt-5 max-w-3xl text-base leading-8 text-zinc-300">
-                  A complete hands-on infrastructure journey across Linux, networking, CI/CD, containers, Kubernetes, cloud, observability, security, SRE, and platform engineering.
-                </p>
-                <div className="mt-7 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                  {[
-                    ["29", "Roadmap nodes", "layers"],
-                    ["78-108 weeks", "Total duration", "clock"],
-                    ["130+", "Infra skills", "badge"],
-                    ["16", "Hands-on labs", "target"],
-                  ].map(([value, label, icon]) => (
-                    <div className="rounded-md border border-zinc-800 bg-[#050505] p-4" key={label}>
-                      <Icon className="h-5 w-5 text-red-400" name={icon as keyof typeof icons} />
-                      <p className="mt-3 text-2xl font-black text-white">{value}</p>
-                      <p className="mt-1 text-sm text-zinc-500">{label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-md border border-zinc-800 bg-[#050505] p-5">
-                <p className="text-sm font-black text-white">Infrastructure Architecture</p>
-                <div className="mt-5 space-y-4">
-                  {stageProgress.map((stage) => (
-                    <button className="w-full text-left" key={stage.stage} onClick={() => setExpandedNodeId(roadmapNodes.find((node) => node.stage === stage.stage)?.id ?? roadmapNodes[0].id)} type="button">
-                      <span className="flex items-center justify-between gap-4 text-sm">
-                        <span className="font-bold text-zinc-200">{stage.stage}</span>
-                        <span className="text-zinc-500">{stage.completed}/{stage.total}</span>
-                      </span>
-                      <span className="mt-2 block h-2 overflow-hidden rounded-full bg-zinc-900">
-                        <span className="block h-full rounded-full bg-red-500" style={{ width: `${stage.percentage}%` }} />
-                      </span>
-                      <span className="mt-2 block text-xs leading-5 text-zinc-500">{stage.duration}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="mt-6 rounded-md border border-zinc-800 bg-zinc-950 p-5">
-            <h2 className="text-2xl font-black text-white">Project-Based Learning Track</h2>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">Every phase ends with hands-on infrastructure labs that combine servers, pipelines, containers, cloud, observability, security, and incident response.</p>
-            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {projectTracks.map((track) => (
-                <section className="rounded-md border border-zinc-800 bg-[#050505] p-4" key={track.stage}>
-                  <span className={`inline-flex rounded-md border px-2.5 py-1 text-xs font-bold ${stageClass(track.stage)}`}>{track.stage}</span>
-                  <ul className="mt-4 space-y-3 text-sm text-zinc-300">
-                    {track.projects.map((project) => (
-                      <li className="flex gap-3" key={project}>
-                        <Icon className="mt-0.5 h-4 w-4 shrink-0 text-red-400" name="code" />
-                        {project}
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-6">
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <h2 className="text-2xl font-black text-white">Vertical Infrastructure Journey</h2>
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
-                  Expand each node for prerequisites, learning outcomes, resources, lab exercises, troubleshooting scenarios, real-world use cases, quizzes, bookmarks, and notes.
-                </p>
-              </div>
-              <button className="rounded-md border border-zinc-800 px-4 py-2 text-sm font-bold text-zinc-300 transition hover:border-red-500/60 hover:text-white" onClick={() => setCompletedIds(new Set())} type="button">
-                Reset Progress
-              </button>
-            </div>
-
-            <div className="relative mt-6 space-y-5">
-              <div className="absolute bottom-8 left-6 top-8 hidden w-px bg-zinc-800 sm:block" />
-              {roadmapNodes.map((node, index) => (
-                <RoadmapNodeCard
-                  bookmarked={bookmarkedIds.has(node.id)}
-                  completed={completedIds.has(node.id)}
-                  expanded={expandedNodeId === node.id}
-                  index={index}
-                  key={node.id}
-                  node={node}
-                  note={notes[node.id] ?? ""}
-                  onExpand={() => setExpandedNodeId((current) => (current === node.id ? "" : node.id))}
-                  onNoteChange={(value) => setNotes((current) => ({ ...current, [node.id]: value }))}
-                  onToggleBookmark={() => toggleSet(setBookmarkedIds, bookmarkedIds, node.id)}
-                  onToggleComplete={() => toggleSet(setCompletedIds, completedIds, node.id)}
-                />
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-6 rounded-md border border-zinc-800 bg-zinc-950 p-5">
-            <h2 className="text-2xl font-black text-white">DevOps Resource Matrix</h2>
-            <div className="mt-6 grid gap-5 lg:grid-cols-2">
-              {resourcesByCategory.map(({ category, resources }) => (
-                <section className="border-t border-zinc-800 pt-4" key={category}>
-                  <h3 className="text-sm font-black text-white">{category}</h3>
-                  <div className="mt-3 space-y-2">
-                    {resources.map((resource) => (
-                      <a className="flex items-center justify-between rounded-md border border-zinc-800 bg-[#050505] px-3 py-2 text-sm font-bold text-zinc-300 transition hover:border-red-500/60 hover:text-white" href={resource.href} key={`${category}-${resource.label}`} rel={resource.href.startsWith("http") ? "noreferrer" : undefined} target={resource.href.startsWith("http") ? "_blank" : undefined}>
-                        {resource.label}
-                        <Icon className="h-4 w-4 text-red-400" name="arrow" />
-                      </a>
-                    ))}
-                  </div>
-                </section>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-6 rounded-md border border-zinc-800 bg-zinc-950 p-5">
-            <h2 className="text-2xl font-black text-white">DevOps Career Paths</h2>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">
-              The roadmap supports DevOps, SRE, platform engineering, and cloud architecture growth without separating core infrastructure fundamentals too early.
-            </p>
-            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {careerPaths.map((path) => (
-                <section className="rounded-md border border-zinc-800 bg-[#050505] p-4" key={path.title}>
-                  <h3 className="text-sm font-black text-white">{path.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-zinc-400">{path.focus}</p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {path.milestones.map((milestone) => (
-                      <span className="rounded-md border border-red-500/20 bg-red-500/10 px-2.5 py-1 text-xs font-bold text-red-200" key={milestone}>
-                        {milestone}
-                      </span>
-                    ))}
-                  </div>
-                </section>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-6 rounded-md border border-zinc-800 bg-zinc-950 p-5">
-            <h2 className="text-2xl font-black text-white">Cloud Certifications Tracker</h2>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">
-              Map roadmap progress to practical certification goals without turning the page into a memorization checklist.
-            </p>
-            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {certificationPaths.map((certification) => (
-                <section className="rounded-md border border-zinc-800 bg-[#050505] p-4" key={certification.title}>
-                  <h3 className="text-sm font-black text-white">{certification.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-zinc-400">{certification.focus}</p>
-                  <div className="mt-4 space-y-2">
-                    {certification.milestones.map((milestone) => (
-                      <span className="flex gap-2 text-xs font-bold text-zinc-300" key={milestone}>
-                        <Icon className="h-3.5 w-3.5 shrink-0 text-red-400" name="check" />
-                        {milestone}
-                      </span>
-                    ))}
-                  </div>
-                </section>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-6 grid gap-5 xl:grid-cols-[1fr_1fr]">
-            <section className="rounded-md border border-zinc-800 bg-zinc-950 p-5">
-              <h2 className="text-2xl font-black text-white">Gamification & Hands-on Learning Tools</h2>
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                {[
-                  ["XP System", "Award XP for completed topics, labs, quizzes, incident simulations, certification milestones, and streaks."],
-                  ["Achievement Badges", "Unlock visible badges for Linux, pipelines, containers, cloud, Kubernetes, SRE, security, and platform mastery."],
-                  ["Milestones", "Mark phase completions with certification-ready checkpoints and infrastructure lab prompts."],
-                  ["Learning Challenges", "Add weekly labs, outage simulations, troubleshooting drills, and deployment missions."],
-                  ["Interactive Quizzes", "Attach quiz prompts, sandbox tasks, and incident response checks to each topic."],
-                  ["Progress Sync", "Store notes, bookmarks, XP, completions, sandbox results, and certification progress per user account."],
-                ].map(([title, detail]) => (
-                  <article className="rounded-md border border-zinc-800 bg-[#050505] p-4" key={title}>
-                    <h3 className="text-sm font-black text-white">{title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-zinc-400">{detail}</p>
-                  </article>
-                ))}
-              </div>
-            </section>
-
-            <section className="rounded-md border border-zinc-800 bg-zinc-950 p-5">
-              <h2 className="text-2xl font-black text-white">DevOps Progress Database Schema</h2>
-              <div className="mt-6 space-y-3">
-                {progressSchema.map(([table, columns]) => (
-                  <article className="rounded-md border border-zinc-800 bg-[#050505] p-4" key={table}>
-                    <h3 className="font-mono text-sm font-black text-red-300">{table}</h3>
-                    <p className="mt-2 font-mono text-xs leading-6 text-zinc-400">{columns}</p>
-                  </article>
-                ))}
-              </div>
-            </section>
-          </section>
-
-          <section className="mt-6 rounded-md border border-zinc-800 bg-zinc-950 p-5">
-            <h2 className="text-2xl font-black text-white">Scalable Page Architecture</h2>
-            <div className="mt-6 grid gap-5 md:grid-cols-2">
-              {[
-                ["Component hierarchy", "DevOpsEngineerRoadmap -> SidebarPanel -> ProgressRing -> RoadmapNodeCard -> career paths, gamification, resources, notes, quiz, project sections."],
-                ["Folder architecture", "Future extraction: src/features/roadmaps/devops/data.ts, components/RoadmapNodeCard.tsx, components/ProgressDashboard.tsx, components/CertificationPathPanel.tsx, components/GamificationPanel.tsx."],
-                ["TypeScript interfaces", "Stage, Difficulty, ResourceCategory, Resource, RoadmapNode, StageSummary, ProjectTrack, CareerPath, CertificationPath, InfraBadge, ProgressSchema."],
-                ["Tailwind structure", "Black base surface, zinc borders, red accent states, compact 13px root scale, infrastructure dashboard grids, sticky readiness panel, accessible focus and pressed states."],
-                ["Framer Motion plan", "Use motion only for node expansion, graph pulse states, readiness score transitions, and badge unlocks with reduced-motion fallbacks once the dependency is installed."],
-                ["shadcn/ui plan", "Extract buttons, cards, progress, tabs, textareas, badges, accordions, and command navigation into shadcn-style primitives when the component library is added."],
-                ["Feature specifications", "Completion tracking, bookmarks, lab notes, sandbox runs, incident simulations, quizzes, XP, cloud certifications tracker, progress sync, recommended next step."],
-                ["UX improvements", "Vertical infrastructure progression, connected ops graph, low-glow premium surfaces, certification lanes, readiness widgets, mobile-first single-column behavior."],
-              ].map(([title, detail]) => (
-                <section className="rounded-md border border-zinc-800 bg-[#050505] p-4" key={title}>
-                  <h3 className="text-sm font-black text-white">{title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-zinc-400">{detail}</p>
-                </section>
-              ))}
-            </div>
-          </section>
-        </section>
-
-        <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
-          <SidebarPanel title="Roadmap Progress">
-            <div className="mt-5 flex items-center gap-5">
-              <ProgressRing percentage={progressPercentage} />
-              <div>
-                <p className="text-3xl font-black text-white">{completedCount}/{roadmapNodes.length}</p>
-                <p className="mt-1 text-sm text-zinc-500">topics completed</p>
-                <p className="mt-4 text-sm font-bold text-red-300">{progressPercentage}% complete</p>
-              </div>
-            </div>
-          </SidebarPanel>
-
-          <SidebarPanel title="Learning Streak">
-            <div className="mt-4 flex items-center gap-4">
-              <span className="grid h-12 w-12 place-items-center rounded-md border border-red-500/30 bg-red-500/10 text-red-300">
-                <Icon className="h-6 w-6" name="flame" />
-              </span>
-              <div>
-                <p className="text-2xl font-black text-white">5 days</p>
-                <p className="text-sm text-zinc-500">current streak</p>
-              </div>
-            </div>
-          </SidebarPanel>
-
-          <SidebarPanel title="Recommended Next Step">
-            <div className="mt-4">
-              <span className={`inline-flex rounded-md border px-2.5 py-1 text-xs font-bold ${difficultyClass(nextNode.difficulty)}`}>{nextNode.difficulty}</span>
-              <h3 className="mt-3 text-lg font-black text-white">{nextNode.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-zinc-400">{nextNode.description}</p>
-              <button className="mt-4 inline-flex items-center gap-2 rounded-md border border-red-500/40 bg-red-500 px-4 py-2 text-sm font-black text-white transition hover:bg-red-400" onClick={() => setExpandedNodeId(nextNode.id)} type="button">
-                Open topic
-                <Icon className="h-4 w-4" name="arrow" />
-              </button>
-            </div>
-          </SidebarPanel>
-
-          <SidebarPanel title="Infrastructure Skill Progress">
-            <div className="mt-4 space-y-4">
-              {stageProgress.map((stage) => (
-                <div key={stage.stage}>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-bold text-zinc-300">{stage.stage}</span>
-                    <span className="text-zinc-500">{stage.percentage}%</span>
-                  </div>
-                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-zinc-900">
-                    <div className="h-full rounded-full bg-red-500" style={{ width: `${stage.percentage}%` }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </SidebarPanel>
-
-          <SidebarPanel title="DevOps Readiness">
-            <div className="mt-4 grid grid-cols-2 gap-3">
-              {[
-                [`${cloudReadiness}%`, "cloud readiness", "server"],
-                [`${kubernetesReadiness}%`, "k8s readiness", "layers"],
-                [devopsMaturityLevel, "maturity level", "shield"],
-                ["78-108w", "estimated time", "clock"],
-              ].map(([value, label, icon]) => (
-                <div className="rounded-md border border-zinc-800 bg-[#050505] p-3" key={label}>
-                  <Icon className="h-4 w-4 text-red-400" name={icon as keyof typeof icons} />
-                  <p className="mt-2 text-lg font-black text-white">{value}</p>
-                  <p className="mt-1 text-xs text-zinc-500">{label}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-4 grid grid-cols-2 gap-3 text-xs text-zinc-500">
-              <span>{currentLevel} phase active</span>
-              <span>{bookmarkedIds.size} bookmarks</span>
-              <span>{noteCount} notes saved</span>
-              <span>{completedCount} topics completed</span>
-            </div>
-          </SidebarPanel>
-
-          <SidebarPanel title="Achievement Badges">
-            <div className="mt-4 grid gap-3">
-              {achievementBadges.map((badge, index) => (
-                <div className={`flex items-center gap-3 rounded-md border p-3 ${completedCount > index * 6 ? "border-red-500/40 bg-red-500/10 text-red-100" : "border-zinc-800 bg-[#050505] text-zinc-500"}`} key={badge}>
-                  <Icon className="h-5 w-5" name="badge" />
-                  <span className="text-sm font-bold">{badge}</span>
-                </div>
-              ))}
-            </div>
-          </SidebarPanel>
-
-          <SidebarPanel title="Missing DevOps Topics Added">
-            <ul className="mt-4 space-y-3 text-sm leading-6 text-zinc-400">
-              {missingTopics.map((topic) => (
-                <li className="flex gap-3" key={topic}>
-                  <Icon className="mt-0.5 h-4 w-4 shrink-0 text-red-400" name="check" />
-                  {topic}
-                </li>
-              ))}
-            </ul>
-          </SidebarPanel>
-        </aside>
-      </div>
-    </main>
+    <RoadmapPageShell
+      storageKey="demontech-devops-roadmap"
+      breadcrumb="DevOps Engineer"
+      eyebrow="Production Infrastructure Engineering Path"
+      title="DevOps Engineer Roadmap"
+      description="A complete hands-on infrastructure journey across Linux, networking, CI/CD, containers, Kubernetes, cloud, observability, security, SRE, and platform engineering."
+      stats={[["29", "Roadmap nodes", "layers"], ["78-108 weeks", "Total duration", "clock"], ["130+", "Infra skills", "badge"], ["16", "Hands-on labs", "target"]]}
+      architectureLabel="Infrastructure Architecture"
+      projectIntro="Every phase ends with hands-on infrastructure labs that combine servers, pipelines, containers, cloud, observability, security, and incident response."
+      journeyTitle="Vertical Infrastructure Journey"
+      journeyDescription="Expand each node for prerequisites, learning outcomes, resources, practice labs, mini projects, quizzes, bookmarks, and notes."
+      resourceTitle="DevOps Resource Matrix"
+      pathTitle="DevOps Career Paths"
+      pathDescription="Pick a specialization across cloud operations, platform engineering, SRE, security, and infrastructure architecture."
+      certificationTitle="Cloud Certifications Tracker"
+      certificationDescription="Use certifications as structured validation for cloud, Kubernetes, Linux, and security skills."
+      gamificationTitle="Learning Features & Component Plan"
+      progressSchemaTitle="DevOps Progress Database Schema"
+      progressTitle="DevOps Progress"
+      readinessTitle="DevOps Readiness"
+      missingTitle="Missing DevOps Topics Added"
+      estimatedTime="78-108w"
+      miniProjectLabel="Infrastructure Lab"
+      stageSummaries={stageSummaries}
+      roadmapNodes={roadmapNodes}
+      projectTracks={projectTracks}
+      resourceCategories={resourceCategories}
+      paths={careerPaths}
+      certifications={certificationPaths}
+      gamificationCards={gamificationCards}
+      progressSchema={progressSchema}
+      achievementBadges={achievementBadges}
+      missingTopics={missingTopics}
+      readinessMetrics={readinessMetrics}
+    />
   );
 }

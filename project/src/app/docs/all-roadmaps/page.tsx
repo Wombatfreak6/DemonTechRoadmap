@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
@@ -9,6 +9,23 @@ type ThemeVars = CSSProperties & Record<`--${string}`, string>;
 type SidebarGroup = {
   title: string;
   items: Array<{ label: string; icon: string; href?: string; active?: boolean }>;
+};
+type RoadmapCategory = "All Categories" | "Frontend" | "Backend" | "Full Stack" | "DevOps" | "Data" | "Mobile" | "Programming" | "Tooling";
+type SkillLevel = "All Levels" | "Beginner" | "Intermediate" | "Advanced" | "Expert";
+type RoadmapCard = {
+  title: string;
+  detail: string;
+  topics: string;
+  level: string;
+  category: Exclude<RoadmapCategory, "All Categories">;
+  skillLevel: Exclude<SkillLevel, "All Levels">;
+  nodeCount: number;
+  storageKey?: string;
+  curatedProgress: number;
+  updated: string;
+  status: "Recommended" | "Recently Updated" | "Popular" | "Core";
+  tags: string[];
+  href: string;
 };
 
 const navItems = ["Roadmaps", "Resources", "Docs", "Guides", "Community"];
@@ -43,21 +60,19 @@ const sidebarGroups: SidebarGroup[] = [
   },
 ];
 
-const roadmapStats = [
-  ["20+", "Roadmaps"],
-  ["10+", "Categories"],
-  ["1000+", "Topics Covered"],
-  ["50K+", "Developers Learning"],
-  ["Weekly", "Content Updates"],
-];
-
-const roadmapCards = [
+const roadmapCards: RoadmapCard[] = [
   {
     title: "Frontend Developer",
     detail: "Complete path through HTML, CSS, Tailwind, Sass, JavaScript, TypeScript, React, Next.js, testing, and deployment.",
     topics: "12 Stages",
     level: "Beginner to Advanced",
-    progress: "92%",
+    category: "Frontend",
+    skillLevel: "Beginner",
+    nodeCount: 24,
+    storageKey: "demontech-frontend-roadmap-completed",
+    curatedProgress: 92,
+    updated: "Today",
+    status: "Recommended",
     tags: ["HTML", "CSS", "React", "Next.js", "+8"],
     href: "/roadmaps/frontend-developer",
   },
@@ -66,7 +81,12 @@ const roadmapCards = [
     detail: "Document-backed path from Git basics to branching, remotes, pull requests, history tools, and recovery.",
     topics: "12 Topics",
     level: "Beginner to Advanced",
-    progress: "80%",
+    category: "Tooling",
+    skillLevel: "Beginner",
+    nodeCount: 12,
+    curatedProgress: 80,
+    updated: "This week",
+    status: "Core",
     tags: ["Git", "Branches", "Remotes", "PRs", "+5"],
     href: "/roadmaps/git",
   },
@@ -75,7 +95,12 @@ const roadmapCards = [
     detail: "Document-backed path from Python basics to async, packaging, testing, and PEP 8.",
     topics: "16 Topics",
     level: "Beginner to Advanced",
-    progress: "88%",
+    category: "Programming",
+    skillLevel: "Beginner",
+    nodeCount: 16,
+    curatedProgress: 88,
+    updated: "This week",
+    status: "Popular",
     tags: ["Python", "OOP", "Async", "Testing", "+5"],
     href: "/roadmaps/python",
   },
@@ -84,7 +109,13 @@ const roadmapCards = [
     detail: "Master server-side development, databases, APIs, and more.",
     topics: "24 Stages",
     level: "Beginner to Advanced",
-    progress: "94%",
+    category: "Backend",
+    skillLevel: "Intermediate",
+    nodeCount: 24,
+    storageKey: "demontech-backend-roadmap-completed",
+    curatedProgress: 94,
+    updated: "Today",
+    status: "Recently Updated",
     tags: ["APIs", "SQL", "Auth", "Cloud", "+10"],
     href: "/roadmaps/backend-developer",
   },
@@ -93,7 +124,13 @@ const roadmapCards = [
     detail: "End-to-end path through frontend, backend, databases, DevOps, cloud, system design, production engineering, and leadership.",
     topics: "33 Stages",
     level: "Beginner to Expert",
-    progress: "90%",
+    category: "Full Stack",
+    skillLevel: "Advanced",
+    nodeCount: 33,
+    storageKey: "demontech-full-stack-roadmap-completed",
+    curatedProgress: 90,
+    updated: "Today",
+    status: "Popular",
     tags: ["React", "Next.js", "Node.js", "Cloud", "+12"],
     href: "/roadmaps/full-stack-developer",
   },
@@ -102,7 +139,13 @@ const roadmapCards = [
     detail: "Hands-on path through Linux, networking, CI/CD, containers, Kubernetes, cloud, observability, DevSecOps, SRE, and platform engineering.",
     topics: "29 Stages",
     level: "Beginner to Expert",
-    progress: "88%",
+    category: "DevOps",
+    skillLevel: "Advanced",
+    nodeCount: 29,
+    storageKey: "demontech-devops-roadmap-completed",
+    curatedProgress: 88,
+    updated: "Today",
+    status: "Recently Updated",
     tags: ["Linux", "CI/CD", "Docker", "Kubernetes", "+10"],
     href: "/roadmaps/devops-engineer",
   },
@@ -111,7 +154,13 @@ const roadmapCards = [
     detail: "Project-based path through statistics, Python, analytics, machine learning, deep learning, GenAI, MLOps, big data, and research.",
     topics: "32 Stages",
     level: "Beginner to Expert",
-    progress: "86%",
+    category: "Data",
+    skillLevel: "Intermediate",
+    nodeCount: 32,
+    storageKey: "demontech-data-scientist-roadmap-completed",
+    curatedProgress: 86,
+    updated: "Today",
+    status: "Recently Updated",
     tags: ["Python", "Pandas", "ML", "GenAI", "+12"],
     href: "/roadmaps/data-scientist",
   },
@@ -120,11 +169,46 @@ const roadmapCards = [
     detail: "Production mobile path through Android, iOS, Flutter, React Native, architecture, backend integration, security, performance, and releases.",
     topics: "33 Stages",
     level: "Beginner to Expert",
-    progress: "84%",
+    category: "Mobile",
+    skillLevel: "Intermediate",
+    nodeCount: 33,
+    storageKey: "demontech-mobile-roadmap-completed",
+    curatedProgress: 84,
+    updated: "Today",
+    status: "Recommended",
     tags: ["Android", "iOS", "Flutter", "React Native", "+10"],
     href: "/roadmaps/mobile-developer",
   },
 ];
+
+const categoryFilters: RoadmapCategory[] = ["All Categories", "Frontend", "Backend", "Full Stack", "DevOps", "Data", "Mobile", "Programming", "Tooling"];
+const skillFilters: SkillLevel[] = ["All Levels", "Beginner", "Intermediate", "Advanced", "Expert"];
+const beginnerPath = [
+  { label: "Start with Git", href: "/roadmaps/git", detail: "Learn commits, branches, remotes, and pull requests." },
+  { label: "Pick Frontend", href: "/roadmaps/frontend-developer", detail: "Build visual confidence with HTML, CSS, JavaScript, and React." },
+  { label: "Add Backend", href: "/roadmaps/backend-developer", detail: "Learn APIs, databases, auth, and deployment fundamentals." },
+];
+
+function loadRoadmapProgress() {
+  if (typeof window === "undefined") return {};
+
+  const nextProgress: Record<string, number> = {};
+  roadmapCards.forEach((roadmap) => {
+    if (!roadmap.storageKey) return;
+    const stored = window.localStorage.getItem(roadmap.storageKey);
+    if (!stored) {
+      nextProgress[roadmap.storageKey] = 0;
+      return;
+    }
+
+    try {
+      nextProgress[roadmap.storageKey] = (JSON.parse(stored) as string[]).length;
+    } catch {
+      nextProgress[roadmap.storageKey] = 0;
+    }
+  });
+  return nextProgress;
+}
 
 const whyRoadmaps = [
   {
@@ -254,9 +338,85 @@ function DemonTechLogo() {
   );
 }
 
+function FilterSelect({ label, onChange, options, value }: { label: string; onChange: (value: string) => void; options: string[]; value: string }) {
+  return (
+    <label className="flex h-12 items-center rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4">
+      <span className="sr-only">{label}</span>
+      <select
+        className="w-full bg-transparent text-sm font-bold text-[var(--text-secondary)] outline-none"
+        onChange={(event) => onChange(event.target.value)}
+        value={value}
+      >
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
+function DashboardFeatureCard({ detail, eyebrow, href, icon, metric, title }: { detail: string; eyebrow: string; href: string; icon: string; metric: string; title: string }) {
+  return (
+    <Link className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5 transition hover:border-red-500/45 hover:shadow-[0_20px_60px_rgba(127,29,29,0.18)]" href={href}>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-red-400">{eyebrow}</p>
+          <h2 className="mt-2 text-xl font-black text-[var(--text-primary)]">{title}</h2>
+        </div>
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md border border-red-500/25 bg-red-950/20 text-red-500">
+          <Icon className="h-5 w-5" name={icon} />
+        </span>
+      </div>
+      <p className="mt-4 line-clamp-3 text-sm leading-6 text-[var(--text-secondary)]">{detail}</p>
+      <div className="mt-5 flex items-center justify-between gap-3">
+        <span className="text-sm font-black text-red-400">{metric}</span>
+        <span className="inline-flex items-center gap-2 text-xs font-black uppercase text-[var(--text-muted)]">
+          Open
+          <Icon className="h-3.5 w-3.5" name="chevron" />
+        </span>
+      </div>
+    </Link>
+  );
+}
+
 export default function AllRoadmaps() {
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState<RoadmapCategory>("All Categories");
+  const [skillFilter, setSkillFilter] = useState<SkillLevel>("All Levels");
+  const [completedByRoadmap] = useState<Record<string, number>>(() => loadRoadmapProgress());
   const theme = isDarkMode ? darkTheme : lightTheme;
+  const roadmapCardsWithProgress = useMemo(
+    () =>
+      roadmapCards.map((roadmap) => {
+        const completed = roadmap.storageKey ? completedByRoadmap[roadmap.storageKey] ?? 0 : 0;
+        const userProgress = roadmap.storageKey ? Math.round((completed / roadmap.nodeCount) * 100) : 0;
+        return {
+          ...roadmap,
+          completed,
+          progress: userProgress,
+          qualityScore: roadmap.curatedProgress,
+        };
+      }),
+    [completedByRoadmap],
+  );
+  const filteredRoadmaps = roadmapCardsWithProgress.filter((roadmap) => {
+    const query = searchQuery.trim().toLowerCase();
+    const searchable = [roadmap.title, roadmap.detail, roadmap.category, roadmap.skillLevel, roadmap.level, roadmap.updated, roadmap.status, ...roadmap.tags].join(" ").toLowerCase();
+    return (
+      (!query || searchable.includes(query)) &&
+      (categoryFilter === "All Categories" || roadmap.category === categoryFilter) &&
+      (skillFilter === "All Levels" || roadmap.skillLevel === skillFilter)
+    );
+  });
+  const recommendedRoadmap = roadmapCardsWithProgress.find((roadmap) => roadmap.status === "Recommended" && roadmap.progress < 100) ?? roadmapCardsWithProgress[0];
+  const recentlyUpdatedRoadmap = roadmapCardsWithProgress.find((roadmap) => roadmap.status === "Recently Updated") ?? roadmapCardsWithProgress[0];
+  const totalCompleted = roadmapCardsWithProgress.reduce((sum, roadmap) => sum + roadmap.completed, 0);
+  const totalNodes = roadmapCardsWithProgress.reduce((sum, roadmap) => sum + roadmap.nodeCount, 0);
+  const overallProgress = Math.round((totalCompleted / totalNodes) * 100);
+  const activeCategories = new Set(roadmapCards.map((roadmap) => roadmap.category)).size;
 
   return (
     <main
@@ -392,7 +552,13 @@ export default function AllRoadmaps() {
             </section>
 
             <section className="mt-9 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-              {roadmapStats.map(([value, label]) => (
+              {[
+                [String(roadmapCards.length), "Roadmaps"],
+                [String(activeCategories), "Categories"],
+                [`${overallProgress}%`, "Your Progress"],
+                [`${totalCompleted}/${totalNodes}`, "Topics Completed"],
+                ["Weekly", "Content Updates"],
+              ].map(([value, label]) => (
                 <article
                   className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5"
                   key={label}
@@ -405,23 +571,27 @@ export default function AllRoadmaps() {
               ))}
             </section>
 
-            <section className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-[1.35fr_0.9fr_0.9fr_1fr_1fr]">
+            <section className="mt-6 grid gap-4 xl:grid-cols-[1.35fr_0.9fr_0.9fr_auto]">
               <label className="flex h-12 items-center gap-3 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm text-[var(--text-muted)]">
-                <span className="flex-1">Search roadmaps...</span>
+                <span className="sr-only">Search roadmaps</span>
+                <input
+                  className="min-w-0 flex-1 bg-transparent text-sm font-bold text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)]"
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="Search roadmaps..."
+                  type="search"
+                  value={searchQuery}
+                />
                 <Icon className="h-5 w-5" name="search" />
               </label>
-              {["All Categories", "All Levels", "Sort: Popular"].map((label) => (
-                <button
-                  className="flex h-12 items-center justify-between rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm font-bold text-[var(--text-secondary)]"
-                  key={label}
-                  type="button"
-                >
-                  {label}
-                  <Icon className="h-4 w-4 rotate-90" name="chevron" />
-                </button>
-              ))}
+              <FilterSelect label="Category" options={categoryFilters} value={categoryFilter} onChange={(value) => setCategoryFilter(value as RoadmapCategory)} />
+              <FilterSelect label="Skill level" options={skillFilters} value={skillFilter} onChange={(value) => setSkillFilter(value as SkillLevel)} />
               <button
                 className="flex h-12 items-center justify-center gap-2 rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4 text-sm font-bold text-red-500"
+                onClick={() => {
+                  setSearchQuery("");
+                  setCategoryFilter("All Categories");
+                  setSkillFilter("All Levels");
+                }}
                 type="button"
               >
                 <span className="grid h-4 w-4 place-items-center rounded-full border border-red-500 text-[10px]">
@@ -431,8 +601,47 @@ export default function AllRoadmaps() {
               </button>
             </section>
 
+            <section className="mt-6 grid gap-5 xl:grid-cols-[1.1fr_1fr_1.2fr]">
+              <DashboardFeatureCard
+                eyebrow="Recommended Roadmap"
+                href={recommendedRoadmap.href}
+                icon="rocket"
+                metric={`${recommendedRoadmap.progress}%`}
+                title={recommendedRoadmap.title}
+                detail={recommendedRoadmap.detail}
+              />
+              <DashboardFeatureCard
+                eyebrow="Recently Updated"
+                href={recentlyUpdatedRoadmap.href}
+                icon="refresh"
+                metric={recentlyUpdatedRoadmap.updated}
+                title={recentlyUpdatedRoadmap.title}
+                detail={recentlyUpdatedRoadmap.detail}
+              />
+              <section className="rounded-lg border border-red-500/25 bg-red-950/15 p-5">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-[0.16em] text-red-400">Start Here</p>
+                    <h2 className="mt-2 text-xl font-black text-[var(--text-primary)]">Beginner launch path</h2>
+                  </div>
+                  <Icon className="h-7 w-7 text-red-500" name="route" />
+                </div>
+                <div className="mt-5 space-y-3">
+                  {beginnerPath.map((step, index) => (
+                    <Link className="flex gap-3 rounded-md border border-[var(--border)] bg-[var(--panel-strong)] p-3 transition hover:border-red-500/50" href={step.href} key={step.label}>
+                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-red-500 text-xs font-black text-white">{index + 1}</span>
+                      <span>
+                        <span className="block text-sm font-black text-[var(--text-primary)]">{step.label}</span>
+                        <span className="mt-1 block text-xs leading-5 text-[var(--text-muted)]">{step.detail}</span>
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            </section>
+
             <section className="mt-6 grid gap-5 xl:grid-cols-3">
-              {roadmapCards.map((roadmap) => {
+              {filteredRoadmaps.map((roadmap) => {
                 const cardContent = (
                   <>
                   <div className="flex items-start justify-between gap-4">
@@ -451,18 +660,25 @@ export default function AllRoadmaps() {
                     <span>{roadmap.topics}</span>
                     <span className="h-4 w-px bg-[var(--border)]" />
                     <span>{roadmap.level}</span>
+                    <span className="h-4 w-px bg-[var(--border)]" />
+                    <span>{roadmap.updated}</span>
                   </div>
 
                   <div className="mt-5 flex items-center gap-4">
                     <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/10">
                       <div
                         className="h-full rounded-full bg-red-500 shadow-[0_0_18px_rgba(239,68,68,0.45)]"
-                        style={{ width: roadmap.progress }}
+                        style={{ width: `${roadmap.progress}%` }}
                       />
                     </div>
                     <span className="text-xs font-black text-[var(--text-secondary)]">
-                      {roadmap.progress}
+                      {roadmap.progress}%
                     </span>
+                  </div>
+
+                  <div className="mt-3 flex items-center justify-between gap-3 text-xs text-[var(--text-muted)]">
+                    <span>{roadmap.completed}/{roadmap.nodeCount} completed</span>
+                    <span className="rounded border border-red-500/25 bg-red-950/20 px-2 py-1 font-black text-red-400">{roadmap.status}</span>
                   </div>
 
                   <div className="mt-5 flex flex-wrap gap-2">
@@ -478,21 +694,14 @@ export default function AllRoadmaps() {
                   </>
                 );
 
-                return roadmap.href ? (
-                  <Link
-                    className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5 transition hover:border-red-500/45 hover:shadow-[0_20px_60px_rgba(127,29,29,0.18)]"
-                    href={roadmap.href}
-                    key={roadmap.title}
-                  >
-                    {cardContent}
-                  </Link>
-                ) : (
-                  <article
-                    className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5 transition hover:border-red-500/45 hover:shadow-[0_20px_60px_rgba(127,29,29,0.18)]"
-                    key={roadmap.title}
-                  >
-                    {cardContent}
-                  </article>
+                return (
+                <Link
+                  className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5 transition hover:border-red-500/45 hover:shadow-[0_20px_60px_rgba(127,29,29,0.18)]"
+                  href={roadmap.href}
+                  key={roadmap.title}
+                >
+                  {cardContent}
+                </Link>
                 );
               })}
             </section>
