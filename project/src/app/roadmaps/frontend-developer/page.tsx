@@ -541,7 +541,7 @@ export default function FrontendDeveloperRoadmap() {
                 </section>
 
                 <section className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-5 shadow-2xl shadow-[var(--shadow)]">
-                  <h2 className="text-lg font-black text-[var(--text-primary)]">What You'll Learn</h2>
+                  <h2 className="text-lg font-black text-[var(--text-primary)]">What You&apos;ll Learn</h2>
                   <div className="mt-5 space-y-4">
                     {["Build responsive websites", "Modern CSS and layouts", "JavaScript and TypeScript", "Component-based UI", "Routing and state", "Testing and debugging", "Deployment and monitoring"].map((item) => (
                       <div className="flex gap-3" key={item}>

@@ -562,7 +562,7 @@ export default function GitRoadmap() {
                 </section>
 
                 <section className="rounded-lg border border-[var(--border)] bg-[var(--panel-bg)] p-5 shadow-2xl shadow-[var(--shadow)]">
-                  <h2 className="text-lg font-black text-[var(--text-primary)]">What You'll Learn</h2>
+                  <h2 className="text-lg font-black text-[var(--text-primary)]">What You&apos;ll Learn</h2>
                   <div className="mt-5 space-y-4">
                     {["Git fundamentals", "Version control concepts", "Branching and merging", "Remote repositories", "Pull request workflow", "Advanced history tools", "Troubleshooting recovery"].map((item) => (
                       <div className="flex gap-3" key={item}>
