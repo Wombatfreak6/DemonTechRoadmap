@@ -263,7 +263,11 @@ export default function BestPractices() {
               </p>
               <label className="mt-5 flex h-10 items-center rounded-md border border-[var(--border)] bg-[var(--field-bg)] text-sm text-[var(--text-muted)]">
                 <span className="flex-1 px-3">Enter your email</span>
-                <button className="grid h-10 w-12 place-items-center border-l border-[var(--border)] text-red-500" type="button">
+                <button
+                  aria-label="Subscribe to best practices updates"
+                  className="grid h-10 w-12 place-items-center border-l border-[var(--border)] text-red-500"
+                  type="button"
+                >
                   <Icon className="h-4 w-4" name="send" />
                 </button>
               </label>
