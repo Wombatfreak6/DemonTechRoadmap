@@ -7,7 +7,8 @@
     "build": "node scripts/build-for-vercel.mjs",
     "start": "next start",
     "lint": "eslint",
-    "validate:resources": "node scripts/validate-resources.mjs"
+    "validate:resources": "node scripts/validate-resources.mjs",
+    "validate:roadmaps": "node scripts/validate-roadmaps.mjs"
   },
   "engines": {
     "node": "24.x"

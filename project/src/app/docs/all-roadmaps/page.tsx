@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { roadmapSeo } from "@/src/lib/roadmapSeo";
 import type { CSSProperties, ReactNode } from "react";
 
 type ThemeVars = CSSProperties & Record<`--${string}`, string>;
@@ -189,6 +190,11 @@ const beginnerPath = [
   { label: "Add Backend", href: "/roadmaps/backend-developer", detail: "Learn APIs, databases, auth, and deployment fundamentals." },
 ];
 
+/**
+ * Loads roadmap progress from localStorage.
+ * 
+ * @returns {Record<string, number>} An object mapping storage keys to completed node counts.
+ */
 function loadRoadmapProgress() {
   if (typeof window === "undefined") return {};
 
@@ -297,6 +303,14 @@ const lightTheme: ThemeVars = {
   "--shadow": "rgba(15, 23, 42, 0.09)",
 };
 
+/**
+ * Renders an SVG icon.
+ * 
+ * @param {Object} props
+ * @param {string} props.name - The name of the icon.
+ * @param {string} [props.className=""] - Optional CSS classes.
+ * @returns {JSX.Element} The SVG element representing the icon.
+ */
 function Icon({ name, className = "" }: { name: string; className?: string }) {
   return (
     <svg
@@ -314,6 +328,11 @@ function Icon({ name, className = "" }: { name: string; className?: string }) {
   );
 }
 
+/**
+ * Renders the DemonTech Roadmap logo and branding.
+ * 
+ * @returns {JSX.Element} The logo component linking to the home page.
+ */
 function DemonTechLogo() {
   return (
     <Link className="flex min-w-fit items-center gap-3" href="/">
@@ -338,6 +357,16 @@ function DemonTechLogo() {
   );
 }
 
+/**
+ * Renders a dropdown filter select input.
+ * 
+ * @param {Object} props
+ * @param {string} props.label - Accessible label for the select element.
+ * @param {function(string): void} props.onChange - Callback fired when a new option is selected.
+ * @param {string[]} props.options - List of option strings.
+ * @param {string} props.value - Currently selected value.
+ * @returns {JSX.Element} The filter select component.
+ */
 function FilterSelect({ label, onChange, options, value }: { label: string; onChange: (value: string) => void; options: string[]; value: string }) {
   return (
     <label className="flex h-12 items-center rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4">
@@ -357,6 +386,18 @@ function FilterSelect({ label, onChange, options, value }: { label: string; onCh
   );
 }
 
+/**
+ * Renders a card highlighting a specific feature or section on the dashboard.
+ * 
+ * @param {Object} props
+ * @param {string} props.detail - Description of the feature.
+ * @param {string} props.eyebrow - Small text above the title.
+ * @param {string} props.href - Link destination.
+ * @param {string} props.icon - Name of the icon to display.
+ * @param {string} props.metric - Key metric or statistic to show.
+ * @param {string} props.title - Title of the feature card.
+ * @returns {JSX.Element} The dashboard feature card component.
+ */
 function DashboardFeatureCard({ detail, eyebrow, href, icon, metric, title }: { detail: string; eyebrow: string; href: string; icon: string; metric: string; title: string }) {
   return (
     <Link className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5 transition hover:border-red-500/45 hover:shadow-[0_20px_60px_rgba(127,29,29,0.18)]" href={href}>
@@ -381,6 +422,12 @@ function DashboardFeatureCard({ detail, eyebrow, href, icon, metric, title }: { 
   );
 }
 
+/**
+ * The main page component for the "All Roadmaps" section.
+ * Renders the roadmap directory, filtering controls, and comparison tables.
+ * 
+ * @returns {JSX.Element} The All Roadmaps page layout.
+ */
 export default function AllRoadmaps() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -642,6 +689,9 @@ export default function AllRoadmaps() {
 
             <section className="mt-6 grid gap-5 xl:grid-cols-3">
               {filteredRoadmaps.map((roadmap) => {
+                const slug = roadmap.href.split("/").pop() || "";
+                const duration = roadmapSeo[slug]?.duration;
+
                 const cardContent = (
                   <>
                   <div className="flex items-start justify-between gap-4">
@@ -660,6 +710,15 @@ export default function AllRoadmaps() {
                     <span>{roadmap.topics}</span>
                     <span className="h-4 w-px bg-[var(--border)]" />
                     <span>{roadmap.level}</span>
+                    {duration && (
+                      <>
+                        <span className="h-4 w-px bg-[var(--border)]" />
+                        <span className="flex items-center gap-1 font-medium">
+                          <Icon className="h-3.5 w-3.5 text-red-400" name="clock" />
+                          {duration}
+                        </span>
+                      </>
+                    )}
                     <span className="h-4 w-px bg-[var(--border)]" />
                     <span>{roadmap.updated}</span>
                   </div>
@@ -704,6 +763,127 @@ export default function AllRoadmaps() {
                 </Link>
                 );
               })}
+            </section>
+
+            <section className="mt-9 rounded-xl border border-[var(--border)] bg-black/20 p-5">
+              <h2 className="flex items-center gap-3 text-2xl font-black text-[var(--text-primary)]">
+                <Icon className="h-7 w-7 text-red-500" name="spark" />
+                Compare Roadmaps at a Glance
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--text-secondary)]">
+                Not sure which path to pick? Compare estimated timelines,
+                difficulty levels, and ideal learner profiles side by side.
+              </p>
+
+              <div className="mt-6 overflow-x-auto rounded-lg border border-[var(--border)]">
+                <table className="w-full min-w-[640px] border-collapse text-left text-sm">
+                  <caption className="sr-only">
+                    Comparison of roadmap paths by learner fit, duration, and starting difficulty.
+                  </caption>
+                  <thead>
+                    <tr className="border-b border-[var(--border)] bg-[var(--panel-strong)]">
+                      <th className="px-5 py-4 text-xs font-black uppercase tracking-[0.14em] text-red-400" scope="col">
+                        Roadmap
+                      </th>
+                      <th className="px-5 py-4 text-xs font-black uppercase tracking-[0.14em] text-red-400" scope="col">
+                        Best For
+                      </th>
+                      <th className="px-5 py-4 text-xs font-black uppercase tracking-[0.14em] text-red-400" scope="col">
+                        Est. Duration
+                      </th>
+                      <th className="px-5 py-4 text-xs font-black uppercase tracking-[0.14em] text-red-400" scope="col">
+                        Starting Difficulty
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[var(--border)]">
+                    {([
+                      {
+                        name: "Frontend Developer",
+                        bestFor: "Visual thinkers who love crafting user interfaces",
+                        duration: "4–6 months",
+                        difficulty: "Beginner" as const,
+                        href: "/roadmaps/frontend-developer",
+                        icon: "paint",
+                      },
+                      {
+                        name: "Backend Developer",
+                        bestFor: "Problem solvers who enjoy working with data and logic",
+                        duration: "5–7 months",
+                        difficulty: "Intermediate" as const,
+                        href: "/roadmaps/backend-developer",
+                        icon: "gear",
+                      },
+                      {
+                        name: "Full Stack Developer",
+                        bestFor: "Generalists who want to build complete applications",
+                        duration: "8–12 months",
+                        difficulty: "Intermediate" as const,
+                        href: "/roadmaps/full-stack-developer",
+                        icon: "layers",
+                      },
+                      {
+                        name: "DevOps Engineer",
+                        bestFor: "System thinkers who enjoy automation and infrastructure",
+                        duration: "6–9 months",
+                        difficulty: "Intermediate" as const,
+                        href: "/roadmaps/devops-engineer",
+                        icon: "rocket",
+                      },
+                      {
+                        name: "Data Scientist",
+                        bestFor: "Analytical minds drawn to data, statistics, and ML",
+                        duration: "8–12 months",
+                        difficulty: "Intermediate" as const,
+                        href: "/roadmaps/data-scientist",
+                        icon: "target",
+                      },
+                      {
+                        name: "Mobile Developer",
+                        bestFor: "Builders who want to create apps for phones and tablets",
+                        duration: "6–9 months",
+                        difficulty: "Intermediate" as const,
+                        href: "/roadmaps/mobile-developer",
+                        icon: "bolt",
+                      },
+                    ] as const).map((row) => (
+                      <tr
+                        className="transition hover:bg-[var(--panel-strong)]"
+                        key={row.name}
+                      >
+                        <td className="px-5 py-4">
+                          <Link
+                            className="inline-flex items-center gap-2 font-black text-[var(--text-primary)] transition hover:text-red-500"
+                            href={row.href}
+                          >
+                            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md border border-red-500/25 bg-red-950/20 text-red-500">
+                              <Icon className="h-4 w-4" name={row.icon} />
+                            </span>
+                            {row.name}
+                          </Link>
+                        </td>
+                        <td className="px-5 py-4 text-[var(--text-secondary)]">
+                          {row.bestFor}
+                        </td>
+                        <td className="px-5 py-4 font-bold text-[var(--text-secondary)]">
+                          {row.duration}
+                        </td>
+                        <td className="px-5 py-4">
+                          <span
+                            className={`inline-block rounded border px-2.5 py-1 text-xs font-black ${
+                              row.difficulty === "Beginner"
+                                ? "border-emerald-500/25 bg-emerald-950/20 text-emerald-400"
+                                : "border-amber-500/25 bg-amber-950/20 text-amber-400"
+                            }`}
+                          >
+                            {row.difficulty}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </section>
 
             <section className="mt-9 rounded-xl border border-[var(--border)] bg-black/20 p-5">
