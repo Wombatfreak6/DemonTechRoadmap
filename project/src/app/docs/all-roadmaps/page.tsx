@@ -190,6 +190,11 @@ const beginnerPath = [
   { label: "Add Backend", href: "/roadmaps/backend-developer", detail: "Learn APIs, databases, auth, and deployment fundamentals." },
 ];
 
+/**
+ * Loads roadmap progress from localStorage.
+ * 
+ * @returns {Record<string, number>} An object mapping storage keys to completed node counts.
+ */
 function loadRoadmapProgress() {
   if (typeof window === "undefined") return {};
 
@@ -298,6 +303,14 @@ const lightTheme: ThemeVars = {
   "--shadow": "rgba(15, 23, 42, 0.09)",
 };
 
+/**
+ * Renders an SVG icon.
+ * 
+ * @param {Object} props
+ * @param {string} props.name - The name of the icon.
+ * @param {string} [props.className=""] - Optional CSS classes.
+ * @returns {JSX.Element} The SVG element representing the icon.
+ */
 function Icon({ name, className = "" }: { name: string; className?: string }) {
   return (
     <svg
@@ -315,6 +328,11 @@ function Icon({ name, className = "" }: { name: string; className?: string }) {
   );
 }
 
+/**
+ * Renders the DemonTech Roadmap logo and branding.
+ * 
+ * @returns {JSX.Element} The logo component linking to the home page.
+ */
 function DemonTechLogo() {
   return (
     <Link className="flex min-w-fit items-center gap-3" href="/">
@@ -339,6 +357,16 @@ function DemonTechLogo() {
   );
 }
 
+/**
+ * Renders a dropdown filter select input.
+ * 
+ * @param {Object} props
+ * @param {string} props.label - Accessible label for the select element.
+ * @param {function(string): void} props.onChange - Callback fired when a new option is selected.
+ * @param {string[]} props.options - List of option strings.
+ * @param {string} props.value - Currently selected value.
+ * @returns {JSX.Element} The filter select component.
+ */
 function FilterSelect({ label, onChange, options, value }: { label: string; onChange: (value: string) => void; options: string[]; value: string }) {
   return (
     <label className="flex h-12 items-center rounded-md border border-[var(--border)] bg-[var(--field-bg)] px-4">
@@ -358,6 +386,18 @@ function FilterSelect({ label, onChange, options, value }: { label: string; onCh
   );
 }
 
+/**
+ * Renders a card highlighting a specific feature or section on the dashboard.
+ * 
+ * @param {Object} props
+ * @param {string} props.detail - Description of the feature.
+ * @param {string} props.eyebrow - Small text above the title.
+ * @param {string} props.href - Link destination.
+ * @param {string} props.icon - Name of the icon to display.
+ * @param {string} props.metric - Key metric or statistic to show.
+ * @param {string} props.title - Title of the feature card.
+ * @returns {JSX.Element} The dashboard feature card component.
+ */
 function DashboardFeatureCard({ detail, eyebrow, href, icon, metric, title }: { detail: string; eyebrow: string; href: string; icon: string; metric: string; title: string }) {
   return (
     <Link className="rounded-lg border border-[var(--border)] bg-[var(--panel-strong)] p-5 transition hover:border-red-500/45 hover:shadow-[0_20px_60px_rgba(127,29,29,0.18)]" href={href}>
@@ -382,6 +422,12 @@ function DashboardFeatureCard({ detail, eyebrow, href, icon, metric, title }: { 
   );
 }
 
+/**
+ * The main page component for the "All Roadmaps" section.
+ * Renders the roadmap directory, filtering controls, and comparison tables.
+ * 
+ * @returns {JSX.Element} The All Roadmaps page layout.
+ */
 export default function AllRoadmaps() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
