@@ -127,6 +127,9 @@ const roadmapLinks = [
   { title: "Git Roadmap", href: "/roadmaps/git", detail: "Commits, branches, remotes, recovery, collaboration" },
 ];
 
+/**
+ * Icon component/function.
+ */
 function Icon({ name, className = "" }: { name: keyof typeof icons; className?: string }) {
   return (
     <svg aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -135,18 +138,27 @@ function Icon({ name, className = "" }: { name: keyof typeof icons; className?: 
   );
 }
 
+/**
+ * loadSet component/function.
+ */
 function loadSet(key: string) {
   if (typeof window === "undefined") return new Set<string>();
   const stored = window.localStorage.getItem(key);
   return stored ? new Set(JSON.parse(stored) as string[]) : new Set<string>();
 }
 
+/**
+ * loadNotes component/function.
+ */
 function loadNotes(key: string) {
   if (typeof window === "undefined") return {};
   const stored = window.localStorage.getItem(key);
   return stored ? (JSON.parse(stored) as Record<string, string>) : {};
 }
 
+/**
+ * difficultyClass component/function.
+ */
 function difficultyClass(difficulty: Difficulty) {
   const classes: Record<Difficulty, string> = {
     Starter: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300",
@@ -158,6 +170,9 @@ function difficultyClass(difficulty: Difficulty) {
   return classes[difficulty];
 }
 
+/**
+ * stageClass component/function.
+ */
 function stageClass(stage: Stage) {
   const classes: Record<Stage, string> = {
     Beginner: "border-zinc-700 bg-zinc-950 text-zinc-200",
@@ -168,6 +183,9 @@ function stageClass(stage: Stage) {
   return classes[stage];
 }
 
+/**
+ * RoadmapPageShell component/function.
+ */
 export function RoadmapPageShell(props: RoadmapPageShellProps) {
   const storageKeys = useMemo(
     () => ({
@@ -382,6 +400,9 @@ export function RoadmapPageShell(props: RoadmapPageShellProps) {
   );
 }
 
+/**
+ * DemonTechLogo component/function.
+ */
 function DemonTechLogo() {
   return (
     <Link className="flex min-w-fit items-center gap-3" href="/">
@@ -398,6 +419,9 @@ function DemonTechLogo() {
   );
 }
 
+/**
+ * Breadcrumb component/function.
+ */
 function Breadcrumb({ current }: { current: string }) {
   return (
     <div className="flex flex-wrap items-center gap-2 text-sm text-zinc-500">
@@ -410,6 +434,9 @@ function Breadcrumb({ current }: { current: string }) {
   );
 }
 
+/**
+ * Hero component/function.
+ */
 function Hero({ props, stageProgress, setExpandedNodeId }: { props: RoadmapPageShellProps; stageProgress: Array<StageSummary & { completed: number; total: number; percentage: number }>; setExpandedNodeId: (id: string) => void }) {
   return (
     <section className="mt-6 overflow-hidden rounded-md border border-zinc-800 bg-zinc-950">
@@ -453,6 +480,9 @@ function Hero({ props, stageProgress, setExpandedNodeId }: { props: RoadmapPageS
   );
 }
 
+/**
+ * ProjectTrackSection component/function.
+ */
 export function ProjectTrackSection({ intro, projectTracks }: { intro: string; projectTracks: ProjectTrack[] }) {
   return (
     <section className="mt-6 rounded-md border border-zinc-800 bg-zinc-950 p-5">
@@ -477,6 +507,9 @@ export function ProjectTrackSection({ intro, projectTracks }: { intro: string; p
   );
 }
 
+/**
+ * RoadmapJourney component/function.
+ */
 function RoadmapJourney(props: {
   bookmarkedIds: Set<string>;
   completedIds: Set<string>;
@@ -591,6 +624,9 @@ function RoadmapJourney(props: {
   );
 }
 
+/**
+ * RoadmapFilters component/function.
+ */
 function RoadmapFilters({
   difficultyFilter,
   durationFilter,
@@ -648,6 +684,9 @@ function RoadmapFilters({
   );
 }
 
+/**
+ * FilterSelect component/function.
+ */
 function FilterSelect({ label, onChange, options, value }: { label: string; onChange: (value: string) => void; options: string[]; value: string }) {
   return (
     <label>
@@ -672,6 +711,9 @@ type CommandResult = {
   nodeId?: string;
 };
 
+/**
+ * CommandPalette component/function.
+ */
 function CommandPalette({
   getTopicHref,
   open,
@@ -828,6 +870,9 @@ function CommandPalette({
   );
 }
 
+/**
+ * RoadmapNodeCard component/function.
+ */
 export function RoadmapNodeCard({
   bookmarked,
   completed,
@@ -898,6 +943,9 @@ export function RoadmapNodeCard({
   );
 }
 
+/**
+ * NodeMainContent component/function.
+ */
 function NodeMainContent({ node, note, notesPlaceholder, onNoteChange }: { node: RoadmapNode; note: string; notesPlaceholder?: string; onNoteChange: (value: string) => void }) {
   return (
     <div className="space-y-6">
@@ -922,6 +970,9 @@ function NodeMainContent({ node, note, notesPlaceholder, onNoteChange }: { node:
   );
 }
 
+/**
+ * NodeAside component/function.
+ */
 function NodeAside({ bookmarked, completed, miniProjectLabel, node, onToggleBookmark, onToggleComplete, topicHref }: { bookmarked: boolean; completed: boolean; miniProjectLabel: string; node: RoadmapNode; onToggleBookmark: () => void; onToggleComplete: () => void; topicHref?: string }) {
   return (
     <aside className="space-y-5">
@@ -980,6 +1031,9 @@ function NodeAside({ bookmarked, completed, miniProjectLabel, node, onToggleBook
   );
 }
 
+/**
+ * TopicList component/function.
+ */
 function TopicList({ title, items }: { title: string; items: string[] }) {
   return (
     <section>
@@ -993,6 +1047,9 @@ function TopicList({ title, items }: { title: string; items: string[] }) {
   );
 }
 
+/**
+ * CheckList component/function.
+ */
 function CheckList({ title, items, icon }: { title: string; items: string[]; icon: keyof typeof icons }) {
   return (
     <section>
@@ -1009,6 +1066,9 @@ function CheckList({ title, items, icon }: { title: string; items: string[]; ico
   );
 }
 
+/**
+ * SideText component/function.
+ */
 function SideText({ title, text }: { title: string; text: string }) {
   return (
     <section className="border-l border-zinc-800 pl-4">
@@ -1018,6 +1078,9 @@ function SideText({ title, text }: { title: string; text: string }) {
   );
 }
 
+/**
+ * ResourceLinks component/function.
+ */
 function ResourceLinks({ resources }: { resources: Resource[] }) {
   return (
     <section>
@@ -1034,6 +1097,9 @@ function ResourceLinks({ resources }: { resources: Resource[] }) {
   );
 }
 
+/**
+ * ResourceMatrix component/function.
+ */
 export function ResourceMatrix({ title, resourcesByCategory }: { title: string; resourcesByCategory: Array<{ category: string; resources: Resource[] }> }) {
   return (
     <section className="mt-6 rounded-md border border-zinc-800 bg-zinc-950 p-5">
@@ -1057,6 +1123,9 @@ export function ResourceMatrix({ title, resourcesByCategory }: { title: string; 
   );
 }
 
+/**
+ * CareerPathPanel component/function.
+ */
 export function CareerPathPanel({ title, description, paths }: { title: string; description: string; paths: RoadmapPath[] }) {
   return (
     <section className="mt-6 rounded-md border border-zinc-800 bg-zinc-950 p-5">
@@ -1067,6 +1136,9 @@ export function CareerPathPanel({ title, description, paths }: { title: string; 
   );
 }
 
+/**
+ * CertificationPanel component/function.
+ */
 export function CertificationPanel({ title, description, certifications }: { title: string; description: string; certifications: RoadmapPath[] }) {
   return (
     <section className="mt-6 rounded-md border border-zinc-800 bg-zinc-950 p-5">
@@ -1077,6 +1149,9 @@ export function CertificationPanel({ title, description, certifications }: { tit
   );
 }
 
+/**
+ * PathGrid component/function.
+ */
 function PathGrid({ paths, columns = "xl:grid-cols-3" }: { paths: RoadmapPath[]; columns?: string }) {
   return (
     <div className={`mt-6 grid gap-4 md:grid-cols-2 ${columns}`}>
@@ -1095,6 +1170,9 @@ function PathGrid({ paths, columns = "xl:grid-cols-3" }: { paths: RoadmapPath[];
   );
 }
 
+/**
+ * LearningTools component/function.
+ */
 function LearningTools({ title, cards }: { title: string; cards: Array<[string, string]> }) {
   return (
     <section className="mt-6 grid gap-5 xl:grid-cols-[1fr_1fr]">
@@ -1113,6 +1191,9 @@ function LearningTools({ title, cards }: { title: string; cards: Array<[string, 
   );
 }
 
+/**
+ * ProgressSchema component/function.
+ */
 function ProgressSchema({ title, rows }: { title: string; rows: Array<[string, string]> }) {
   return (
     <section className="-mt-5 grid gap-5 xl:grid-cols-[1fr_1fr]">
@@ -1132,6 +1213,9 @@ function ProgressSchema({ title, rows }: { title: string; rows: Array<[string, s
   );
 }
 
+/**
+ * ArchitectureCards component/function.
+ */
 function ArchitectureCards({ cards }: { cards: Array<[string, string]> }) {
   return (
     <section className="mt-6 rounded-md border border-zinc-800 bg-zinc-950 p-5">
@@ -1148,6 +1232,9 @@ function ArchitectureCards({ cards }: { cards: Array<[string, string]> }) {
   );
 }
 
+/**
+ * ProgressDashboard component/function.
+ */
 export function ProgressDashboard({
   badges,
   bookmarkedCount,
@@ -1274,6 +1361,9 @@ export function ProgressDashboard({
   );
 }
 
+/**
+ * ProgressRing component/function.
+ */
 function ProgressRing({ percentage }: { percentage: number }) {
   const radius = 42;
   const circumference = 2 * Math.PI * radius;
@@ -1289,6 +1379,9 @@ function ProgressRing({ percentage }: { percentage: number }) {
   );
 }
 
+/**
+ * SidebarPanel component/function.
+ */
 function SidebarPanel({ children, title }: { children: ReactNode; title: string }) {
   return (
     <section className="rounded-md border border-zinc-800 bg-zinc-950/90 p-5">
