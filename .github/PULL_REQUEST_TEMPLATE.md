@@ -19,6 +19,22 @@ Closes #
 <--write here-->
 
 ---
+## 🔍 Quality Assurance Checklist
+Please check the boxes that apply to your changes (`[x]`):
+
+## 🛠️ General Checks
+- [ ] **Self-Review:** I have reviewed my own code/content for typos, formatting, and clarity.
+- [ ] **No Breakages:** My changes do not break existing roadmaps or application functionality.
+
+## 📄 Documentation & Data Changes (Roadmaps, JSON, Markdown)
+- [ ] **Data Validity:** All resource links, roadmap steps, and data points are accurate and up to date.
+- [ ] **Formatting:** Markdown tables, bullet points, and front matter are properly formatted and easy to read.
+
+## 🎨 UI & Code Changes (Next.js, Tailwind, TypeScript)
+- [ ] **Build, Lint & Format:** The project builds locally and passes all linting/formatting checks (`npm run build` or code formatting tools run without errors).
+- [ ] **Responsive Design:** If this is a UI change, it looks great on both desktop and mobile screens.
+
+---
 ## 📸 Verification & Screenshots
 - **UI/UX (User Interface / User Experience - how it looks and feels):**
   
