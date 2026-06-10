@@ -175,6 +175,7 @@ export default function Introduction() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const theme = isDarkMode ? darkTheme : lightTheme;
 
+
   return (
     <main
       className="min-h-screen overflow-hidden bg-[var(--page-bg)] text-[var(--text-primary)] transition-colors duration-300"
