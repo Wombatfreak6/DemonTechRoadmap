@@ -119,11 +119,11 @@ New to open source? Here's how to get started the right way:
 
 When adding, updating, or reviewing external learning resources (articles, videos, documentation) for our roadmaps, please use this checklist to ensure high-quality content:
 
-- [ ] **No Duplicates:** Verify that this exact resource URL isn't already used somewhere else in the project.
-- [ ] **Active & Working:** Click the link to confirm it loads successfully and does not return a 404 or dead page error.
-- [ ] **Free & Accessible:** Ensure the primary content is free to access. Avoid resources hidden behind mandatory paywalls.
-- [ ] **Beginner Friendly:** Confirm the material is easy to follow, avoids unnecessary jargon, and suits the roadmap level.
-- [ ] **Up to Date:** Check that the information is modern and relevant to the current state of technology.
+* [ ] **No Duplicates:** Verify that this exact resource URL isn't already used somewhere else in the project.
+* [ ] **Active & Working:** Click the link to confirm it loads successfully and does not return a 404 or dead page error.
+* [ ] **Free & Accessible:** Ensure the primary content is free to access. Avoid resources hidden behind mandatory paywalls.
+* [ ] **Beginner Friendly:** Confirm the material is easy to follow, avoids unnecessary jargon, and suits the roadmap level.
+* [ ] **Up to Date:** Check that the information is modern and relevant to the current state of technology.
 
 ### What to do with Broken or Low-Quality Links?
 If you find a link during your review that is broken, outdated, or paid-only:
