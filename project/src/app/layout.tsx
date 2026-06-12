@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://demon-tech-roadmap.vercel.app"),
   title: {
     default: "Demon Tech Roadmap",
     template: "%s | Demon Tech Roadmap",
@@ -31,6 +32,14 @@ export const metadata: Metadata = {
     title: "Demon Tech Roadmap",
     description:
       "Community-driven roadmaps that help beginners learn technology through clear learning paths, curated resources, and project-focused growth.",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "DemonTech Roadmap preview",
+      },
+    ],
     type: "website",
     locale: "en_US",
     siteName: "Demon Tech Roadmap",
@@ -41,6 +50,7 @@ export const metadata: Metadata = {
     title: "Demon Tech Roadmap",
     description:
       "Community-driven roadmaps that help beginners learn technology through clear learning paths, curated resources, and project-focused growth.",
+    images: ["/og-image.svg"],
   },
 
   robots: {

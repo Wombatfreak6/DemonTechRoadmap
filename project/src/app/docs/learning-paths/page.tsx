@@ -28,7 +28,7 @@ const sidebarGroups: SidebarGroup[] = [
     items: [
       { label: "All Roadmaps", icon: "grid", href: "/docs/all-roadmaps" },
       { label: "By Category", icon: "folder", href: "/docs/by-category" },
-      { label: "Learning Resources", icon: "send" },
+      { label: "Learning Resources", icon: "send", href: "/docs/resources" },
       { label: "Project Ideas", icon: "spark", href: "/docs/project-ideas" },
     ],
   },
@@ -330,8 +330,7 @@ export default function LearningPaths() {
               </p>
               <a
                 className="mt-5 flex h-10 items-center justify-center gap-2 rounded-md bg-red-700/70 px-4 text-sm font-bold text-white"
-                href="#"
-              >
+                href="/docs/common-questions">
                 View FAQ
                 <Icon className="h-4 w-4" name="pen" />
               </a>

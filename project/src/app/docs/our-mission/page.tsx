@@ -24,7 +24,7 @@ const sidebarGroups = [
     items: [
       ["All Roadmaps", "grid", "/docs/all-roadmaps"],
       ["By Category", "folder", "/docs/by-category"],
-      ["Learning Resources", "send", "#"],
+      ["Learning Resources", "send", "/docs/resources"],
       ["Project Ideas", "spark", "/docs/project-ideas"],
     ],
   },
