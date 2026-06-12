@@ -1,6 +1,6 @@
 import { spawn } from "node:child_process";
 import { createRequire } from "node:module";
-import { cp } from "node:fs/promises";
+import { symlink, rm } from "node:fs/promises";
 import { ensureVercelRoutesManifest, watchVercelRoutesManifest } from "./ensure-vercel-routes-manifest.mjs";
 
 const require = createRequire(import.meta.url);
@@ -24,14 +24,15 @@ if (exitCode === 0) {
   await watcher;
   await ensureVercelRoutesManifest();
 
-  // Copy project/.next to root .next directory so Vercel can find all assets/manifests
+  // Symlink root .next directory to project/.next so Vercel can find all assets/manifests
+  // while preserving node_modules path resolution via the symlink's realpath
   const rootNextPath = new URL("../../.next", import.meta.url);
-  const projectNextPath = new URL("../.next", import.meta.url);
   try {
-    await cp(projectNextPath, rootNextPath, { recursive: true });
-    console.log("Successfully copied project/.next to root .next directory");
+    await rm(rootNextPath, { recursive: true, force: true });
+    await symlink("./project/.next", rootNextPath, "dir");
+    console.log("Successfully symlinked root .next directory to project/.next");
   } catch (err) {
-    console.error("Failed to copy project/.next to root:", err);
+    console.error("Failed to symlink root .next directory:", err);
   }
 }
 
