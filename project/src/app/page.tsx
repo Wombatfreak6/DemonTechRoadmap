@@ -1,24 +1,10 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import type { ReactNode } from "react";
-
-const navItems = [
-  { label: "Roadmaps", href: "/docs/all-roadmaps" },
-  { label: "Resources", href: "/docs/resources" },
-  { label: "Guides", href: "/docs/study-guide" },
-  { label: "Docs", href: "/docs/quick-start" },
-  { label: "Community", href: "https://discord.gg/yWtjK2Tb8T" },
-];
-
-const stats = [
-  ["500+", "learners building in public"],
-  ["8", "roadmaps across core tech tracks"],
-  ["150+", "curated topics, projects, and resources"],
-  ["Active", "Discord community for feedback"],
-];
+import HomeHeader, { Logo } from "@/src/components/HomeHeader";
+import ContributorLeaderboard from "@/src/components/ContributorLeaderboard";
+import SocialProof from "@/src/components/SocialProof";
+import RoadmapQuiz from "@/src/components/RoadmapQuiz";
 
 const audiences = [
   {
@@ -43,16 +29,10 @@ const roadmaps = [
 
 const icons: Record<string, ReactNode> = {
   arrow: <path d="M5 12h14m-6-6 6 6-6 6" />,
-  book: <path d="M5 4h7a3 3 0 0 1 3 3v15a3 3 0 0 0-3-3H5V4Zm10 0h4v15h-4" />,
   check: <path d="m5 12 4 4L19 6" />,
-  discord: <path d="M8 16c1.5 1 6.5 1 8 0m-9-3h.01M17 13h.01M7 8c3-1.5 7-1.5 10 0l1 7c-1.5 1-3 1.5-4.5 1.8L12 15l-1.5 1.8C9 16.5 7.5 16 6 15l1-7Z" />,
-  github: <path d="M12 2a10 10 0 0 0-3 19c.5.1.7-.2.7-.5v-2c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.7-1.4-2.2-.3-4.6-1.1-4.6-5A3.9 3.9 0 0 1 7 7.2c-.1-.3-.4-1.3.1-2.7 0 0 .9-.3 2.8 1.1a9.5 9.5 0 0 1 5.1 0c1.9-1.4 2.8-1.1 2.8-1.1.5 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.8 1 .8 2v3c0 .3.2.6.8.5A10 10 0 0 0 12 2Z" />,
   lock: <path d="M7 11V8a5 5 0 0 1 10 0v3m-12 0h14v10H5V11Zm7 5v2" />,
   mail: <path d="M4 6h16v12H4V6Zm0 0 8 7 8-7" />,
-  map: <path d="m4 6 5-2 6 2 5-2v14l-5 2-6-2-5 2V6Zm5-2v14m6-12v14" />,
-  menu: <path d="M4 7h16M4 12h16M4 17h16" />,
   route: <path d="M5 7h6a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h10M5 7l3-3M5 7l3 3m11 9-3-3m3 3-3 3" />,
-  spark: <path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3Z" />,
 };
 
 function Icon({ className = "", name }: { className?: string; name: keyof typeof icons }) {
@@ -72,60 +52,10 @@ function Icon({ className = "", name }: { className?: string; name: keyof typeof
   );
 }
 
-function Logo() {
-  return (
-    <Link className="flex min-w-fit items-center gap-3" href="/">
-      <span className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-md border border-red-500/30 bg-black">
-        <Image alt="DemonTech logo" className="h-full w-full object-cover" height={48} src="/demontech-logo.png" width={48} />
-      </span>
-      <span>
-        <span className="block text-lg font-black leading-6 text-white">
-          Demon<span className="text-red-500">Tech</span>
-        </span>
-        <span className="mt-1 block text-[11px] font-bold uppercase text-zinc-500">Roadmap</span>
-      </span>
-    </Link>
-  );
-}
-
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return (
     <main className="min-h-screen bg-[#050505] text-zinc-100">
-      <header className="sticky top-0 z-50 border-b border-zinc-900 bg-[#050505]/95 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-5 px-5 lg:px-8">
-          <Logo />
-          <nav className="ml-auto hidden items-center gap-7 text-sm font-bold text-zinc-400 lg:flex">
-            {navItems.map((item) => (
-              <Link className="transition hover:text-white" href={item.href} key={item.label}>
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <Link className="hidden rounded-md border border-red-500/40 bg-red-500 px-4 py-2 text-sm font-black text-white transition hover:bg-red-400 md:inline-flex" href="/docs/all-roadmaps">
-            Start Learning Free
-          </Link>
-          <button
-            aria-expanded={menuOpen}
-            aria-label="Toggle navigation"
-            className="ml-auto grid h-10 w-10 place-items-center rounded-md border border-zinc-800 text-zinc-300 lg:hidden"
-            onClick={() => setMenuOpen((value) => !value)}
-            type="button"
-          >
-            <Icon className="h-5 w-5" name="menu" />
-          </button>
-        </div>
-        {menuOpen ? (
-          <nav className="grid gap-1 border-t border-zinc-900 bg-[#050505] px-5 py-4 lg:hidden">
-            {navItems.map((item) => (
-              <Link className="rounded-md px-3 py-3 text-sm font-bold text-zinc-300 hover:bg-zinc-900" href={item.href} key={item.label}>
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        ) : null}
-      </header>
+      <HomeHeader />
 
       <section className="relative isolate min-h-[calc(100vh-4rem)] overflow-hidden">
         <Image
@@ -139,7 +69,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-[1280px] gap-10 px-5 py-16 lg:grid-cols-[1fr_460px] lg:px-8 lg:py-20">
           <div className="flex max-w-3xl flex-col justify-center">
             <p className="mb-5 inline-flex w-fit rounded-md border border-red-500/35 bg-red-500/10 px-3 py-1 text-sm font-black text-red-300">
-              Learn tech with a clear path
+              Stop tutorial hopping. Learn with a roadmap.
             </p>
             <h1 className="max-w-3xl text-5xl font-black leading-[1.02] text-white sm:text-6xl lg:text-7xl">
               DemonTech Roadmap
@@ -149,7 +79,7 @@ export default function Home() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-red-500 px-5 text-sm font-black text-white transition hover:bg-red-400" href="/docs/all-roadmaps">
-                Start Learning Free
+                Browse Roadmaps
                 <Icon className="h-4 w-4" name="arrow" />
               </Link>
               <Link className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-zinc-700 bg-black/35 px-5 text-sm font-black text-white transition hover:border-zinc-500" href="/dashboard">
@@ -157,13 +87,10 @@ export default function Home() {
                 <Icon className="h-4 w-4" name="lock" />
               </Link>
             </div>
-            <div className="mt-10 grid gap-3 sm:grid-cols-4">
-              {stats.map(([value, label]) => (
-                <div className="border-l border-zinc-800 pl-4" key={label}>
-                  <p className="text-2xl font-black text-white">{value}</p>
-                  <p className="mt-1 text-sm leading-5 text-zinc-400">{label}</p>
-                </div>
-              ))}
+            
+            {/* Social Proof (Live stars) */}
+            <div className="mt-10">
+              <SocialProof />
             </div>
           </div>
 
@@ -220,6 +147,12 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="px-5 py-16 lg:px-8 bg-[#050505]">
+        <div className="mx-auto max-w-[1280px]">
+          <RoadmapQuiz />
+        </div>
+      </section>
+
       <section className="px-5 py-16 lg:px-8">
         <div className="mx-auto grid max-w-[1280px] gap-8 lg:grid-cols-2">
           <div className="rounded-lg border border-zinc-800 bg-[#090909] p-6">
@@ -252,6 +185,9 @@ export default function Home() {
           </form>
         </div>
       </section>
+
+      {/* Community Leaderboard */}
+      <ContributorLeaderboard />
 
       <footer className="border-t border-zinc-900 bg-black px-5 py-10 lg:px-8">
         <div className="mx-auto flex max-w-[1280px] flex-col gap-8 md:flex-row md:items-center md:justify-between">
